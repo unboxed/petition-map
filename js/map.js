@@ -52,7 +52,7 @@ function init(width, height) {
         .attr("y", 0)
         .attr("width", width)
         .attr("height", height)
-        .style("fill", "#fff")
+        .style("fill", "SteelBlue")
         .on('click', deselect);
 }
 
@@ -101,7 +101,7 @@ function select(d) {
                 }
         });
         $('#data_table').append(
-            $('<tr></tr>').html("<i></br>" + name + "</br>" + mp + ", " + count + " signatures" + "</br></i>")
+            $('<tr></tr>').html("<i></br>" + name +  ", " + mp + "</br>" + count + " signatures" + "</i>")
         );
     });
 }
@@ -130,7 +130,7 @@ function draw(boundaries) {
         .attr("id", function(d) {return d.id})
         .attr("properties_table", function(d) { return create_table(d.properties)})
         .attr("d", path)
-        .on("click", function(d){ return select(d)});
+        .on("mouseenter", function(d){ return select(d)});
 
     // add a boundary between areas
     g.append("path")

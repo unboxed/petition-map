@@ -101,6 +101,15 @@ function display_petition_info() {
             $('<tr></tr>').html("</br>" + data.data.attributes.signature_count + " signatures")
         );
         // console.log(data.data.attributes.background);
+        country_data = data.data.attributes.signatures_by_country;
+        // console.log(country_data);
+        $('#countries-info').html("Signatures by Country:" + "</br>");
+        $('#countries-info').append('<table></table>');
+        $.each(country_data, function(index, item) {
+            $('#countries-info').append(
+                $('<tr></tr>').html(item.name + " - " + item.signature_count)
+            );
+        });
     });
 }
 

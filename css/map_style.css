@@ -5,6 +5,7 @@ body {
   font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
   color:#777;
   font-weight:300;
+  background-color: SteelBlue;
 }
 
 h1 {
@@ -18,10 +19,11 @@ p, table {
 
 h1 {
   line-height:1.1;
+  color: #fff;
 }
 
 h1 {
-  font-size:28px;
+  font-size:40px;
 }
 
 a {
@@ -53,21 +55,25 @@ th, td {
 
 #data_table {
     height: 200px;
+    color:#fff;
 }
 
 #choiceform {
     padding-top: 20px;
-    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    color:#fff;
 }
 
 #left_column {
     width: 35%;
     float:left;
+    color:#fff;
 }
 
 #right_column {
     width: 65%;
     float: right;
+    color: #fff;
 }
 
 .area{
@@ -85,10 +91,6 @@ th, td {
     stroke: #777;
     stroke-dasharray: 2,2;
     stroke-linejoin: round;
-}
-
-.test-fill {
-    fill: #f00;
 }
 
 .c0-50 { fill:rgb(247,251,255); }
