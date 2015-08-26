@@ -100,9 +100,11 @@ function select(d) {
                     return;
                 }
         });
-        $('#data_table').append(
-            $('<tr></tr>').html("<i></br>" + name +  ", " + mp + "</br>" + count + " signatures" + "</i>")
-        );
+        if (name && mp && count) {
+            $('#data_table').append(
+                $('<tr></tr>').html("<i></br>" + name +  ", " + mp + "</br>" + count + " signatures" + "</i>")
+            );
+        }
     });
 }
 
