@@ -84,6 +84,41 @@ function change_area() {
     }
 }
 
+function display_petition_info() {
+    var petitions = document.getElementById('petition');
+    var petition_id = petitions.options[petitions.selectedIndex].value;
+    // console.log(petition_id);
+    $('#petition-info').html("");
+    $('#petition-info').append('<table></table>');
+    $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
+        $('#petition-info').append(
+            $('<tr></tr>').html(data.data.attributes.action + "</br>")
+        );
+        $('#petition-info').append(
+            $('<tr></tr>').html("</br>" + data.data.attributes.background + "</br>")
+        );
+        $('#petition-info').append(
+            $('<tr></tr>').html("</br>" + data.data.attributes.signature_count + " signatures")
+        );
+        // console.log(data.data.attributes.background);
+    });
+}
+
+$.getJSON("json/petitions/petitions.json", function (data) {
+    petitions = data.data
+    // console.log(petitions)
+    $.each(petitions, function (index, item) {
+        $('#petition').append(
+            $('<option></option>').val(item.id).html(item.attributes.action)
+        );
+        // console.log(item.id + " - " + item.attributes.action);
+    });
+});
+
+d3.select('#petition').on('change', function(){
+    display_petition_info();
+});
+
 d3.select('#lad').on('change', function(){
     update_resolution_select();
     change_area();
@@ -101,4 +136,5 @@ d3.select("#resolution").on('change', function(){
 
 update_lad_select();
 change_area();
+
 

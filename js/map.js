@@ -23,9 +23,9 @@ init(width, height);
 // remove any data when we lose selection of a map unit
 function deselect() {
     d3.selectAll(".selected")
-        .attr("class", "area"); 
+        .attr("class", "area");
     d3.select("#data_table")
-        .html("");      
+        .html("");
 }
 
 
@@ -73,6 +73,7 @@ function create_table(properties) {
 function select(d) {
     // get the id of the selected map area
     var id = "#" + d.id;
+    console.log(id);
     // remove the selected class from any other selected areas
     d3.selectAll(".selected")
         .attr("class", "area");
@@ -95,7 +96,7 @@ function draw(boundaries) {
     var b = path.bounds(topojson.feature(boundaries, boundaries.objects[units]));
     var s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height);
     var t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
-    
+
     projection
         .scale(s)
         .translate(t);
@@ -141,7 +142,7 @@ function load_data(filename, u) {
         if (error) return console.error(error);
         boundaries = b;
         redraw();
-    });    
+    });
 }
 
 // when the window is resized, redraw the map

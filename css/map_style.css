@@ -70,14 +70,7 @@ th, td {
     float: right;
 }
 
-
-#download {
-    float: right;
-    font-size:28px;
-    font-weight: 700;
-}
-
-.area{ 
+.area{
     fill: #C0C0C0;
     stroke: none;
 }
@@ -92,4 +85,9 @@ th, td {
     stroke: #777;
     stroke-dasharray: 2,2;
     stroke-linejoin: round;
+}
+
+#petition {
+  width: 100%;
+  max-width: 300px;
 }
