@@ -40,7 +40,6 @@ table {
 th, td {
   text-align:left;
   padding:5px 10px;
-  border-bottom:1px solid #e5e5e5;
 }
 
 .title {
@@ -72,7 +71,6 @@ th, td {
 #right_column {
     width: 65%;
     float: right;
-    color: #fff;
 }
 
 .area{
@@ -101,6 +99,15 @@ th, td {
 .c301-350 { fill: #447019; }
 .c350on { fill: #306100; }
 
+.t0-50 { color: #c0cfb2; }
+.t51-100 { color: #acbf99; }
+.t101-150 { color: #97b07f; }
+.t151-200 { color: #82a066; }
+.t201-250 { color: #6e904c; }
+.t251-300 { color: #598032; }
+.t301-350 { color: #447019; }
+.t350on { color: #306100; }
+
 #petition {
   width: 100%;
   max-width: 300px;
@@ -109,4 +116,14 @@ th, td {
 #logo {
   text-align: right;
   font-size: 36px;
+  color: #fff;
+}
+
+#key {
+  width: 100%;
+  max-width: 150px;
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  color: #fff;
 }
