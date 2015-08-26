@@ -1,17 +1,14 @@
 $(document).ready(function() {
-    console.log( "ready!" );
     $.getJSON("json/petitions/petitions.json", function (data) {
-        console.log("something");
         petitions = data.data;
-        console.log(petitions);
+        // console.log(petitions);
         $.each(petitions, function (index, item) {
             $('#petition').append(
                 $('<option></option>').val(item.id).html(item.attributes.action)
             );
-            console.log(item.id + " - " + item.attributes.action);
+            // console.log(item.id + " - " + item.attributes.action);
         });
     });
-    console.log("done!");
 });
 
 function update_lad_select() {
@@ -54,23 +51,6 @@ function update_resolution_select() {
     options_string = '';
     if(lad === 'national') {
         options_string += '<option value="wpc">Westminster Parliamentary Constituencies</option>';
-        // if(area === 'wal') {
-        //     options_string += '<option value = "nawc">National Assembly Wales Constituencies</option>';
-        //     options_string += '<option value = "nawer">National Assembly Wales Electoral Regions</option>';
-        // } else if(area === 'sco') {
-        //     options_string += '<option value = "spc">Scottish Parliament Constituencies</option>';
-        //     options_string += '<option value = "sper">Scottish Parliament Electoral Regions</option>';
-        // }
-    } else {
-        // options_string += '<option value="wpc">Westminster Parliamentary Constituencies</option><option value="wards">Westminster Parliamentary Wards</option>';
-        // if(area === 'eng' || area === 'wal') {
-        //     options_string += '<option value="msoa">Middle Layer Super Output Areas</option>';
-        //     options_string += '<option value="lsoa">Lower Layer Super Output Areas</option>';
-        // } else if (area === 'sco') {
-        //     options_string += '<option value="idz">Intermediate Data Zones</option>';
-        //     options_string += '<option value="dz">Data Zones</option>';
-        // }
-        // options_string += '<option value="oa">Output Areas</option>';
     }
     d3.select('#resolution').html(options_string);
 }
@@ -131,38 +111,69 @@ function display_petition_info() {
 function recolour_map() {
     var petitions = document.getElementById('petition');
     var petition_id = petitions.options[petitions.selectedIndex].value;
+    get_highest_count(petition_id);
+}
 
+function get_highest_count(petition_id) {
+    var top_count = 0;
+    var top_constituency;
+
+    $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
+        constituencies = data.data.attributes.signatures_by_constituency;
+        $.each(constituencies, function (index, item) {
+            if (item.signature_count >= top_count) {
+                top_count = item.signature_count;
+                top_constituency = item.name;
+            }
+        });
+
+        // console.log(top_count);
+        // console.log(top_constituency);
+        get_slices(top_count, petition_id);
+    });
+}
+
+function get_slices(top_count, petition_id) {
+    var slice = top_count / 8;
+    var slices = {};
+    var current_slice = 0;
+    for (i = 0; i <= 8; i++) {
+        $('#t' + (i+1)).html("");
+        if (i < 7) {
+            $('#t' + (i+1)).html(Math.ceil(current_slice) + " - " +  Math.floor(current_slice + slice));
+        } else {
+            $('#t' + (i+1)).html(Math.ceil(current_slice) + " +");
+        }
+        slices[i] = current_slice;
+        current_slice += slice;
+        // console.log(current_slice);
+    }
+    // console.log(slices);
+    colour_classes(slices, petition_id);
+}
+
+function colour_classes(slices, petition_id) {
     $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
         constituencies = data.data.attributes.signatures_by_constituency;
         $.each(constituencies, function (index, item) {
             // console.log(item);
             var id = "#" + item.ons_code;
-            var colour_class = get_colour_class(item.signature_count);
+            var index = place_in_array(slices, item.signature_count);
+            var colour_class = "c" + index;
             d3.select(id)
                 .attr("class", colour_class);
         });
     });
 }
 
-function get_colour_class(count) {
-    if (count <= 50) {
-        return "c0-50";
-    } else if (count > 50 && count <= 100) {
-        return "c51-100";
-    } else if (count > 100 && count <= 150) {
-        return "c101-150";
-    } else if (count > 150 && count <= 200) {
-        return "c151-200";
-    } else if (count > 200 && count <= 250) {
-        return "c201-250";
-    } else if (count > 250 && count <= 300) {
-        return "c251-300";
-    } else if (count > 300 && count <= 350) {
-        return "c301-350";
-    } else if (count > 350) {
-        return "c350on";
-    } else {
-        return "area";
+function place_in_array(slices, count) {
+    var slice = slices[1];
+    for (i = 0; i < 8; i++) {
+        if (count >= slices[i] && count < (slices[i] + slice)) {
+            return i+1;
+        } else if (count === (slices[1] * 8)) {
+            return 8;
+        }
     }
 }
 

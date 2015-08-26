@@ -90,23 +90,23 @@ th, td {
     stroke-linejoin: round;
 }
 
-.c0-50 { fill: #c0cfb2; }
-.c51-100 { fill: #acbf99; }
-.c101-150 { fill: #97b07f; }
-.c151-200 { fill: #82a066; }
-.c201-250 { fill: #6e904c; }
-.c251-300 { fill: #598032; }
-.c301-350 { fill: #447019; }
-.c350on { fill: #306100; }
+.c1 { fill: #c0cfb2; }
+.c2 { fill: #acbf99; }
+.c3 { fill: #97b07f; }
+.c4 { fill: #82a066; }
+.c5 { fill: #6e904c; }
+.c6 { fill: #598032; }
+.c7 { fill: #447019; }
+.c8 { fill: #306100; }
 
-.t0-50 { color: #c0cfb2; }
-.t51-100 { color: #acbf99; }
-.t101-150 { color: #97b07f; }
-.t151-200 { color: #82a066; }
-.t201-250 { color: #6e904c; }
-.t251-300 { color: #598032; }
-.t301-350 { color: #447019; }
-.t350on { color: #306100; }
+.t1 { color: #c0cfb2; }
+.t2 { color: #acbf99; }
+.t3 { color: #97b07f; }
+.t4 { color: #82a066; }
+.t5 { color: #6e904c; }
+.t6 { color: #598032; }
+.t7 { color: #447019; }
+.t8 { color: #306100; }
 
 #petition {
   width: 100%;
