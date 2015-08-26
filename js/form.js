@@ -111,7 +111,7 @@ function recolour_map() {
     $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
         constituencies = data.data.attributes.signatures_by_constituency;
         $.each(constituencies, function (index, item) {
-            console.log(item);
+            // console.log(item);
             var id = "#" + item.ons_code;
             var colour_class = get_colour_class(item.signature_count);
             d3.select(id)
@@ -175,5 +175,3 @@ d3.select("#resolution").on('change', function(){
 
 update_lad_select();
 change_area();
-
-

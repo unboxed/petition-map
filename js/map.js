@@ -72,17 +72,38 @@ function create_table(properties) {
 // select a map area
 function select(d) {
     // get the id of the selected map area
-    var id = "#" + d.id;
-    console.log(id);
+    // var id = "#" + d.id;
+    // console.log(id);
     // remove the selected class from any other selected areas
-    d3.selectAll(".selected")
-        .attr("class", "area");
+    // d3.selectAll(".selected")
+    //     .attr("class", "area");
     // and add it to this area
-    d3.select(id)
-        .attr("class", "selected area");
+    // d3.select(id)
+    //     .attr("class", "selected");
     // add the area properties to the data_table section
-    d3.select("#data_table")
-        .html(create_table(d.properties));
+    // d3.select("#data_table")
+    //     .html(create_table(d.properties));
+    var petitions = document.getElementById('petition');
+    var petition_id = petitions.options[petitions.selectedIndex].value;
+
+    $('#data_table').html("");
+    $('#data_table').append('<table></table>');
+    $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
+        var name;
+        var mp;
+        var count;
+        $.each(data.data.attributes.signatures_by_constituency, function(i, v) {
+                if (v.ons_code === d.id) {
+                    name = v.name;
+                    mp = v.mp;
+                    count = v.signature_count;
+                    return;
+                }
+        });
+        $('#data_table').append(
+            $('<tr></tr>').html("<i></br>" + name + "</br>" + mp + ", " + count + " signatures" + "</br></i>")
+        );
+    });
 }
 
 // draw our map on the SVG element
