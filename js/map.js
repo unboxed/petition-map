@@ -79,7 +79,7 @@ function select(d) {
         .attr("class", "area");
     // and add it to this area
     d3.select(id)
-        .attr("class", "selected area")
+        .attr("class", "selected area");
     // add the area properties to the data_table section
     d3.select("#data_table")
         .html(create_table(d.properties));

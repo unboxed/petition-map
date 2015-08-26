@@ -104,6 +104,44 @@ function display_petition_info() {
     });
 }
 
+function recolour_map() {
+    var petitions = document.getElementById('petition');
+    var petition_id = petitions.options[petitions.selectedIndex].value;
+
+    $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
+        constituencies = data.data.attributes.signatures_by_constituency;
+        $.each(constituencies, function (index, item) {
+            console.log(item);
+            var id = "#" + item.ons_code;
+            var colour_class = get_colour_class(item.signature_count);
+            d3.select(id)
+                .attr("class", colour_class);
+        });
+    });
+}
+
+function get_colour_class(count) {
+    if (count < 50) {
+        return "c0-50";
+    } else if (count > 50 && count <= 100) {
+        return "c51-100";
+    } else if (count > 100 && count <= 150) {
+        return "c101-150";
+    } else if (count > 150 && count <= 200) {
+        return "c151-200";
+    } else if (count > 200 && count <= 250) {
+        return "c201-250";
+    } else if (count > 250 && count <= 300) {
+        return "c251-300";
+    } else if (count > 300 && count <= 350) {
+        return "c301-350";
+    } else if (count > 350) {
+        return "c350on";
+    } else {
+        return "area";
+    }
+}
+
 $.getJSON("json/petitions/petitions.json", function (data) {
     petitions = data.data
     // console.log(petitions)
@@ -117,6 +155,7 @@ $.getJSON("json/petitions/petitions.json", function (data) {
 
 d3.select('#petition').on('change', function(){
     display_petition_info();
+    recolour_map();
 });
 
 d3.select('#lad').on('change', function(){
