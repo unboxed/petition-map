@@ -1,15 +1,58 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<style>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <link rel="stylesheet" type="text/css" href="css/map_style.css">
 
-/* CSS goes here. */
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    </head>
 
-</style>
-<body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="http://d3js.org/topojson.v1.min.js"></script>
-<script>
+    <body>
 
-/* JavaScript goes here. */
+        <div id="left_column">
+            <h1>Petitions Map</h1>
+            <form id="choiceform">
+                <p>
+                    <select name="top_level"  id="top_level" hidden>
+                        <option value="uk">United Kingdom</option>
+                    </select>
+                    <select name="lad" id="lad" hidden>
+                        <option value="national">National</option>
+                    </select>
+                    <select name="resolution" id="resolution" hidden>
+                        <option value="wpc">Westminster Parliamentary Constituencies</option>
+                    </select>
+                    Select a petition<br>
+                    <select name="petition" id="petition">
+                    </select>
+                </p>
+            </form>
+            <section id="petition-info">
+            </section>
+            <section id="data_table">
+            </section>
+     <!--        <section id="countries-info">
+            </section> -->
 
-</script>
+        </div>
+
+        <div id="right_column">
+            <section id="map">
+            </section>
+            <section id="logo">
+                Unboxed
+            </section>
+        </div>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.1.0/topojson.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+        <script src="js/map.js"></script>
+        <script src="js/lads.js"></script>
+        <script src="js/form.js"></script>
+
+    </body>
+</html>
