@@ -1,3 +1,18 @@
+$(document).ready(function() {
+    console.log( "ready!" );
+    $.getJSON("json/petitions/petitions.json", function (data) {
+        console.log("something");
+        petitions = data.data;
+        console.log(petitions);
+        $.each(petitions, function (index, item) {
+            $('#petition').append(
+                $('<option></option>').val(item.id).html(item.attributes.action)
+            );
+            console.log(item.id + " - " + item.attributes.action);
+        });
+    });
+    console.log("done!");
+});
 
 function update_lad_select() {
     var top_level_select = document.getElementById('top_level');
@@ -151,16 +166,6 @@ function get_colour_class(count) {
     }
 }
 
-$.getJSON("json/petitions/petitions.json", function (data) {
-    petitions = data.data
-    // console.log(petitions)
-    $.each(petitions, function (index, item) {
-        $('#petition').append(
-            $('<option></option>').val(item.id).html(item.attributes.action)
-        );
-        // console.log(item.id + " - " + item.attributes.action);
-    });
-});
 
 d3.select('#petition').on('change', function(){
     display_petition_info();
