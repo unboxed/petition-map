@@ -59,7 +59,6 @@ th, td {
 }
 
 #choiceform {
-    padding-top: 20px;
     border-bottom: 1px solid #e5e5e5;
     color:#fff;
 }
@@ -93,14 +92,14 @@ th, td {
     stroke-linejoin: round;
 }
 
-.c0-50 { fill:rgb(247,251,255); }
-.c51-100 { fill:rgb(222,235,247); }
-.c101-150 { fill:rgb(198,219,239); }
-.c151-200 { fill:rgb(158,202,225); }
-.c201-250 { fill:rgb(107,174,214); }
-.c251-300 { fill:rgb(66,146,198); }
-.c301-350 { fill:rgb(33,113,181); }
-.c350on { fill:rgb(8,81,156); }
+.c0-50 { fill: #c0cfb2; }
+.c51-100 { fill: #acbf99; }
+.c101-150 { fill: #97b07f; }
+.c151-200 { fill: #82a066; }
+.c201-250 { fill: #6e904c; }
+.c251-300 { fill: #598032; }
+.c301-350 { fill: #447019; }
+.c350on { fill: #306100; }
 
 #petition {
   width: 100%;
