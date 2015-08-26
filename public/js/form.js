@@ -145,7 +145,7 @@ function recolour_map() {
 }
 
 function get_colour_class(count) {
-    if (count < 50) {
+    if (count <= 50) {
         return "c0-50";
     } else if (count > 50 && count <= 100) {
         return "c51-100";
