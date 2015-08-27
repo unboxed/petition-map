@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    console.log("READY!");
     $.getJSON("json/petitions/petitions.json", function (data) {
         petitions = data.data;
         // console.log(petitions);
@@ -12,72 +11,14 @@ $(document).ready(function() {
     });
 });
 
-function update_lad_select() {
-    var top_level_select = document.getElementById('top_level');
-    var area = top_level_select.options[top_level_select.selectedIndex].value;
-
-    options_string = '<option value="national">National</option><option disabled>──────────</option>';
-    if(area === 'eng') {
-        for (var key in e_lads) {
-            if (e_lads.hasOwnProperty(key)) {
-                options_string += '<option value=' + key + '>' + e_lads[key] + '</option>';
-            }
-        }
-    } else if(area === 'sco') {
-        for (var key in s_lads) {
-            if (s_lads.hasOwnProperty(key)) {
-                options_string += '<option value=' + key + '>' + s_lads[key] + '</option>';
-            }
-        }
-    } else if(area === 'wal') {
-        for (var key in w_lads) {
-            if (w_lads.hasOwnProperty(key)) {
-                options_string += '<option value=' + key + '>' + w_lads[key] + '</option>';
-            }
-        }
-    } else if(area === 'uk') {
-
-    }
-    d3.select('#lad').html(options_string);
-}
-
-
-function update_resolution_select() {
-    var top_level_select = document.getElementById('top_level');
-    var area = top_level_select.options[top_level_select.selectedIndex].value;
-
-    var lad_select = document.getElementById('lad');
-    var lad = lad_select.options[lad_select.selectedIndex].value;
-
-    options_string = '';
-    if(lad === 'national') {
-        options_string += '<option value="wpc">Westminster Parliamentary Constituencies</option>';
-    }
-    d3.select('#resolution').html(options_string);
-}
-
-
 function change_area() {
-    d3.select('#download').html("");
-    var resolution_select = document.getElementById('resolution');
-    units = resolution_select.options[resolution_select.selectedIndex].value;
+    units = "wpc";
 
     var top_level_select = document.getElementById('top_level');
     var area = top_level_select.options[top_level_select.selectedIndex].value;
 
-    var lad_select = document.getElementById('lad');
-    var lad = lad_select.options[lad_select.selectedIndex].value;
-
-    var f;
-    if(lad === 'national') {
-        var f = 'json/uk/' + area + '/topo_' + units + '.json';
-        d3.select('#download').attr('href', f).attr('target', '_blank').text('download topoJSON');
-        load_data(f, units);
-    } else {
-        var f = 'json/' + area + '/' + units + '_by_lad/topo_' + lad + '.json';
-        d3.select('#download').attr('href', f).attr('target', '_blank').text('download topoJSON');
-        load_data(f, lad);
-    }
+    var f = 'json/uk/' + area + '/topo_' + units + '.json';
+    load_data(f, units);
 }
 
 function display_petition_info() {
@@ -96,16 +37,6 @@ function display_petition_info() {
         $('#petition-info').append(
             $('<tr></tr>').html("</br>" + data.data.attributes.signature_count + " signatures")
         );
-        // console.log(data.data.attributes.background);
-        country_data = data.data.attributes.signatures_by_country;
-        // console.log(country_data);
-        $('#countries-info').html("Signatures by Country:" + "</br>");
-        $('#countries-info').append('<table></table>');
-        $.each(country_data, function(index, item) {
-            $('#countries-info').append(
-                $('<tr></tr>').html(item.name + " - " + item.signature_count)
-            );
-        });
     });
 }
 
@@ -178,26 +109,14 @@ function place_in_array(slices, count) {
     }
 }
 
-
 d3.select('#petition').on('change', function(){
     display_petition_info();
     recolour_map();
 });
 
-d3.select('#lad').on('change', function(){
-    update_resolution_select();
-    change_area();
-});
-
 d3.select("#top_level").on('change', function(){
     update_lad_select();
-    update_resolution_select();
     change_area();
 });
 
-d3.select("#resolution").on('change', function(){
-    change_area();
-});
-
-update_lad_select();
 change_area();

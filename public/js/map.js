@@ -130,7 +130,6 @@ function draw(boundaries) {
         .enter().append("path")
         .attr("class", "area")
         .attr("id", function(d) {return d.id})
-        .attr("properties_table", function(d) { return create_table(d.properties)})
         .attr("d", path)
         .on("mouseenter", function(d){ return select(d)});
 
