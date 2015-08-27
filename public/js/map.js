@@ -28,6 +28,9 @@ function deselect() {
         .html("");
 }
 
+function clear_info() {
+    $('#data_table').html("");
+}
 
 function init(width, height) {
 
@@ -131,7 +134,8 @@ function draw(boundaries) {
         .attr("class", "area")
         .attr("id", function(d) {return d.id})
         .attr("d", path)
-        .on("mouseenter", function(d){ return select(d)});
+        .on("mouseenter", function(d){ return select(d)})
+        .on("mouseleave", function(d){ return clear_info(d)});
 
     // add a boundary between areas
     g.append("path")
