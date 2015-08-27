@@ -71,10 +71,12 @@ function get_slices(top_count, petition_id) {
     var current_slice = 0;
     for (i = 0; i <= 8; i++) {
         $('#t' + (i+1)).html("");
-        if (i < 7) {
+        if (i < 7 && i > 0) {
             $('#t' + (i+1)).html(Math.ceil(current_slice) + " - " +  Math.floor(current_slice + slice));
-        } else {
+        } else if (i === 7) {
             $('#t' + (i+1)).html(Math.ceil(current_slice) + " +");
+        } else {
+            $('#t' + (i+1)).html("1 - " +  Math.floor(current_slice + slice));
         }
         slices[i] = current_slice;
         current_slice += slice;
