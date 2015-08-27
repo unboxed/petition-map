@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    console.log("READY!");
     $.getJSON("json/petitions/petitions.json", function (data) {
         petitions = data.data;
         // console.log(petitions);
@@ -69,7 +70,7 @@ function change_area() {
 
     var f;
     if(lad === 'national') {
-        var f = 'json/' + area + '/topo_' + units + '.json';
+        var f = 'json/uk/' + area + '/topo_' + units + '.json';
         d3.select('#download').attr('href', f).attr('target', '_blank').text('download topoJSON');
         load_data(f, units);
     } else {

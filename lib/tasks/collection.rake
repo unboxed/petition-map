@@ -3,7 +3,7 @@ require 'json'
 require 'pry'
 
 task :refresh do
-  response = JSON.parse open('https://petition.parliament.uk/petitions.json').read
+  response = JSON.parse open('https://petition.parliament.uk/petitions.json?state=open').read
 
   File.open("public/json/petitions/petitions.json", 'w') do |file|
     file.write(response)
