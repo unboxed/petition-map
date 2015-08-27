@@ -85,13 +85,14 @@ function get_slices(top_count, petition_id) {
 }
 
 function colour_classes(slices, petition_id) {
+    d3.selectAll(".coloured").attr("class", "area");
     $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
         constituencies = data.data.attributes.signatures_by_constituency;
         $.each(constituencies, function (index, item) {
             // console.log(item);
             var id = "#" + item.ons_code;
             var index = place_in_array(slices, item.signature_count);
-            var colour_class = "c" + index;
+            var colour_class = "c" + index + " coloured";
             d3.select(id)
                 .attr("class", colour_class);
         });
@@ -115,7 +116,6 @@ d3.select('#petition').on('change', function(){
 });
 
 d3.select("#top_level").on('change', function(){
-    update_lad_select();
     change_area();
 });
 
