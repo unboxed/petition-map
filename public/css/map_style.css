@@ -5,7 +5,7 @@ body {
   font-family: 'Lato', sans-serif;
   color:#777;
   font-weight:300;
-  background-color: SteelBlue;
+  background-color: White;
 }
 
 h1 {
@@ -53,8 +53,23 @@ th, td {
 }
 
 #data_table {
-    height: 200px;
-    color:#fff;
+    color: #fff;
+    position: fixed;
+    top: 40px;
+    left: 25%;
+    background-color: #812A80;
+    display: none;
+    width: 200px;
+    height: 100px;
+    padding: 20px;
+}
+
+#data-name {
+  padding-bottom: 5px;
+}
+
+#data-count {
+  font-size: 25px;
 }
 
 #choiceform {
@@ -63,9 +78,15 @@ th, td {
 }
 
 #left_column {
-    width: 35%;
+    width: 20%;
+    height: 100%;
+    top:0;
+    left:0;
+    position: absolute;
     float:left;
+    padding: 20px;
     color:#fff;
+    background-color: #812A80;
 }
 
 #right_column {
@@ -119,7 +140,7 @@ th, td {
 #logo {
   text-align: right;
   font-size: 36px;
-  color: #fff;
+  color: Black;
 }
 
 #key {
@@ -128,5 +149,5 @@ th, td {
   position: fixed;
   right: 20px;
   top: 20px;
-  color: #fff;
+  color: Black;
 }

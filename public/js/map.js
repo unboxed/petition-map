@@ -18,7 +18,8 @@ compute_size();
 init(width, height);
 
 function clear_info() {
-    $('#data_table').html("");
+    $('#data_table').hide();
+    $('#data_table').empty();
 }
 
 function init(width, height) {
@@ -44,7 +45,8 @@ function select(d) {
     var petitions = document.getElementById('petition');
     var petition_id = petitions.options[petitions.selectedIndex].value;
 
-    $('#data_table').html("");
+    $('#data_table').empty();
+    $('#data_table').show();
     $('#data_table').append('<table></table>');
     $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
         var name;
@@ -58,9 +60,12 @@ function select(d) {
                     return;
                 }
         });
+        var name_html = "<div id=\"data-name\">" + name + "</div>";
+        var mp_html = "<div id=\"data-mp\">" + mp + "<div>";
+        var count_html = "<span id=\"data-count\"><b>" + count + "</b></span>";
         if (name && mp && count) {
             $('#data_table').append(
-                $('<tr></tr>').html("<i></br>" + name +  ", " + mp + "</br>" + count + " signatures" + "</i>")
+                $('<tr></tr>').html(name_html + mp_html + count_html + " signatures")
             );
         }
     });
