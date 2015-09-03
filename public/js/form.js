@@ -41,6 +41,7 @@ function display_petition_info() {
 }
 
 function recolour_map() {
+    console.log("Recolour");
     var petitions = document.getElementById('petition');
     var petition_id = petitions.options[petitions.selectedIndex].value;
     get_highest_count(petition_id);

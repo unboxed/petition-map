@@ -1,5 +1,3 @@
-
-
 // get the width of the area we're displaying in
 var width;
 // but we're using the full window height
@@ -12,21 +10,12 @@ var boundaries, units;
 function compute_size() {
     var margin = 50;
     width = parseInt(d3.select("#map").style("width"));
-    height = window.innerHeight - 2*margin;
+    height = window.innerHeight - (2 * margin);
 }
 
 compute_size();
 // initialise the map
 init(width, height);
-
-
-// remove any data when we lose selection of a map unit
-function deselect() {
-    d3.selectAll(".selected")
-        .attr("class", "area");
-    d3.select("#data_table")
-        .html("");
-}
 
 function clear_info() {
     $('#data_table').html("");
@@ -48,44 +37,10 @@ function init(width, height) {
 
     // graphics go here
     g = svg.append("g");
-
-    // add a white rectangle as background to enable us to deselect a map selection
-    g.append("rect")
-        .attr("x", 0)
-        .attr("y", 0)
-        .attr("width", width)
-        .attr("height", height)
-        .style("fill", "SteelBlue")
-        .on('click', deselect);
-}
-
-// create a HTML table to display any properties about the selected item
-function create_table(properties) {
-    var keys = Object.keys(properties);
-
-    table_string = "<table>";
-    table_string += "<th>Property</th><th>Value</th>";
-    for (var i = 0; i < keys.length; i++) {
-        table_string += "<tr><td>" + keys[i] + "</td><td>" + properties[keys[i]] + "</td></tr>";
-    }
-    table_string += "</table>";
-    return table_string;
 }
 
 // select a map area
 function select(d) {
-    // get the id of the selected map area
-    // var id = "#" + d.id;
-    // console.log(id);
-    // remove the selected class from any other selected areas
-    // d3.selectAll(".selected")
-    //     .attr("class", "area");
-    // and add it to this area
-    // d3.select(id)
-    //     .attr("class", "selected");
-    // add the area properties to the data_table section
-    // d3.select("#data_table")
-    //     .html(create_table(d.properties));
     var petitions = document.getElementById('petition');
     var petition_id = petitions.options[petitions.selectedIndex].value;
 
@@ -147,8 +102,6 @@ function draw(boundaries) {
 // called to redraw the map - removes map completely and starts from scratch
 function redraw() {
     compute_size();
-    //width = parseInt(d3.select("#map").style("width"));
-    //height = window.innerHeight - margin;
 
     d3.select("svg").remove();
 
@@ -158,9 +111,6 @@ function redraw() {
 
 // loads data from the given file and redraws the map
 function load_data(filename, u) {
-    // clear any selection
-    deselect();
-
     units = u;
     var f = filename;
 
