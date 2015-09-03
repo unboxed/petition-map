@@ -14,6 +14,9 @@
             <h1>Petitions Map</h1>
             <form id="choiceform">
                 <p>
+                    Select a petition</br>
+                    <select name="petition" id="petition">
+                    </select></br></br>
                     Select area</br>
                     <select name="top_level"  id="top_level">
                         <option value="gb">Great Britain</option>
@@ -22,9 +25,9 @@
                         <option value="wal">Wales</option>
                         <option value="lon">London</option>
                     </select></br></br>
-                    Select a petition</br>
-                    <select name="petition" id="petition">
-                    </select>
+                    Enter a petition code</br>
+                    <input type="text" id="petition_code">
+                    <button type="button" id="petition_button">Submit</button>
                 </p>
             </form>
             <section id="petition-info">

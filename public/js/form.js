@@ -2,8 +2,9 @@ $(document).ready(function() {
     $.getJSON("json/petitions/petitions.json", function (data) {
         petitions = data.data;
         $.each(petitions, function (index, item) {
+            var dropdown_text = item.attributes.signature_count + " signatures - " + item.attributes.action;
             $('#petition').append(
-                $('<option></option>').val(item.id).html(item.attributes.action)
+                $('<option></option>').val(item.id).html(dropdown_text)
             );
         });
     });
@@ -112,6 +113,13 @@ d3.select('#petition').on('change', function(){
 
 d3.select("#top_level").on('change', function(){
     change_area();
+});
+
+d3.select('#petition_button').on('click', function() {
+    code = $('#petition_code').val();
+    $.getJSON("https://petition.parliament.uk/petitions/" + code + ".json", function (data) {
+        console.log(data);
+    });
 });
 
 change_area();
