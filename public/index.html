@@ -17,17 +17,18 @@
                     Select a petition</br>
                     <select name="petition" id="petition">
                     </select></br></br>
+
                     Select area</br>
-                    <select name="top_level"  id="top_level">
-                        <option value="gb">Great Britain</option>
-                        <option value="eng">England</option>
-                        <option value="sco">Scotland</option>
-                        <option value="wal">Wales</option>
-                        <option value="lon">London</option>
-                    </select></br></br>
+
+                    <input type="radio" name="area" checked="yes" value="gb" onclick="change_area()"/>Great Britain</br>
+                    <input type="radio" name="area" value="eng" onclick="change_area()">England</br>
+                    <input type="radio" name="area" value="sco" onclick="change_area()">Scotland</br>
+                    <input type="radio" name="area" value="wal" onclick="change_area()">Wales</br>
+                    <input type="radio" name="area" value="lon" onclick="change_area()">London</br></br>
+
                     Enter a petition code</br>
-                    <input type="text" id="petition_code">
-                    <button type="button" id="petition_button">Submit</button>
+                    <input type="text" id="petition_code" placeholder="e.g. 105991">
+                    <a class="submitButton" type="button" id="petition_button">Submit</a>
                 </p>
             </form>
             <section id="petition-info">

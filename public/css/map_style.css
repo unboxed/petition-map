@@ -77,6 +77,23 @@ th, td {
     color:#fff;
 }
 
+.submitButton {
+  background-color:#a478c2;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-size: 14px;
+  padding: 3px 10px;
+  text-decoration:none;
+}
+.submitButton:hover {
+  background-color:#c29fd1;
+}
+.submitButton:active {
+  position:relative;
+  top:1px;
+}
+
 #left_column {
     width: 20%;
     height: 100%;
@@ -135,6 +152,10 @@ th, td {
 #petition {
   width: 100%;
   max-width: 600px;
+}
+
+#petition_code {
+  font-size: 14px;
 }
 
 #logo {

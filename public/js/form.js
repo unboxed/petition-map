@@ -13,8 +13,7 @@ $(document).ready(function() {
 function change_area() {
     units = "wpc";
 
-    var top_level_select = document.getElementById('top_level');
-    var area = top_level_select.options[top_level_select.selectedIndex].value;
+    var area = $("input[name='area']:checked").val();
 
     var f = 'json/uk/' + area + '/topo_' + units + '.json';
     load_data(f, units);
@@ -37,7 +36,7 @@ function display_petition_info() {
             $('<tr></tr>').html("</br>" + data.data.attributes.signature_count + " signatures")
         );
         $('#petition-info').append(
-            $('<tr></tr>').html("</br><input type=\"button\" onclick=\"location.href='" + sign_link + "';\" value=\"Sign Petition\" />")
+            $('<tr></tr>').html("</br><a class=\"submitButton\" href='" + sign_link + "'>Sign Petition</a>")
         );
     });
 }
@@ -113,10 +112,6 @@ d3.select('#petition').on('change', function(){
     display_petition_info();
     recolour_map();
     $('#key').fadeIn();
-});
-
-d3.select("#top_level").on('change', function(){
-    change_area();
 });
 
 d3.select('#petition_button').on('click', function() {
