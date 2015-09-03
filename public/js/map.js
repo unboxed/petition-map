@@ -109,7 +109,7 @@ function redraw() {
     draw(boundaries);
 }
 
-// loads data from the given file and redraws the map
+// loads data from the given file and redraws and recolours the map
 function load_data(filename, u) {
     units = u;
     var f = filename;
@@ -118,6 +118,8 @@ function load_data(filename, u) {
         if (error) return console.error(error);
         boundaries = b;
         redraw();
+        recolour_map();
+        display_petition_info();
     });
 }
 

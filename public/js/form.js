@@ -1,12 +1,10 @@
 $(document).ready(function() {
     $.getJSON("json/petitions/petitions.json", function (data) {
         petitions = data.data;
-        // console.log(petitions);
         $.each(petitions, function (index, item) {
             $('#petition').append(
                 $('<option></option>').val(item.id).html(item.attributes.action)
             );
-            // console.log(item.id + " - " + item.attributes.action);
         });
     });
 });
@@ -24,7 +22,6 @@ function change_area() {
 function display_petition_info() {
     var petitions = document.getElementById('petition');
     var petition_id = petitions.options[petitions.selectedIndex].value;
-    // console.log(petition_id);
     $('#petition-info').html("");
     $('#petition-info').append('<table></table>');
     $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
@@ -41,7 +38,6 @@ function display_petition_info() {
 }
 
 function recolour_map() {
-    console.log("Recolour");
     var petitions = document.getElementById('petition');
     var petition_id = petitions.options[petitions.selectedIndex].value;
     get_highest_count(petition_id);
@@ -60,8 +56,6 @@ function get_highest_count(petition_id) {
             }
         });
 
-        // console.log(top_count);
-        // console.log(top_constituency);
         get_slices(top_count, petition_id);
     });
 }
@@ -81,9 +75,7 @@ function get_slices(top_count, petition_id) {
         }
         slices[i] = current_slice;
         current_slice += slice;
-        // console.log(current_slice);
     }
-    // console.log(slices);
     colour_classes(slices, petition_id);
 }
 
@@ -92,12 +84,11 @@ function colour_classes(slices, petition_id) {
     $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
         constituencies = data.data.attributes.signatures_by_constituency;
         $.each(constituencies, function (index, item) {
-            // console.log(item);
             var id = "#" + item.ons_code;
             var index = place_in_array(slices, item.signature_count);
             var colour_class = "c" + index + " coloured";
             d3.select(id)
-                .attr("class", colour_class);
+                .attr("class", colour_class)
         });
     });
 }
@@ -124,3 +115,4 @@ d3.select("#top_level").on('change', function(){
 });
 
 change_area();
+$('#key').fadeIn();
