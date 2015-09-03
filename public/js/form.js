@@ -115,6 +115,7 @@ function place_in_array(slices, count) {
 d3.select('#petition').on('change', function(){
     display_petition_info();
     recolour_map();
+    $('#key').fadeIn();
 });
 
 d3.select("#top_level").on('change', function(){
