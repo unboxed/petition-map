@@ -98,6 +98,24 @@ th, td {
   top:1px;
 }
 
+#geojson_link {
+  color: #c29fd1;
+}
+
+#geojson_link:hover {
+  color: #ffffff;
+}
+
+#licence {
+  position: absolute;
+  bottom: 5%;
+  border-top: 1px solid #e5e5e5;
+  padding-top: 10px;
+  width: 350px;
+  vertical-align: bottom;
+  font-size: 12px;
+}
+
 #left_column {
   height: 100%;
   top:0;
