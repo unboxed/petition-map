@@ -1,191 +1,128 @@
 $(document).ready(function() {
-    console.log( "ready!" );
     $.getJSON("json/petitions/petitions.json", function (data) {
-        console.log("something");
         petitions = data.data;
-        console.log(petitions);
         $.each(petitions, function (index, item) {
+            var dropdown_text = item.attributes.signature_count + " signatures - " + item.attributes.action;
             $('#petition').append(
-                $('<option></option>').val(item.id).html(item.attributes.action)
+                $('<option></option>').val(item.id).html(dropdown_text)
             );
-            console.log(item.id + " - " + item.attributes.action);
         });
     });
-    console.log("done!");
 });
 
-function update_lad_select() {
-    var top_level_select = document.getElementById('top_level');
-    var area = top_level_select.options[top_level_select.selectedIndex].value;
-
-    options_string = '<option value="national">National</option><option disabled>──────────</option>';
-    if(area === 'eng') {
-        for (var key in e_lads) {
-            if (e_lads.hasOwnProperty(key)) {
-                options_string += '<option value=' + key + '>' + e_lads[key] + '</option>';
-            }
-        }
-    } else if(area === 'sco') {
-        for (var key in s_lads) {
-            if (s_lads.hasOwnProperty(key)) {
-                options_string += '<option value=' + key + '>' + s_lads[key] + '</option>';
-            }
-        }
-    } else if(area === 'wal') {
-        for (var key in w_lads) {
-            if (w_lads.hasOwnProperty(key)) {
-                options_string += '<option value=' + key + '>' + w_lads[key] + '</option>';
-            }
-        }
-    } else if(area === 'uk') {
-
-    }
-    d3.select('#lad').html(options_string);
-}
-
-
-function update_resolution_select() {
-    var top_level_select = document.getElementById('top_level');
-    var area = top_level_select.options[top_level_select.selectedIndex].value;
-
-    var lad_select = document.getElementById('lad');
-    var lad = lad_select.options[lad_select.selectedIndex].value;
-
-    options_string = '';
-    if(lad === 'national') {
-        options_string += '<option value="wpc">Westminster Parliamentary Constituencies</option>';
-        // if(area === 'wal') {
-        //     options_string += '<option value = "nawc">National Assembly Wales Constituencies</option>';
-        //     options_string += '<option value = "nawer">National Assembly Wales Electoral Regions</option>';
-        // } else if(area === 'sco') {
-        //     options_string += '<option value = "spc">Scottish Parliament Constituencies</option>';
-        //     options_string += '<option value = "sper">Scottish Parliament Electoral Regions</option>';
-        // }
-    } else {
-        // options_string += '<option value="wpc">Westminster Parliamentary Constituencies</option><option value="wards">Westminster Parliamentary Wards</option>';
-        // if(area === 'eng' || area === 'wal') {
-        //     options_string += '<option value="msoa">Middle Layer Super Output Areas</option>';
-        //     options_string += '<option value="lsoa">Lower Layer Super Output Areas</option>';
-        // } else if (area === 'sco') {
-        //     options_string += '<option value="idz">Intermediate Data Zones</option>';
-        //     options_string += '<option value="dz">Data Zones</option>';
-        // }
-        // options_string += '<option value="oa">Output Areas</option>';
-    }
-    d3.select('#resolution').html(options_string);
-}
-
-
 function change_area() {
-    d3.select('#download').html("");
-    var resolution_select = document.getElementById('resolution');
-    units = resolution_select.options[resolution_select.selectedIndex].value;
+    units = "wpc";
 
-    var top_level_select = document.getElementById('top_level');
-    var area = top_level_select.options[top_level_select.selectedIndex].value;
+    var area = $("input[name='area']:checked").val();
 
-    var lad_select = document.getElementById('lad');
-    var lad = lad_select.options[lad_select.selectedIndex].value;
-
-    var f;
-    if(lad === 'national') {
-        var f = 'json/' + area + '/topo_' + units + '.json';
-        d3.select('#download').attr('href', f).attr('target', '_blank').text('download topoJSON');
-        load_data(f, units);
-    } else {
-        var f = 'json/' + area + '/' + units + '_by_lad/topo_' + lad + '.json';
-        d3.select('#download').attr('href', f).attr('target', '_blank').text('download topoJSON');
-        load_data(f, lad);
-    }
+    var f = 'json/uk/' + area + '/topo_' + units + '.json';
+    load_data(f, units);
 }
 
 function display_petition_info() {
     var petitions = document.getElementById('petition');
     var petition_id = petitions.options[petitions.selectedIndex].value;
-    // console.log(petition_id);
-    $('#petition-info').html("");
-    $('#petition-info').append('<table></table>');
+    $('#petition_info').hide();
+    $('#petition_info').empty();
+    $('#petition_info').append('<table></table>');
     $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
-        $('#petition-info').append(
-            $('<tr></tr>').html(data.data.attributes.action + "</br>")
+        var sign_link = "https://petition.parliament.uk/petitions/" + data.data.id + "/signatures/new";
+        var count_html = "<span id=\"data-count\"><b>" + data.data.attributes.signature_count + "</b></span>";
+        $('#petition_info').append(
+            $('<tr></tr>').html("<b>" + data.data.attributes.action + "</b></br>")
         );
-        $('#petition-info').append(
+        $('#petition_info').append(
             $('<tr></tr>').html("</br>" + data.data.attributes.background + "</br>")
         );
-        $('#petition-info').append(
-            $('<tr></tr>').html("</br>" + data.data.attributes.signature_count + " signatures")
+        $('#petition_info').append(
+            $('<tr></tr>').html("</br>" + count_html + " signatures")
         );
-        // console.log(data.data.attributes.background);
-        country_data = data.data.attributes.signatures_by_country;
-        // console.log(country_data);
-        $('#countries-info').html("Signatures by Country:" + "</br>");
-        $('#countries-info').append('<table></table>');
-        $.each(country_data, function(index, item) {
-            $('#countries-info').append(
-                $('<tr></tr>').html(item.name + " - " + item.signature_count)
-            );
-        });
+        $('#petition_info').append(
+            $('<tr></tr>').html("</br><a class=\"submitButton\" href='" + sign_link + "'>Sign Petition</a>")
+        );
+        $('#petition_info').show();
     });
 }
 
 function recolour_map() {
     var petitions = document.getElementById('petition');
     var petition_id = petitions.options[petitions.selectedIndex].value;
+    get_highest_count(petition_id);
+}
+
+function get_highest_count(petition_id) {
+    var top_count = 0;
+    var top_constituency;
 
     $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
         constituencies = data.data.attributes.signatures_by_constituency;
         $.each(constituencies, function (index, item) {
-            // console.log(item);
+            if (item.signature_count >= top_count) {
+                top_count = item.signature_count;
+                top_constituency = item.name;
+            }
+        });
+
+        get_slices(top_count, petition_id);
+    });
+}
+
+function get_slices(top_count, petition_id) {
+    var slice = top_count / 8;
+    var slices = {};
+    var current_slice = 0;
+    for (i = 0; i <= 8; i++) {
+        $('#t' + (i+1)).html("");
+        if (i < 7 && i > 0) {
+            $('#t' + (i+1)).html(Math.ceil(current_slice) + " - " +  Math.floor(current_slice + slice));
+        } else if (i === 7) {
+            $('#t' + (i+1)).html(Math.ceil(current_slice) + " +");
+        } else {
+            $('#t' + (i+1)).html("1 - " +  Math.floor(current_slice + slice));
+        }
+        slices[i] = current_slice;
+        current_slice += slice;
+    }
+    colour_classes(slices, petition_id);
+}
+
+function colour_classes(slices, petition_id) {
+    d3.selectAll(".coloured").attr("class", "area");
+    $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
+        constituencies = data.data.attributes.signatures_by_constituency;
+        $.each(constituencies, function (index, item) {
             var id = "#" + item.ons_code;
-            var colour_class = get_colour_class(item.signature_count);
+            var index = place_in_array(slices, item.signature_count);
+            var colour_class = "c" + index + " coloured";
             d3.select(id)
-                .attr("class", colour_class);
+                .attr("class", colour_class)
         });
     });
 }
 
-function get_colour_class(count) {
-    if (count < 50) {
-        return "c0-50";
-    } else if (count > 50 && count <= 100) {
-        return "c51-100";
-    } else if (count > 100 && count <= 150) {
-        return "c101-150";
-    } else if (count > 150 && count <= 200) {
-        return "c151-200";
-    } else if (count > 200 && count <= 250) {
-        return "c201-250";
-    } else if (count > 250 && count <= 300) {
-        return "c251-300";
-    } else if (count > 300 && count <= 350) {
-        return "c301-350";
-    } else if (count > 350) {
-        return "c350on";
-    } else {
-        return "area";
+function place_in_array(slices, count) {
+    var slice = slices[1];
+    for (i = 0; i < 8; i++) {
+        if (count >= slices[i] && count < (slices[i] + slice)) {
+            return i+1;
+        } else if (count === (slices[1] * 8)) {
+            return 8;
+        }
     }
 }
-
 
 d3.select('#petition').on('change', function(){
     display_petition_info();
     recolour_map();
+    $('#key').fadeIn();
 });
 
-d3.select('#lad').on('change', function(){
-    update_resolution_select();
-    change_area();
+d3.select('#petition_button').on('click', function() {
+    code = $('#petition_code').val();
+    $.getJSON("https://petition.parliament.uk/petitions/" + code + ".json", function (data) {
+        console.log(data);
+    });
 });
 
-d3.select("#top_level").on('change', function(){
-    update_lad_select();
-    update_resolution_select();
-    change_area();
-});
-
-d3.select("#resolution").on('change', function(){
-    change_area();
-});
-
-update_lad_select();
 change_area();
+$('#key').fadeIn();

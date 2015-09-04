@@ -1,11 +1,11 @@
-@import url(http://fonts.googleapis.com/css?family=Lato);
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,100,900);
 
 body {
   padding:20px;
   font-family: 'Lato', sans-serif;
   color:#777;
   font-weight:300;
-  background-color: SteelBlue;
+  background-color: White;
 }
 
 h1 {
@@ -23,7 +23,7 @@ h1 {
 }
 
 h1 {
-  font-size:40px;
+  font-size: 40px;
 }
 
 a {
@@ -40,73 +40,171 @@ table {
 th, td {
   text-align:left;
   padding:5px 10px;
-  border-bottom:1px solid #e5e5e5;
-}
-
-.title {
-    padding-bottom: 10px;
-    border-bottom: 1px solid #e5e5e5;
 }
 
 .content {
-    padding-top: 20px;
-    padding-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 10px;
 }
 
 #data_table {
-    height: 200px;
-    color:#fff;
+  position: fixed;
+  top: 40px;
+  left: 25%;
+  display: none;
+  width: 200px;
+  padding: 15px 20px 20px 20px;
+  background-color: #812A80;
+  color: #fff;
+}
+
+#petition_info {
+  position: fixed;
+  bottom: 40px;
+  left: 25%;
+  width: 300px;
+  padding: 20px;
+  background-color: #812A80;
+  color: #fff;
+}
+
+#data-name {
+  padding-bottom: 5px;
+}
+
+#data-count {
+  font-size: 25px;
 }
 
 #choiceform {
-    border-bottom: 1px solid #e5e5e5;
-    color:#fff;
+  color:#fff;
+}
+
+.submitButton {
+  background-color:#a478c2;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-size: 14px;
+  padding: 3px 10px;
+  text-decoration:none;
+}
+.submitButton:hover {
+  background-color:#c29fd1;
+}
+.submitButton:active {
+  position:relative;
+  top:1px;
+}
+
+.form_section {
+  padding-top: 3px;
+}
+
+#geojson_link {
+  color: #c29fd1;
+}
+
+#geojson_link:hover {
+  color: #ffffff;
+}
+
+#licence {
+  position: absolute;
+  bottom: 5%;
+  border-top: 1px solid #e5e5e5;
+  padding-top: 10px;
+  width: 350px;
+  vertical-align: bottom;
+  font-size: 12px;
 }
 
 #left_column {
-    width: 35%;
-    float:left;
-    color:#fff;
+  height: 100%;
+  top:0;
+  left:0;
+  position: absolute;
+  float:left;
+  padding: 20px;
+  color:#fff;
+  background-color: #812A80;
 }
 
 #right_column {
-    width: 65%;
-    float: right;
-    color: #fff;
+  width: 65%;
+  float: right;
 }
 
 .area{
-    fill: #C0C0C0;
-    stroke: none;
+  fill: #C0C0C0;
+  color: #C0C0C0;
+  stroke: none;
 }
 
 .boundary {
-    fill: none;
-    stroke: #777;
+  fill: none;
+  stroke: #777;
 }
 
 .selected {
-    fill: #fff;
-    stroke: #777;
-    stroke-dasharray: 2,2;
-    stroke-linejoin: round;
+  fill: #fff;
+  stroke: #777;
+  stroke-dasharray: 2,2;
+  stroke-linejoin: round;
 }
 
-.c0-50 { fill: #c0cfb2; }
-.c51-100 { fill: #acbf99; }
-.c101-150 { fill: #97b07f; }
-.c151-200 { fill: #82a066; }
-.c201-250 { fill: #6e904c; }
-.c251-300 { fill: #598032; }
-.c301-350 { fill: #447019; }
-.c350on { fill: #306100; }
+.c1 { fill: #c0cfb2; }
+.c2 { fill: #acbf99; }
+.c3 { fill: #97b07f; }
+.c4 { fill: #82a066; }
+.c5 { fill: #6e904c; }
+.c6 { fill: #598032; }
+.c7 { fill: #447019; }
+.c8 { fill: #306100; }
+
+.coloured {}
+
+.t1 { color: #c0cfb2; }
+.t2 { color: #acbf99; }
+.t3 { color: #97b07f; }
+.t4 { color: #82a066; }
+.t5 { color: #6e904c; }
+.t6 { color: #598032; }
+.t7 { color: #447019; }
+.t8 { color: #306100; }
 
 #petition {
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
+}
+
+#petition_code {
+  font-size: 14px;
 }
 
 #logo {
+  position: absolute;
+  bottom: 35px;
+  right: 20px;
   text-align: right;
   font-size: 36px;
+  color: Black;
+}
+
+#version {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  text-align: right;
+  font-size: 16px;
+}
+
+#key {
+  width: 100%;
+  max-width: 150px;
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  color: Black;
+  font-weight: 400;
 }

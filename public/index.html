@@ -11,37 +11,94 @@
     <body>
 
         <div id="left_column">
-            <h1>Petitions Map</h1>
-            <form id="choiceform">
-                <p>
-                    <select name="top_level"  id="top_level" hidden>
-                        <option value="uk">United Kingdom</option>
-                    </select>
-                    <select name="lad" id="lad" hidden>
-                        <option value="national">National</option>
-                    </select>
-                    <select name="resolution" id="resolution" hidden>
-                        <option value="wpc">Westminster Parliamentary Constituencies</option>
-                    </select>
-                    Select a petition<br>
-                    <select name="petition" id="petition">
-                    </select>
-                </p>
-            </form>
-            <section id="petition-info">
-            </section>
-            <section id="data_table">
-            </section>
-     <!--        <section id="countries-info">
-            </section> -->
+            <h1>Petitions Heatmap</h1>
 
+            <form id="choiceform">
+                Select a petition</br>
+                <div class="form_section">
+                    <select name="petition" id="petition"></select>
+                    </br></br>
+                </div>
+
+                Select area</br>
+                <div class="form_section">
+                    <input type="radio" name="area" checked="yes" value="gb" onclick="change_area()"/>  Great Britain</br>
+                    <input type="radio" name="area" value="eng" onclick="change_area()">  England</br>
+                    <input type="radio" name="area" value="sco" onclick="change_area()">  Scotland</br>
+                    <input type="radio" name="area" value="wal" onclick="change_area()">  Wales</br>
+                    <input type="radio" name="area" value="lon" onclick="change_area()">  London</br></br>
+                </div>
+
+                Enter a petition code</br>
+                <div class="form_section">
+                    <input type="text" id="petition_code" placeholder="e.g. 105991">
+                    <a class="submitButton" type="button" id="petition_button">Submit</a>
+                </div>
+            </form>
+
+            <section id="licence">
+                <p>
+                    <a id="geojson_link" href="https://github.com/martinjc/UK-GeoJson">GeoJSON and TopoJSON UK Boundary Data</a>
+                    by Martin Chorley is licensed under a Creative Commons Attribution 4.0 International License.
+                </p>
+                <p>
+                    Contains Ordnance Survey, Office of National Statistics and National Records Scotland data © Crown copyright and database right [2014]. Ordnance Survey data covered by OS OpenData Licence.
+                </p>
+            </section>
         </div>
 
         <div id="right_column">
+            <section id="data_table">
+            </section>
+            <section id="petition_info" hidden>
+            </section>
+            <section id="key" hidden>
+                <table>
+                    <tr>
+                        <td class="area">&#9608</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td class="t1">&#9608</td>
+                        <td id="t1"></td>
+                    </tr>
+                    <tr>
+                        <td class="t2">&#9608</td>
+                        <td id="t2"></td>
+                    </tr>
+                    <tr>
+                        <td class="t3">&#9608</td>
+                        <td id="t3"></td>
+                    </tr>
+                    <tr>
+                        <td class="t4">&#9608</td>
+                        <td id="t4"></td>
+                    </tr>
+                    <tr>
+                        <td class="t5">&#9608</td>
+                        <td id="t5"></td>
+                    </tr>
+                    <tr>
+                        <td class="t6">&#9608</td>
+                        <td id="t6"></td>
+                    </tr>
+                    <tr>
+                        <td class="t7">&#9608</td>
+                        <td id="t7"></td>
+                    </tr>
+                    <tr>
+                        <td class="t8">&#9608</td>
+                        <td id="t8"></td>
+                    </tr>
+                </table>
+            </section>
             <section id="map">
             </section>
             <section id="logo">
                 Unboxed
+            </section>
+            <section id="version">
+                ALPHA
             </section>
         </div>
 
@@ -51,7 +108,6 @@
         <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
         <script src="js/map.js"></script>
-        <script src="js/lads.js"></script>
         <script src="js/form.js"></script>
 
     </body>
