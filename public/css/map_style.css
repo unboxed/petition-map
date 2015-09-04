@@ -23,7 +23,7 @@ h1 {
 }
 
 h1 {
-  font-size: 40px;
+  font-size: 2.5em;
 }
 
 a {
@@ -56,16 +56,18 @@ th, td {
   padding: 15px 20px 20px 20px;
   background-color: #812A80;
   color: #fff;
+  font-size: 0.9em;
 }
 
 #petition_info {
   position: fixed;
   bottom: 40px;
   left: 25%;
-  width: 300px;
+  width: 250px;
   padding: 20px;
   background-color: #812A80;
   color: #fff;
+  font-size: 0.9em;
 }
 
 #data-name {
@@ -73,7 +75,7 @@ th, td {
 }
 
 #data-count {
-  font-size: 25px;
+  font-size: 2em;
 }
 
 #choiceform {
@@ -85,7 +87,7 @@ th, td {
   display:inline-block;
   cursor:pointer;
   color:#ffffff;
-  font-size: 14px;
+  font-size: 1em;
   padding: 3px 10px;
   text-decoration:none;
 }
@@ -114,13 +116,14 @@ th, td {
   bottom: 5%;
   border-top: 1px solid #e5e5e5;
   padding-top: 10px;
-  width: 350px;
+  width: 90%;
   vertical-align: bottom;
-  font-size: 12px;
+  font-size: 0.75em;
 }
 
 #left_column {
   height: 100%;
+  width: 20%;
   top:0;
   left:0;
   position: absolute;
@@ -131,7 +134,7 @@ th, td {
 }
 
 #right_column {
-  width: 65%;
+  width: 50%;
   float: right;
 }
 
@@ -180,7 +183,7 @@ th, td {
 }
 
 #petition_code {
-  font-size: 14px;
+  font-size: 1em;
 }
 
 #logo {
@@ -188,7 +191,7 @@ th, td {
   bottom: 35px;
   right: 20px;
   text-align: right;
-  font-size: 36px;
+  font-size: 2em;
   color: Black;
 }
 
@@ -197,7 +200,7 @@ th, td {
   bottom: 20px;
   right: 20px;
   text-align: right;
-  font-size: 16px;
+  font-size: 0.8em;
 }
 
 #key {
