@@ -208,4 +208,7 @@ th, td {
   top: 20px;
   color: Black;
   font-weight: 400;
+  background-color: #f6f6f6;
+  opacity: 0.75;
+  padding: 10px;
 }

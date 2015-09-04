@@ -10,7 +10,7 @@ var boundaries, units;
 function compute_size() {
     var margin = 50;
     width = parseInt(d3.select("#map").style("width"));
-    height = window.innerHeight - (2 * margin);
+    height = window.innerHeight - margin;
 }
 
 compute_size();
@@ -34,10 +34,17 @@ function init(width, height) {
     // create the svg element for drawing onto
     svg = d3.select("#map").append("svg")
         .attr("width", width)
-        .attr("height", height);
+        .attr("height", height)
+        .append("g")
+            .call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoom))
+        .append("g");
 
     // graphics go here
     g = svg.append("g");
+}
+
+function zoom() {
+  svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 }
 
 // select a map area
