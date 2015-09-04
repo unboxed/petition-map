@@ -22,22 +22,25 @@ function change_area() {
 function display_petition_info() {
     var petitions = document.getElementById('petition');
     var petition_id = petitions.options[petitions.selectedIndex].value;
-    $('#petition-info').html("");
-    $('#petition-info').append('<table></table>');
+    $('#petition_info').hide();
+    $('#petition_info').empty();
+    $('#petition_info').append('<table></table>');
     $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
         var sign_link = "https://petition.parliament.uk/petitions/" + data.data.id + "/signatures/new";
-        $('#petition-info').append(
-            $('<tr></tr>').html(data.data.attributes.action + "</br>")
+        var count_html = "<span id=\"data-count\"><b>" + data.data.attributes.signature_count + "</b></span>";
+        $('#petition_info').append(
+            $('<tr></tr>').html("<b>" + data.data.attributes.action + "</b></br>")
         );
-        $('#petition-info').append(
+        $('#petition_info').append(
             $('<tr></tr>').html("</br>" + data.data.attributes.background + "</br>")
         );
-        $('#petition-info').append(
-            $('<tr></tr>').html("</br>" + data.data.attributes.signature_count + " signatures")
+        $('#petition_info').append(
+            $('<tr></tr>').html("</br>" + count_html + " signatures")
         );
-        $('#petition-info').append(
+        $('#petition_info').append(
             $('<tr></tr>').html("</br><a class=\"submitButton\" href='" + sign_link + "'>Sign Petition</a>")
         );
+        $('#petition_info').show();
     });
 }
 

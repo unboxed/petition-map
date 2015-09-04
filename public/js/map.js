@@ -60,7 +60,7 @@ function select(d) {
                     return;
                 }
         });
-        var name_html = "<div id=\"data-name\">" + name + "</div>";
+        var name_html = "<div id=\"data-name\"><b>" + name + "</b></div>";
         var mp_html = "<div id=\"data-mp\">" + mp + "<div>";
         var count_html = "<span id=\"data-count\"><b>" + count + "</b></span>";
         if (name && mp && count) {

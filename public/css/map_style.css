@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Lato);
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,100,900);
 
 body {
   padding:20px;
@@ -23,7 +23,7 @@ h1 {
 }
 
 h1 {
-  font-size:40px;
+  font-size: 40px;
 }
 
 a {
@@ -42,26 +42,31 @@ th, td {
   padding:5px 10px;
 }
 
-.title {
-    padding-bottom: 10px;
-    border-bottom: 1px solid #e5e5e5;
-}
-
 .content {
-    padding-top: 20px;
-    padding-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 10px;
 }
 
 #data_table {
-    color: #fff;
-    position: fixed;
-    top: 40px;
-    left: 25%;
-    background-color: #812A80;
-    display: none;
-    width: 200px;
-    height: 100px;
-    padding: 20px;
+  position: fixed;
+  top: 40px;
+  left: 25%;
+  display: none;
+  width: 200px;
+  padding: 20px;
+  background-color: #812A80;
+  color: #fff;
+}
+
+#petition_info {
+  position: fixed;
+  bottom: 40px;
+  left: 25%;
+  width: 300px;
+  padding: 20px;
+  background-color: #812A80;
+  color: #fff;
+
 }
 
 #data-name {
@@ -73,8 +78,7 @@ th, td {
 }
 
 #choiceform {
-    border-bottom: 1px solid #e5e5e5;
-    color:#fff;
+  color:#fff;
 }
 
 .submitButton {
@@ -95,38 +99,38 @@ th, td {
 }
 
 #left_column {
-    width: 20%;
-    height: 100%;
-    top:0;
-    left:0;
-    position: absolute;
-    float:left;
-    padding: 20px;
-    color:#fff;
-    background-color: #812A80;
+  width: 20%;
+  height: 100%;
+  top:0;
+  left:0;
+  position: absolute;
+  float:left;
+  padding: 20px;
+  color:#fff;
+  background-color: #812A80;
 }
 
 #right_column {
-    width: 65%;
-    float: right;
+  width: 65%;
+  float: right;
 }
 
 .area{
-    fill: #C0C0C0;
-    color: #C0C0C0;
-    stroke: none;
+  fill: #C0C0C0;
+  color: #C0C0C0;
+  stroke: none;
 }
 
 .boundary {
-    fill: none;
-    stroke: #777;
+  fill: none;
+  stroke: #777;
 }
 
 .selected {
-    fill: #fff;
-    stroke: #777;
-    stroke-dasharray: 2,2;
-    stroke-linejoin: round;
+  fill: #fff;
+  stroke: #777;
+  stroke-dasharray: 2,2;
+  stroke-linejoin: round;
 }
 
 .c1 { fill: #c0cfb2; }
@@ -171,4 +175,5 @@ th, td {
   right: 20px;
   top: 20px;
   color: Black;
+  font-weight: 400;
 }
