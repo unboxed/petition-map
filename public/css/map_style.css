@@ -66,7 +66,6 @@ th, td {
   padding: 20px;
   background-color: #812A80;
   color: #fff;
-
 }
 
 #data-name {
@@ -96,6 +95,10 @@ th, td {
 .submitButton:active {
   position:relative;
   top:1px;
+}
+
+.form_section {
+  padding-top: 3px;
 }
 
 #geojson_link {
@@ -180,9 +183,20 @@ th, td {
 }
 
 #logo {
+  position: absolute;
+  bottom: 35px;
+  right: 20px;
   text-align: right;
   font-size: 36px;
   color: Black;
+}
+
+#version {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  text-align: right;
+  font-size: 16px;
 }
 
 #key {
