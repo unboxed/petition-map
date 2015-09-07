@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $.getJSON("json/petitions/petitions.json", function (data) {
+    $.getJSON("https://preview.epetitions.website/petitions.json?state=open", function (data) {
         petitions = data.data;
         $.each(petitions, function (index, item) {
             var dropdown_text = item.attributes.action;
@@ -8,6 +8,8 @@ $(document).ready(function() {
             );
         });
         $("#petition").select2();
+        change_area();
+        $('#key').fadeIn();
     });
 });
 
@@ -26,7 +28,7 @@ function display_petition_info() {
     $('#petition_info').hide();
     $('#petition_info').empty();
     $('#petition_info').append('<table></table>');
-    $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
+    $.getJSON("https://preview.epetitions.website/petitions/" + petition_id + ".json", function (data) {
         var sign_link = "https://petition.parliament.uk/petitions/" + data.data.id + "/signatures/new";
         var count_html = "<span id=\"data-count\"><b>" + data.data.attributes.signature_count + "</b></span>";
         $('#petition_info').append(
@@ -55,7 +57,7 @@ function get_highest_count(petition_id) {
     var top_count = 0;
     var top_constituency;
 
-    $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
+    $.getJSON("https://preview.epetitions.website/petitions/" + petition_id + ".json", function (data) {
         constituencies = data.data.attributes.signatures_by_constituency;
         $.each(constituencies, function (index, item) {
             if (item.signature_count >= top_count) {
@@ -89,7 +91,7 @@ function get_slices(top_count, petition_id) {
 
 function colour_classes(slices, petition_id) {
     d3.selectAll(".coloured").attr("class", "area");
-    $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
+    $.getJSON("https://preview.epetitions.website/petitions/" + petition_id + ".json", function (data) {
         constituencies = data.data.attributes.signatures_by_constituency;
         $.each(constituencies, function (index, item) {
             var id = "#" + item.ons_code;
@@ -120,10 +122,8 @@ $("#petition").on('change', function() {
 
 d3.select('#petition_button').on('click', function() {
     code = $('#petition_code').val();
-    $.getJSON("https://petition.parliament.uk/petitions/" + code + ".json", function (data) {
+    $.getJSON("https://preview.epetitions.website/petitions/" + code + ".json", function (data) {
         console.log(data);
     });
 });
 
-change_area();
-$('#key').fadeIn();

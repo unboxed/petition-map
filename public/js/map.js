@@ -55,7 +55,7 @@ function select(d) {
     $('#data_table').empty();
     $('#data_table').show();
     $('#data_table').append('<table></table>');
-    $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
+    $.getJSON("https://preview.epetitions.website/petitions/" + petition_id + ".json", function (data) {
         var name;
         var mp;
         var count;
