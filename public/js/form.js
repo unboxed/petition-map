@@ -2,11 +2,12 @@ $(document).ready(function() {
     $.getJSON("json/petitions/petitions.json", function (data) {
         petitions = data.data;
         $.each(petitions, function (index, item) {
-            var dropdown_text = item.attributes.signature_count + " signatures - " + item.attributes.action;
+            var dropdown_text = item.attributes.action;
             $('#petition').append(
                 $('<option></option>').val(item.id).html(dropdown_text)
             );
         });
+        $("#petition").select2();
     });
 });
 
@@ -111,7 +112,7 @@ function place_in_array(slices, count) {
     }
 }
 
-d3.select('#petition').on('change', function(){
+$("#petition").on('change', function() {
     display_petition_info();
     recolour_map();
     $('#key').fadeIn();
