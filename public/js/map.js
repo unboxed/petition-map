@@ -49,8 +49,7 @@ function zoom() {
 
 // select a map area
 function select(d) {
-    var petitions = document.getElementById('petition');
-    var petition_id = petitions.options[petitions.selectedIndex].value;
+    var petition_id = localStorage.getItem("petition_id");
 
     $('#data_table').empty();
     $('#data_table').show();
@@ -130,8 +129,9 @@ function load_data(filename, u) {
         if (error) return console.error(error);
         boundaries = b;
         redraw();
-        recolour_map();
-        display_petition_info();
+        var petition_id = localStorage.getItem("petition_id")
+        recolour_map(petition_id);
+        display_petition_info(petition_id);
     });
 }
 
