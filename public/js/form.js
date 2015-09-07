@@ -28,6 +28,7 @@ function display_petition_info(petition_id) {
     $('#petition_info').hide();
     $('#petition_info').empty();
     $('#petition_info').append('<table></table>');
+
     $.getJSON("https://preview.epetitions.website/petitions/" + petition_id + ".json", function (data) {
         var sign_link = "https://petition.parliament.uk/petitions/" + data.data.id + "/signatures/new";
         var count_html = "<span id=\"data-count\"><b>" + data.data.attributes.signature_count + "</b></span>";
@@ -128,6 +129,9 @@ d3.select('#petition_button').on('click', function() {
 
         display_petition_info(code);
         recolour_map(code);
+    })
+    .fail(function() {
+        alert("Petition not found!");
     });
 });
 
