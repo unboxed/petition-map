@@ -135,7 +135,67 @@ function load_data(filename, u) {
     });
 }
 
+function recolour_map(petition_id) {
+    get_highest_count(petition_id);
+}
+
+function get_highest_count(petition_id) {
+    var top_count = 0;
+    var top_constituency;
+
+    constituencies = current_petition.data.attributes.signatures_by_constituency;
+    $.each(constituencies, function (index, item) {
+        if (item.signature_count >= top_count) {
+            top_count = item.signature_count;
+            top_constituency = item.name;
+        }
+    });
+
+    get_slices(top_count, petition_id);
+}
+
+function get_slices(top_count, petition_id) {
+    var slice = top_count / 8;
+    var slices = {};
+    var current_slice = 0;
+    for (i = 0; i <= 8; i++) {
+        $('#t' + (i+1)).html("");
+        if (i < 7 && i > 0) {
+            $('#t' + (i+1)).html(Math.ceil(current_slice) + " - " +  Math.floor(current_slice + slice));
+        } else if (i === 7) {
+            $('#t' + (i+1)).html(Math.ceil(current_slice) + " +");
+        } else {
+            $('#t' + (i+1)).html("1 - " +  Math.floor(current_slice + slice));
+        }
+        slices[i] = current_slice;
+        current_slice += slice;
+    }
+    colour_classes(slices, petition_id);
+}
+
+function colour_classes(slices, petition_id) {
+    d3.selectAll(".coloured").attr("class", "area");
+
+    constituencies = current_petition.data.attributes.signatures_by_constituency;
+    $.each(constituencies, function (index, item) {
+        var id = "#" + item.ons_code;
+        var index = place_in_array(slices, item.signature_count);
+        var colour_class = "c" + index + " coloured";
+        d3.select(id)
+            .attr("class", colour_class)
+    });
+}
+
+function place_in_array(slices, count) {
+    var slice = slices[1];
+    for (i = 0; i < 8; i++) {
+        if (count >= slices[i] && count < (slices[i] + slice)) {
+            return i+1;
+        } else if (count === (slices[1] * 8)) {
+            return 8;
+        }
+    }
+}
+
 // when the window is resized, redraw the map
 window.addEventListener('resize', redraw);
-
-
