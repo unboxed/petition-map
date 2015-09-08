@@ -47,7 +47,7 @@ th, td {
   padding-bottom: 10px;
 }
 
-#data_table {
+#data-box {
   position: fixed;
   top: 40px;
   left: 25%;
@@ -71,10 +71,11 @@ th, td {
 }
 
 #data-name {
+  font-weight: bold;
   padding-bottom: 5px;
 }
 
-#data-count {
+#data-count strong {
   font-size: 2em;
 }
 
