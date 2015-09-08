@@ -134,11 +134,11 @@ th, td {
 }
 
 #right_column {
-  width: 50%;
+  width: 70%;
   float: right;
 }
 
-.area{
+.area {
   fill: #C0C0C0;
   color: #C0C0C0;
   stroke: none;
@@ -178,8 +178,7 @@ th, td {
 .t8 { color: #306100; }
 
 #petition {
-  width: 100%;
-  max-width: 350px;
+  width: 85%;
 }
 
 #petition_code {
