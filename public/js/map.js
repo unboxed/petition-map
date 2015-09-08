@@ -42,6 +42,15 @@ function zoom() {
   svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 }
 
+function reset() {
+  svg.transition()
+      .call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoom).translate([0, 0]).scale(1).event);
+}
+
+$("#reset").on('click', function() {
+    reset();
+});
+
 // select a map area
 function select(d) {
     var petition_id = localStorage.getItem("petition_id");
