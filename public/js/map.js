@@ -17,11 +17,6 @@ compute_size();
 // initialise the map
 init(width, height);
 
-function clear_info() {
-    $('#data_table').hide();
-    $('#data_table').empty();
-}
-
 function init(width, height) {
 
     // pretty boring projection
@@ -51,29 +46,22 @@ function zoom() {
 function select(d) {
     var petition_id = localStorage.getItem("petition_id");
 
-    $('#data_table').empty();
-    $('#data_table').show();
-    $('#data_table').append('<table></table>');
     $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
-        var name;
-        var mp;
-        var count;
+        $('#data-box').fadeIn("fast");
+        $('#data-box').html("");
+        var name, mp, count;
         $.each(data.data.attributes.signatures_by_constituency, function(i, v) {
-                if (v.ons_code === d.id) {
-                    name = v.name;
-                    mp = v.mp;
-                    count = v.signature_count;
-                    return;
-                }
+            if (v.ons_code === d.id) {
+                name = v.name;
+                mp = v.mp;
+                count = v.signature_count;
+                return;
+            }
         });
-        var name_html = "<div id=\"data-name\"><b>" + name + "</b></div>";
-        var mp_html = "<div id=\"data-mp\">" + mp + "<div>";
-        var count_html = "<span id=\"data-count\"><b>" + count + "</b></span>";
-        if (name && mp && count) {
-            $('#data_table').append(
-                $('<tr></tr>').html(name_html + mp_html + count_html + " signatures")
-            );
-        }
+
+        $('#data-box').append('<div id="data-name">' + name + "</div>");
+        $('#data-box').append('<div id="data-mp">' + mp + '</div>');
+        $('#data-box').append('<div id="data-count"><strong>' + count + '</strong> signatures</div>');
     });
 }
 
@@ -101,7 +89,7 @@ function draw(boundaries) {
         .attr("id", function(d) {return d.id})
         .attr("d", path)
         .on("mouseenter", function(d){ return select(d)})
-        .on("mouseleave", function(d){ return clear_info(d)});
+        .on("mouseleave", function(d){ return $('#data-box').show() });
 
     // add a boundary between areas
     g.append("path")
