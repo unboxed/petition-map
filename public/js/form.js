@@ -1,7 +1,7 @@
 var current_petition;
 
 $(document).ready(function() {
-    $.getJSON("https://preview.epetitions.website/petitions.json?state=open", function (data) {
+    $.getJSON("json/petitions/petitions.json", function (data) {
         petitions = data.data;
         $.each(petitions, function (index, item) {
             var dropdown_text = item.attributes.action;
@@ -19,7 +19,7 @@ $(document).ready(function() {
 });
 
 function load_petition(petition_id) {
-    $.getJSON("https://preview.epetitions.website/petitions/" + petition_id + ".json", function (data) {
+    $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
         current_petition = data;
         display_petition_info(petition_id);
         reload_map();
