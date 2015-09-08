@@ -215,3 +215,17 @@ th, td {
   opacity: 0.75;
   padding: 10px;
 }
+
+#controls {
+  text-align: center;
+  width: 100%;
+  max-width: 150px;
+  position: fixed;
+  right: 20px;
+  bottom: 50%;
+  color: Black;
+  font-weight: 400;
+  background-color: #f6f6f6;
+  opacity: 0.75;
+  padding: 10px;
+}
