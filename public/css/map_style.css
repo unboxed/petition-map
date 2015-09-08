@@ -9,16 +9,16 @@ body {
 }
 
 h1 {
-  color:#222;
-  margin:0 0 20px;
+  color: #222;
+  margin: 0 0 20px;
 }
 
 p, table {
-  margin:0 0 10px;
+  margin: 0px;
 }
 
 h1 {
-  line-height:1.1;
+  line-height: 1.1;
   color: #fff;
 }
 
@@ -27,19 +27,19 @@ h1 {
 }
 
 a {
-  color:#39c;
-  font-weight:400;
-  text-decoration:none;
+  color: #39c;
+  font-weight: 400;
+  text-decoration: none;
 }
 
 table {
-  width:100%;
-  border-collapse:collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 th, td {
-  text-align:left;
-  padding:5px 10px;
+  text-align: left;
+  padding: 5px 10px;
 }
 
 .content {
@@ -83,20 +83,20 @@ th, td {
 }
 
 .submitButton {
-  background-color:#a478c2;
-  display:inline-block;
-  cursor:pointer;
-  color:#ffffff;
+  background-color: #a478c2;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
   font-size: 1em;
   padding: 3px 10px;
-  text-decoration:none;
+  text-decoration: none;
 }
 .submitButton:hover {
-  background-color:#c29fd1;
+  background-color: #c29fd1;
 }
 .submitButton:active {
-  position:relative;
-  top:1px;
+  position: relative;
+  top: 1px;
 }
 
 .form_section {
@@ -129,7 +129,7 @@ th, td {
   position: absolute;
   float:left;
   padding: 20px;
-  color:#fff;
+  color: #fff;
   background-color: #812A80;
 }
 
@@ -185,7 +185,7 @@ th, td {
   font-size: 1em;
 }
 
-#logo {
+.logo {
   position: absolute;
   bottom: 35px;
   right: 20px;
@@ -194,7 +194,7 @@ th, td {
   color: Black;
 }
 
-#version {
+.version {
   position: absolute;
   bottom: 20px;
   right: 20px;

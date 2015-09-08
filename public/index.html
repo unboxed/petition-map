@@ -10,27 +10,26 @@
     </head>
 
     <body>
-
         <div id="left_column">
             <h1>Petitions Heatmap</h1>
 
             <form id="choiceform">
-                Select a petition</br>
+                <p>Select a petition</p>
                 <div class="form_section">
                     <select name="petition" id="petition"></select>
                     </br></br>
                 </div>
 
-                Select area</br>
+                <p>Select area</p>
                 <div class="form_section">
                     <input type="radio" name="area" checked="yes" value="gb" onclick="change_area()"/>  Great Britain</br>
-                    <input type="radio" name="area" value="eng" onclick="change_area()">  England</br>
-                    <input type="radio" name="area" value="sco" onclick="change_area()">  Scotland</br>
-                    <input type="radio" name="area" value="wal" onclick="change_area()">  Wales</br>
-                    <input type="radio" name="area" value="lon" onclick="change_area()">  London</br></br>
+                    <input type="radio" name="area" value="eng" onclick="change_area()"> England</br>
+                    <input type="radio" name="area" value="sco" onclick="change_area()"> Scotland</br>
+                    <input type="radio" name="area" value="wal" onclick="change_area()"> Wales</br>
+                    <input type="radio" name="area" value="lon" onclick="change_area()"> London</br></br>
                 </div>
 
-                Enter a petition code</br>
+                <p>Enter a petition code</p>
                 <div class="form_section">
                     <input type="text" id="petition_code" placeholder="e.g. 105991">
                     <a class="submitButton" type="button" id="petition_button">Submit</a>
@@ -39,7 +38,9 @@
 
             <section id="licence">
                 <p>
-                    <a id="geojson_link" href="https://github.com/martinjc/UK-GeoJson">GeoJSON and TopoJSON UK Boundary Data</a>
+                    <a id="geojson_link" href="https://github.com/martinjc/UK-GeoJson">
+                        GeoJSON and TopoJSON UK Boundary Data
+                    </a>
                     by Martin Chorley is licensed under a Creative Commons Attribution 4.0 International License.
                 </p>
                 <p>
@@ -95,12 +96,8 @@
             </section>
             <section id="map">
             </section>
-            <section id="logo">
-                Unboxed
-            </section>
-            <section id="version">
-                ALPHA
-            </section>
+            <span class="logo">Unboxed</span>
+            <span class="version">ALPHA</span>
         </div>
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
@@ -111,6 +108,5 @@
 
         <script src="js/map.js"></script>
         <script src="js/form.js"></script>
-
     </body>
 </html>
