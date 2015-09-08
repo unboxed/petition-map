@@ -3,6 +3,10 @@ var width;
 // but we're using the full window height
 var height;
 
+var active = d3.select(null);
+
+var zoom = d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoomed);
+
 // variables for map drawing
 var projection, svg, path, g;
 var boundaries, units;
@@ -31,25 +35,14 @@ function init(width, height) {
         .attr("width", width)
         .attr("height", height)
         .append("g")
-            .call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoom))
-        .append("g");
+            .call(zoom)
+        .append("g")
+        .on("click", stopped, true);
 
     // graphics go here
     g = svg.append("g");
 }
 
-function zoom() {
-  svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-}
-
-function reset() {
-  svg.transition()
-      .call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoom).translate([0, 0]).scale(1).event);
-}
-
-$("#reset").on('click', function() {
-    reset();
-});
 
 // select a map area
 function select(d) {
@@ -73,6 +66,44 @@ function select(d) {
         $('#data-box').append('<div id="data-count"><strong>' + count + '</strong> signatures</div>');
     });
 }
+
+function clicked(d) {
+  if (active.node() === this) return reset();
+  active.classed("active", false);
+  active = d3.select(this).classed("active", true);
+
+  var bounds = path.bounds(d),
+      dx = bounds[1][0] - bounds[0][0],
+      dy = bounds[1][1] - bounds[0][1],
+      x = (bounds[0][0] + bounds[1][0]) / 2,
+      y = (bounds[0][1] + bounds[1][1]) / 2,
+      scale = .2 / Math.max(dx / width, dy / height),
+      translate = [width / 2 - scale * x, height / 2 - scale * y];
+
+  svg.transition()
+      .duration(750)
+      .call(zoom.translate(translate).scale(scale).event);
+}
+
+function zoomed() {
+  svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+}
+
+function stopped() {
+  if (d3.event.defaultPrevented) d3.event.stopPropagation();
+}
+
+function reset() {
+    active.classed("active", false);
+    active = d3.select(null);
+
+    svg.transition()
+        .call(zoom.translate([0, 0]).scale(1).event);
+}
+
+$("#reset").on('click', function() {
+    reset();
+});
 
 // draw our map on the SVG element
 function draw(boundaries) {
@@ -98,7 +129,8 @@ function draw(boundaries) {
         .attr("id", function(d) {return d.id})
         .attr("d", path)
         .on("mouseenter", function(d){ return select(d)})
-        .on("mouseleave", function(d){ return $('#data-box').show() });
+        .on("mouseleave", function(d){ return $('#data-box').show() })
+        .on("click", clicked);
 
     // add a boundary between areas
     g.append("path")
