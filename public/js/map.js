@@ -151,25 +151,30 @@ function get_highest_count(petition_id) {
         }
     });
 
-    get_slices(top_count, petition_id);
+    draw_slices(top_count, petition_id);
 }
 
-function get_slices(top_count, petition_id) {
-    var slice = top_count / 8;
-    var slices = {};
-    var current_slice = 0;
+function draw_slices(top_count, petition_id) {
+    var goalBinSize = Math.floor(top_count / 8)
+    var roundBy = Math.pow(10, Math.floor(goalBinSize.toString().length / 2))
+    var binSize = Math.round(goalBinSize/ roundBy) * roundBy;
+
+    slices = {};
+    for (i = 0; i <= 8; i++) {
+        slices[i] = i * Math.round(goalBinSize / roundBy) * roundBy;
+    }
+
     for (i = 0; i <= 8; i++) {
         $('#t' + (i+1)).html("");
-        if (i < 7 && i > 0) {
-            $('#t' + (i+1)).html(Math.ceil(current_slice) + " - " +  Math.floor(current_slice + slice));
+        if (i === 0) {
+            $('#t' + (i+1)).html("1 - " +  slices[i + 1]);
         } else if (i === 7) {
-            $('#t' + (i+1)).html(Math.ceil(current_slice) + " +");
+            $('#t' + (i + 1)).html(slices[i] + " +");
         } else {
-            $('#t' + (i+1)).html("1 - " +  Math.floor(current_slice + slice));
+            $('#t' + (i + 1)).html(slices[i] + " - " +  slices[i + 1]);
         }
-        slices[i] = current_slice;
-        current_slice += slice;
     }
+
     colour_classes(slices, petition_id);
 }
 
