@@ -70,7 +70,7 @@ th, td {
   color:#fff;
 }
 
-.submitButton {
+.flatButton {
   background-color: #a478c2;
   display: inline-block;
   cursor: pointer;
@@ -79,10 +79,10 @@ th, td {
   padding: 3px 10px;
   text-decoration: none;
 }
-.submitButton:hover {
+.flatButton:hover {
   background-color: #c29fd1;
 }
-.submitButton:active {
+.flatButton:active {
   position: relative;
   top: 1px;
 }
@@ -208,8 +208,8 @@ th, td {
   width: 100%;
   max-width: 150px;
   position: fixed;
-  right: 20px;
-  bottom: 50%;
+  top: 40px;
+  left: 40%;
   color: Black;
   font-weight: 400;
   background-color: #f6f6f6;

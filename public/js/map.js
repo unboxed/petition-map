@@ -39,14 +39,21 @@ function select(d) {
     $('#data-box').fadeIn("fast");
     $('#data-box').html("");
     var name, mp, count;
+    var data_found;
     $.each(current_petition.data.attributes.signatures_by_constituency, function(i, v) {
         if (v.ons_code === d.id) {
             name = v.name;
             mp = v.mp;
             count = v.signature_count;
+            data_found = true;
             return;
         }
     });
+    if (!data_found) {
+        name = "";
+        mp = "";
+        count = "0";
+    }
 
     $('#data-box').append('<div id="data-name">' + name + "</div>");
     $('#data-box').append('<div id="data-mp">' + mp + '</div>');

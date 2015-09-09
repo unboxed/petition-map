@@ -45,7 +45,7 @@ function display_petition_info() {
         $('<tr></tr>').html("</br>" + count_html + " signatures")
     );
     $('#petition_info').append(
-        $('<tr></tr>').html("</br><a class=\"submitButton\" href='" + sign_link + "'>Sign Petition</a>")
+        $('<tr></tr>').html("</br><a class=\"flatButton\" href='" + sign_link + "'>Sign Petition</a>")
     );
     $('#petition_info').show();
 }
