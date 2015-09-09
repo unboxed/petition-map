@@ -150,7 +150,16 @@ function draw(boundaries) {
     // compute the correct bounds and scaling from the topoJSON
     var b = path.bounds(topojson.feature(boundaries, boundaries.objects[units]));
     var s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height);
-    var t = [((width - s * (b[1][0] + b[0][0])) / 1.8), (height - s * (b[1][1] + b[0][1])) / 2];
+    var t;
+
+    var area = $("input[name='area']:checked").val();
+    if (area === "lon") {
+        t = [((width - s * (b[1][0] + b[0][0])) / 2.25), (height - s * (b[1][1] + b[0][1])) / 2];
+    } else if (area === "gb") {
+        t = [((width - s * (b[1][0] + b[0][0])) / 1.8), (height - s * (b[1][1] + b[0][1])) / 2];
+    } else {
+        t = [((width - s * (b[1][0] + b[0][0])) / 1.85), (height - s * (b[1][1] + b[0][1])) / 2];
+    }
 
     projection
         .scale(s)
