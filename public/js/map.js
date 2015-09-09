@@ -244,7 +244,7 @@ function colour_classes(slices) {
         var index = place_in_array(slices, item.signature_count);
         var colour_class = "c" + index + " coloured";
         d3.select(id)
-            .attr("class", colour_class)
+            .attr("class", colour_class);
     });
 }
 
