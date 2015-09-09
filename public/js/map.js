@@ -35,45 +35,22 @@ function init(width, height) {
     g = svg.append("g");
 }
 
-
 function select(d) {
-    var petition_id = localStorage.getItem("petition_id");
-
-    $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
-        $('#data-box').fadeIn("fast");
-        $('#data-box').html("");
-        var name, mp, count;
-        $.each(data.data.attributes.signatures_by_constituency, function(i, v) {
-            if (v.ons_code === d.id) {
-                name = v.name;
-                mp = v.mp;
-                count = v.signature_count;
-                return;
-            }
-        });
-
-        $('#data-box').append('<div id="data-name">' + name + "</div>");
-        $('#data-box').append('<div id="data-mp">' + mp + '</div>');
-        $('#data-box').append('<div id="data-count"><strong>' + count + '</strong> signatures</div>');
+    $('#data-box').fadeIn("fast");
+    $('#data-box').html("");
+    var name, mp, count;
+    $.each(current_petition.data.attributes.signatures_by_constituency, function(i, v) {
+        if (v.ons_code === d.id) {
+            name = v.name;
+            mp = v.mp;
+            count = v.signature_count;
+            return;
+        }
     });
-}
 
-function clicked(d) {
-  if (active.node() === this) return reset();
-  active.classed("active", false);
-  active = d3.select(this).classed("active", true);
-
-  var bounds = path.bounds(d),
-      dx = bounds[1][0] - bounds[0][0],
-      dy = bounds[1][1] - bounds[0][1],
-      x = (bounds[0][0] + bounds[1][0]) / 2,
-      y = (bounds[0][1] + bounds[1][1]) / 2,
-      scale = .3 / Math.max(dx / width, dy / height),
-      translate = [width / 2 - scale * x, height / 2 - scale * y];
-
-  svg.transition()
-      .duration(750)
-      .call(zoom.translate(translate).scale(scale).event);
+    $('#data-box').append('<div id="data-name">' + name + "</div>");
+    $('#data-box').append('<div id="data-mp">' + mp + '</div>');
+    $('#data-box').append('<div id="data-count"><strong>' + count + '</strong> signatures</div>');
 }
 
 function interpolateZoom (translate, scale) {
@@ -173,8 +150,7 @@ function draw(boundaries) {
         .attr("id", function(d) {return d.id})
         .attr("d", path)
         .on("mouseenter", function(d){ return select(d)})
-        .on("mouseleave", function(d){ return $('#data-box').show() })
-        .on("click", clicked);
+        .on("mouseleave", function(d){ return $('#data-box').show() });
 
     // add a boundary between areas
     g.append("path")
@@ -202,33 +178,34 @@ function load_data(filename, u) {
         if (error) return console.error(error);
         boundaries = b;
         redraw();
-        var petition_id = localStorage.getItem("petition_id")
-        recolour_map(petition_id);
-        display_petition_info(petition_id);
+        recolour_map();
+        display_petition_info();
     });
 }
 
-function recolour_map(petition_id) {
-    get_highest_count(petition_id);
+function recolour_map() {
+    highest_count = get_highest_count();
+    slices = draw_slices(highest_count);
+    colour_classes(slices);
 }
 
-function get_highest_count(petition_id) {
-    var top_count = 0;
+function get_highest_count() {
+    var highest_count = 0;
     var top_constituency;
 
     constituencies = current_petition.data.attributes.signatures_by_constituency;
     $.each(constituencies, function (index, item) {
-        if (item.signature_count >= top_count) {
-            top_count = item.signature_count;
+        if (item.signature_count >= highest_count) {
+            highest_count = item.signature_count;
             top_constituency = item.name;
         }
     });
 
-    draw_slices(top_count, petition_id);
+    return highest_count;
 }
 
-function draw_slices(top_count, petition_id) {
-    var goalBinSize = Math.floor(top_count / 8)
+function draw_slices(highest_count) {
+    var goalBinSize = Math.floor(highest_count / 8)
     var roundBy = Math.pow(10, Math.floor(goalBinSize.toString().length / 2))
     var binSize = Math.round(goalBinSize/ roundBy) * roundBy;
 
@@ -248,10 +225,10 @@ function draw_slices(top_count, petition_id) {
         }
     }
 
-    colour_classes(slices, petition_id);
+    return slices;
 }
 
-function colour_classes(slices, petition_id) {
+function colour_classes(slices) {
     d3.selectAll(".coloured").attr("class", "area");
 
     constituencies = current_petition.data.attributes.signatures_by_constituency;
@@ -269,7 +246,8 @@ function place_in_array(slices, count) {
     for (i = 0; i < 8; i++) {
         if (count >= slices[i] && count < (slices[i] + slice)) {
             return i+1;
-        } else if (count === (slices[1] * 8)) {
+        }
+        if (count > slice * 8) {
             return 8;
         }
     }

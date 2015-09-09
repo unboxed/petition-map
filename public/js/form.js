@@ -12,8 +12,6 @@ $(document).ready(function() {
 
         $("#petition").select2();
         var petition_id = $("#petition").val();
-        localStorage.setItem("petition_id", petition_id);
-
         load_petition(petition_id);
     });
 });
@@ -30,7 +28,7 @@ function load_petition(petition_id) {
     });
 }
 
-function display_petition_info(petition_id) {
+function display_petition_info() {
     $('#petition_info').hide();
     $('#petition_info').empty();
     $('#petition_info').append('<table></table>');
@@ -62,17 +60,15 @@ function reload_map() {
 }
 
 $("#petition").on('change', function() {
-    var petition_id = $("#petition").val();
-    localStorage.setItem("petition_id", petition_id);
+    var petition_id = $("#petition").val()
 
     load_petition(petition_id);
 });
 
 d3.select('#petition_button').on('click', function() {
-    code = $('#petition_code').val();
-    localStorage.setItem("petition_id", code);
-    load_petition(code);
+    petition_id = $('#petition_code').val()
+    load_petition(petition_id);
 
-    recolour_map(code);
+    recolour_map();
 });
 
