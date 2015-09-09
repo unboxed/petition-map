@@ -234,5 +234,10 @@ th, td {
   text-align: center;
   font-size: 20px;
   color: White;
-  padding-top: 300px;
+}
+
+#support_cat {
+  text-align: center;
+  font-size: 100px;
+  padding-top: 50px;
 }
