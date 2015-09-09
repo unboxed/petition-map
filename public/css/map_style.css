@@ -1,7 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300,100,900);
 
 body {
-  padding:20px;
   font-family: 'Lato', sans-serif;
   color:#777;
   font-weight:300;
@@ -9,21 +8,14 @@ body {
 }
 
 h1 {
-  color: #222;
   margin: 0 0 20px;
+  line-height: 1.1;
+  color: #fff;
+  font-size: 2.5em;
 }
 
 p, table {
   margin: 0px;
-}
-
-h1 {
-  line-height: 1.1;
-  color: #fff;
-}
-
-h1 {
-  font-size: 2.5em;
 }
 
 a {
@@ -40,11 +32,6 @@ table {
 th, td {
   text-align: left;
   padding: 5px 10px;
-}
-
-.content {
-  padding-top: 20px;
-  padding-bottom: 10px;
 }
 
 #data-box {
@@ -135,7 +122,7 @@ th, td {
 }
 
 #right_column {
-  width: 70%;
+  width: 80%;
   float: right;
 }
 

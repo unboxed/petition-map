@@ -1,36 +1,29 @@
-// get the width of the area we're displaying in
-var width;
-// but we're using the full window height
-var height;
+var width, height;
 
 var active = d3.select(null);
 
 var zoom = d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoomed);
 
-// variables for map drawing
 var projection, svg, path, g;
 var boundaries, units;
 
 function compute_size() {
-    var margin = 50;
+    var margin = 15;
     width = parseInt(d3.select("#map").style("width"));
     height = window.innerHeight - margin;
 }
 
 compute_size();
-// initialise the map
 init(width, height);
 
 function init(width, height) {
 
-    // pretty boring projection
     projection = d3.geo.albers()
         .rotate([0, 0]);
 
     path = d3.geo.path()
         .projection(projection);
 
-    // create the svg element for drawing onto
     svg = d3.select("#map").append("svg")
         .attr("width", width)
         .attr("height", height)
@@ -39,12 +32,10 @@ function init(width, height) {
         .append("g")
         .on("click", stopped, true);
 
-    // graphics go here
     g = svg.append("g");
 }
 
 
-// select a map area
 function select(d) {
     var petition_id = localStorage.getItem("petition_id");
 
@@ -99,7 +90,7 @@ function interpolateZoom (translate, scale) {
     });
 }
 
-function zoomClick() {
+function zoomButton() {
     var clicked = d3.event.target,
         direction = 1,
         factor = 0.2,
@@ -147,7 +138,7 @@ $("#reset").on('click', function() {
     reset();
 });
 
-d3.selectAll('.zoom').on('click', zoomClick);
+d3.selectAll('.zoom').on('click', zoomButton);
 
 // draw our map on the SVG element
 function draw(boundaries) {
@@ -159,7 +150,7 @@ function draw(boundaries) {
     // compute the correct bounds and scaling from the topoJSON
     var b = path.bounds(topojson.feature(boundaries, boundaries.objects[units]));
     var s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height);
-    var t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
+    var t = [((width - s * (b[1][0] + b[0][0])) / 1.8), (height - s * (b[1][1] + b[0][1])) / 2];
 
     projection
         .scale(s)
