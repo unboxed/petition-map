@@ -7,6 +7,8 @@ var zoom = d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoomed);
 var projection, svg, path, g;
 var boundaries, units;
 
+var parties = ["Conservative", "Green", "Independent", "Labour", "LabourCooperative", "LiberalDemocrat", "PlaidCymru", "ScottishNationalParty", "Speaker", "UKIP"];
+
 function compute_size() {
     var margin = 15;
     width = parseInt(d3.select("#map").style("width"));
@@ -74,26 +76,10 @@ function deselect(d) {
 }
 
 function deselect_party_colours() {
-    d3.selectAll(".area").classed("Conservative", false);
-    d3.selectAll(".area").classed("Green", false);
-    d3.selectAll(".area").classed("Independent", false);
-    d3.selectAll(".area").classed("Labour", false);
-    d3.selectAll(".area").classed("LabourCooperative", false);
-    d3.selectAll(".area").classed("LiberalDemocrat", false);
-    d3.selectAll(".area").classed("PlaidCymru", false);
-    d3.selectAll(".area").classed("ScottishNationalParty", false);
-    d3.selectAll(".area").classed("Speaker", false);
-    d3.selectAll(".area").classed("UKIP", false);
-    d3.selectAll(".coloured").classed("Conservative", false);
-    d3.selectAll(".coloured").classed("Green", false);
-    d3.selectAll(".coloured").classed("Independent", false);
-    d3.selectAll(".coloured").classed("Labour", false);
-    d3.selectAll(".coloured").classed("LabourCooperative", false);
-    d3.selectAll(".coloured").classed("LiberalDemocrat", false);
-    d3.selectAll(".coloured").classed("PlaidCymru", false);
-    d3.selectAll(".coloured").classed("ScottishNationalParty", false);
-    d3.selectAll(".coloured").classed("Speaker", false);
-    d3.selectAll(".coloured").classed("UKIP", false);
+    $.each(parties, function (index, item) {
+        d3.selectAll(".area").classed(item, false);
+        d3.selectAll(".coloured").classed(item, false);
+    });
 }
 
 function strip_whitespace(string) {
@@ -294,7 +280,7 @@ function place_in_array(slices, count) {
         if (count >= slices[i] && count < (slices[i] + slice)) {
             return i+1;
         }
-        if (count > slice * 8) {
+        if (count >= slice * 8) {
             return 8;
         }
     }
