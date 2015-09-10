@@ -22,7 +22,14 @@ $(document).ready(function() {
 function load_mp_data() {
     $.getJSON("json/mps/constituency_party_ons.json", function (data) {
         mp_data = data;
-        console.log(mp_data);
+        $.each(mp_data, function (index, item) {
+            var dropdown_text = item.constituency;
+            $('#constituency').append(
+                $('<option></option>').val(index).html(dropdown_text)
+            );
+        });
+
+        $("#constituency").select2();
     });
 }
 
@@ -73,6 +80,16 @@ $("#petition").on('change', function() {
     var petition_id = $("#petition").val()
 
     load_petition(petition_id);
+});
+
+$("#constituency").on('change', function() {
+    var ons_code = $("#constituency").val()
+
+    var constituency_data = {
+        "id": ons_code
+    }
+
+    select(constituency_data);
 });
 
 d3.select('#petition_button').on('click', function() {

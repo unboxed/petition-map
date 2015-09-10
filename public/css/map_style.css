@@ -170,6 +170,10 @@ th, td {
   width: 85%;
 }
 
+#constituency {
+  width: 85%;
+}
+
 #petition_code {
   font-size: 1em;
 }

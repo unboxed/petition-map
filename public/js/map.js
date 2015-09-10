@@ -36,7 +36,8 @@ function init(width, height) {
 }
 
 function select(d) {
-    var party = stripWhitespace(mp_data[d.id].party);
+    deselect_party_colours();
+    var party = strip_whitespace(mp_data[d.id].party);
     d3.select("#" + d.id).classed(party, true);
 
     $('#data-box').fadeIn("fast");
@@ -54,8 +55,9 @@ function select(d) {
         }
     });
     if (!data_found) {
-        name = "";
-        mp = "";
+        name = mp_data[d.id].constituency;
+        mp = mp_data[d.id].mp;
+        party = mp_data[d.id].party;
         count = "0";
     }
 
@@ -65,17 +67,40 @@ function select(d) {
 }
 
 function deselect(d) {
-    var party = stripWhitespace(mp_data[d.id].party);
+    var party = strip_whitespace(mp_data[d.id].party);
     d3.select("#" + d.id).classed(party, false);
 
     $('#data-box').show();
 }
 
-function stripWhitespace(string) {
+function deselect_party_colours() {
+    d3.selectAll(".area").classed("Conservative", false);
+    d3.selectAll(".area").classed("Green", false);
+    d3.selectAll(".area").classed("Independent", false);
+    d3.selectAll(".area").classed("Labour", false);
+    d3.selectAll(".area").classed("LabourCooperative", false);
+    d3.selectAll(".area").classed("LiberalDemocrat", false);
+    d3.selectAll(".area").classed("PlaidCymru", false);
+    d3.selectAll(".area").classed("ScottishNationalParty", false);
+    d3.selectAll(".area").classed("Speaker", false);
+    d3.selectAll(".area").classed("UKIP", false);
+    d3.selectAll(".coloured").classed("Conservative", false);
+    d3.selectAll(".coloured").classed("Green", false);
+    d3.selectAll(".coloured").classed("Independent", false);
+    d3.selectAll(".coloured").classed("Labour", false);
+    d3.selectAll(".coloured").classed("LabourCooperative", false);
+    d3.selectAll(".coloured").classed("LiberalDemocrat", false);
+    d3.selectAll(".coloured").classed("PlaidCymru", false);
+    d3.selectAll(".coloured").classed("ScottishNationalParty", false);
+    d3.selectAll(".coloured").classed("Speaker", false);
+    d3.selectAll(".coloured").classed("UKIP", false);
+}
+
+function strip_whitespace(string) {
     return string.replace(/[^a-zA-Z]/g, '');
 }
 
-function interpolateZoom (translate, scale) {
+function interpolate_zoom(translate, scale) {
     var self = this;
     return d3.transition().duration(350).tween("zoom", function () {
         var iTranslate = d3.interpolate(zoom.translate(), translate),
@@ -89,7 +114,7 @@ function interpolateZoom (translate, scale) {
     });
 }
 
-function zoomButton() {
+function zoom_button() {
     var clicked = d3.event.target,
         direction = 1,
         factor = 0.2,
@@ -114,7 +139,7 @@ function zoomButton() {
     view.x += center[0] - l[0];
     view.y += center[1] - l[1];
 
-    interpolateZoom([view.x, view.y], view.k);
+    interpolate_zoom([view.x, view.y], view.k);
 }
 
 function zoomed() {
@@ -137,7 +162,7 @@ $("#reset").on('click', function() {
     reset();
 });
 
-d3.selectAll('.zoom').on('click', zoomButton);
+d3.selectAll('.zoom').on('click', zoom_button);
 
 // draw our map on the SVG element
 function draw(boundaries) {
