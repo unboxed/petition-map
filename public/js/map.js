@@ -36,7 +36,9 @@ function init(width, height) {
 }
 
 function select(d) {
-    d3.select("#" + d.id).classed("selected", true);
+    var party = stripWhitespace(mp_data[d.id].party);
+    d3.select("#" + d.id).classed(party, true);
+
     $('#data-box').fadeIn("fast");
     $('#data-box').html("");
     var name, mp, count;
@@ -45,6 +47,7 @@ function select(d) {
         if (v.ons_code === d.id) {
             name = v.name;
             mp = v.mp;
+            party = mp_data[d.id].party;
             count = v.signature_count;
             data_found = true;
             return;
@@ -57,13 +60,19 @@ function select(d) {
     }
 
     $('#data-box').append('<div id="data-name">' + name + "</div>");
-    $('#data-box').append('<div id="data-mp">' + mp + '</div>');
+    $('#data-box').append('<div id="data-mp">' + mp + '</br>' + party + '</div>');
     $('#data-box').append('<div id="data-count"><strong>' + count + '</strong> signatures</div>');
 }
 
 function deselect(d) {
-    d3.select("#" + d.id).classed("selected", false);
+    var party = stripWhitespace(mp_data[d.id].party);
+    d3.select("#" + d.id).classed(party, false);
+
     $('#data-box').show();
+}
+
+function stripWhitespace(string) {
+    return string.replace(/[^a-zA-Z]/g, '');
 }
 
 function interpolateZoom (translate, scale) {

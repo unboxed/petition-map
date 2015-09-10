@@ -1,4 +1,5 @@
 var current_petition;
+var mp_data;
 
 $(document).ready(function() {
     $.getJSON("json/petitions/petitions.json", function (data) {
@@ -10,11 +11,20 @@ $(document).ready(function() {
             );
         });
 
+        load_mp_data();
+
         $("#petition").select2();
         var petition_id = $("#petition").val();
         load_petition(petition_id);
     });
 });
+
+function load_mp_data() {
+    $.getJSON("json/mps/constituency_party_ons.json", function (data) {
+        mp_data = data;
+        console.log(mp_data);
+    });
+}
 
 function load_petition(petition_id) {
     $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
