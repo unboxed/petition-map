@@ -36,6 +36,7 @@ function init(width, height) {
 }
 
 function select(d) {
+    d3.select("#" + d.id).classed("selected", true);
     $('#data-box').fadeIn("fast");
     $('#data-box').html("");
     var name, mp, count;
@@ -58,6 +59,11 @@ function select(d) {
     $('#data-box').append('<div id="data-name">' + name + "</div>");
     $('#data-box').append('<div id="data-mp">' + mp + '</div>');
     $('#data-box').append('<div id="data-count"><strong>' + count + '</strong> signatures</div>');
+}
+
+function deselect(d) {
+    d3.select("#" + d.id).classed("selected", false);
+    $('#data-box').show();
 }
 
 function interpolateZoom (translate, scale) {
@@ -156,8 +162,8 @@ function draw(boundaries) {
         .attr("class", "area")
         .attr("id", function(d) {return d.id})
         .attr("d", path)
-        .on("mouseenter", function(d){ return select(d)})
-        .on("mouseleave", function(d){ return $('#data-box').show() });
+        .on("mouseenter", function(d){ return select(d) })
+        .on("mouseleave", function(d){ return deselect(d) });
 
     // add a boundary between areas
     g.append("path")

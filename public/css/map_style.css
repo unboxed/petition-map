@@ -121,6 +121,12 @@ th, td {
   background-color: #812A80;
 }
 
+@media (max-width: 1024px) {
+  #left_column {
+    display: none;
+  }
+}
+
 #right_column {
   width: 80%;
   float: right;
@@ -147,8 +153,6 @@ th, td {
 .c7 { fill: #447019; }
 .c8 { fill: #306100; }
 
-.coloured {}
-
 .t1 { color: #c0cfb2; }
 .t2 { color: #acbf99; }
 .t3 { color: #97b07f; }
@@ -157,6 +161,10 @@ th, td {
 .t6 { color: #598032; }
 .t7 { color: #447019; }
 .t8 { color: #306100; }
+
+.selected {
+  fill-opacity: 0.3;
+}
 
 #petition {
   width: 85%;
@@ -210,13 +218,13 @@ th, td {
   padding: 10px;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1024px) {
   #support {
     display: none;
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   #support {
     position: fixed;
     padding: 0;
