@@ -65,7 +65,7 @@ function select(d) {
 
     $('#data_box').append('<div id="constituency_name">' + name + "</div>");
     $('#data_box').append('<div id="constituency_mp">' + mp + '</br>' + party + '</div>');
-    $('#data_box').append('<div id="constituency_count"><strong>' + count + '</strong> signatures</div>');
+    $('#data_box').append('<div id="constituency_count"><strong>' + number_with_commas(count) + '</strong> signatures</div>');
 }
 
 function deselect(d) {
@@ -84,6 +84,10 @@ function deselect_party_colours() {
 
 function strip_whitespace(string) {
     return string.replace(/[^a-zA-Z]/g, '');
+}
+
+function number_with_commas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function interpolate_zoom(translate, scale) {

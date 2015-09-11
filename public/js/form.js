@@ -15,7 +15,7 @@ $(document).ready(function() {
 
         $("#petition").select2();
         var petition_id = $("#petition").val();
-        load_petition(petition_id);
+        load_petition(petition_id, false);
     });
 });
 
@@ -33,8 +33,15 @@ function load_mp_data() {
     });
 }
 
-function load_petition(petition_id) {
-    $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
+function load_petition(petition_id, is_url) {
+    var petition;
+    if (is_url) {
+        petition = petition_id;
+    } else {
+        petition = "json/petitions/" + petition_id;
+    }
+
+    $.getJSON(petition + ".json", function (data) {
         current_petition = data;
         display_petition_info(petition_id);
         reload_map();
@@ -50,8 +57,11 @@ function display_petition_info() {
     $('#petition_info').empty();
     $('#petition_info').append('<table></table>');
 
+    var count = number_with_commas(current_petition.data.attributes.signature_count);
+
     var sign_link = "https://petition.parliament.uk/petitions/" + current_petition.data.id + "/signatures/new";
-    var count_html = "<span id=\"data-count\"><b>" + current_petition.data.attributes.signature_count + "</b></span>";
+    var count_html = "<span id=\"data-count\"><b>" + count + "</b></span>";
+
     $('#petition_info').append(
         $('<tr></tr>').html("<b>" + current_petition.data.attributes.action + "</b></br>")
     );
@@ -79,7 +89,7 @@ function reload_map() {
 $("#petition").on('change', function() {
     var petition_id = $("#petition").val()
 
-    load_petition(petition_id);
+    load_petition(petition_id, false);
 });
 
 $("#constituency").on('change', function() {
@@ -93,8 +103,8 @@ $("#constituency").on('change', function() {
 });
 
 d3.select('#petition_button').on('click', function() {
-    petition_id = $('#petition_code').val()
-    load_petition(petition_id);
+    petition_url = $('#petition_url').val()
+    load_petition(petition_url, true);
 
     recolour_map();
 });
