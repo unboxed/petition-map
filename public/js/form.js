@@ -6,15 +6,15 @@ $(document).ready(function() {
         petitions = data.data;
         $.each(petitions, function (index, item) {
             var dropdown_text = item.attributes.action;
-            $('#petition').append(
+            $('#petition_dropdown').append(
                 $('<option></option>').val(item.id).html(dropdown_text)
             );
         });
 
         load_mp_data();
 
-        $("#petition").select2();
-        var petition_id = $("#petition").val();
+        $("#petition_dropdown").select2();
+        var petition_id = $("#petition_dropdown").val();
         load_petition(petition_id, false);
     });
 });
@@ -53,6 +53,8 @@ function load_petition(petition_id, is_url) {
 }
 
 function display_petition_info() {
+    $('#hide_petition_info').prop('checked', false);
+
     $('#petition_info').hide();
     $('#petition_info').empty();
     $('#petition_info').append('<table></table>');
@@ -61,6 +63,7 @@ function display_petition_info() {
 
     var sign_link = "https://petition.parliament.uk/petitions/" + current_petition.data.id + "/signatures/new";
     var count_html = "<span id=\"data-count\"><b>" + count + "</b></span>";
+    var sign_html = "<button class=\"flatButton\" href='" + sign_link + "'>Sign Petition</button>";
 
     $('#petition_info').append(
         $('<tr></tr>').html("<b>" + current_petition.data.attributes.action + "</b></br>")
@@ -72,7 +75,7 @@ function display_petition_info() {
         $('<tr></tr>').html("</br><div id=\"petition_count\"><strong>" + count_html + "</strong> signatures</div>")
     );
     $('#petition_info').append(
-        $('<tr></tr>').html("</br><a class=\"flatButton\" href='" + sign_link + "'>Sign Petition</a>")
+        $('<tr></tr>').html("</br>" + sign_html)
     );
     $('#petition_info').show();
 }
@@ -86,8 +89,8 @@ function reload_map() {
     load_data(f, units);
 }
 
-$("#petition").on('change', function() {
-    var petition_id = $("#petition").val()
+$("#petition_dropdown").on('change', function() {
+    var petition_id = $("#petition_dropdown").val()
 
     load_petition(petition_id, false);
 });
@@ -100,6 +103,15 @@ $("#constituency").on('change', function() {
     }
 
     select(constituency_data);
+});
+
+$("#hide_petition_info").click(function(){
+    if($(this).prop("checked") == true){
+        $('#petition_info').fadeOut();
+    }
+    else if($(this).prop("checked") == false){
+        $('#petition_info').fadeIn();
+    }
 });
 
 d3.select('#petition_button').on('click', function() {

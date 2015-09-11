@@ -21,7 +21,7 @@
             <form id="choiceform">
                 <p>Select a petition</p>
                 <div class="form_section">
-                    <select name="petition" id="petition"></select>
+                    <select name="petition" id="petition_dropdown"></select>
                     </br></br>
                 </div>
 
@@ -43,10 +43,13 @@
                 <p>Enter a petition url</p>
                 <div class="form_section">
                     <input type="text" id="petition_url">
-                    <a class="flatButton" type="button" id="petition_button">Submit</a>
+                    <button class="flatButton" type="button" id="petition_button">Submit</button>
+                    </br></br>
                 </div>
 
-
+                <div class="form_section">
+                    <p><input type="checkbox" id="hide_petition_info"> Hide Petition Info</p>
+                </div>
             </form>
 
             <section id="licence">

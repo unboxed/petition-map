@@ -43,18 +43,18 @@ th, td {
   padding: 15px 20px 20px 20px;
   background-color: #812A80;
   color: #fff;
-  font-size: 0.9em;
+  font-size: 0.8em;
 }
 
 #petition_info {
   position: fixed;
   bottom: 40px;
   left: 25%;
-  width: 18%;
+  max-width: 18%;
   padding: 20px;
   background-color: #812A80;
   color: #fff;
-  font-size: 0.9em;
+  font-size: 0.8em;
 }
 
 #constituency_name {
@@ -93,6 +93,11 @@ th, td {
   top: 1px;
 }
 
+#close {
+  display: inline-block;
+  float: right;
+}
+
 .form_section {
   padding-top: 3px;
 }
@@ -113,6 +118,12 @@ th, td {
   width: 90%;
   vertical-align: bottom;
   font-size: 0.75em;
+}
+
+@media (max-height: 1024px) {
+  #licence {
+    font-size: 0.6em;
+  }
 }
 
 #left_column {
@@ -136,6 +147,12 @@ th, td {
 #right_column {
   width: 80%;
   float: right;
+}
+
+@media (max-width: 1024px) {
+  #right_column {
+    display: none;
+  }
 }
 
 .area {
@@ -168,7 +185,7 @@ th, td {
 .t7 { color: #447019; }
 .t8 { color: #306100; }
 
-#petition {
+#petition_dropdown {
   width: 85%;
 }
 
@@ -178,6 +195,12 @@ th, td {
 
 #petition_url {
   font-size: 1em;
+  width: 60%;
+}
+
+#petition_button {
+  font-size: 0.8em;
+  margin-left: 0.2em;
 }
 
 .logo {
