@@ -63,7 +63,7 @@ function display_petition_info() {
 
     var sign_link = "https://petition.parliament.uk/petitions/" + current_petition.data.id + "/signatures/new";
     var count_html = "<span id=\"data-count\"><b>" + count + "</b></span>";
-    var sign_html = "<button class=\"flatButton\" href='" + sign_link + "'>Sign Petition</button>";
+    var sign_html = "<a class=\"flatButton\" href='" + sign_link + "'>Sign Petition</a>";
 
     $('#petition_info').append(
         $('<tr></tr>').html("<b>" + current_petition.data.attributes.action + "</b></br>")
