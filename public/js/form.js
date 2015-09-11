@@ -114,6 +114,15 @@ $("#hide_petition_info").click(function(){
     }
 });
 
+$("#hide_map_key").click(function(){
+    if($(this).prop("checked") == true){
+        $('#key').fadeOut();
+    }
+    else if($(this).prop("checked") == false){
+        $('#key').fadeIn();
+    }
+});
+
 d3.select('#petition_button').on('click', function() {
     petition_url = $('#petition_url').val()
     load_petition(petition_url, true);

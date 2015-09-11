@@ -10,9 +10,8 @@ var boundaries, units;
 var parties = ["Conservative", "Green", "Independent", "Labour", "LabourCooperative", "LiberalDemocrat", "PlaidCymru", "ScottishNationalParty", "Speaker", "UKIP"];
 
 function compute_size() {
-    var margin = 15;
     width = parseInt(d3.select("#map").style("width"));
-    height = window.innerHeight - margin;
+    height = window.innerHeight * 0.85;
 }
 
 compute_size();

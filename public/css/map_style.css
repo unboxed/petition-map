@@ -238,7 +238,7 @@ th, td {
   width: 100%;
   max-width: 150px;
   position: fixed;
-  top: 350px;
+  bottom: 50%;
   right: 20px;
   color: Black;
   font-weight: 400;
@@ -277,4 +277,8 @@ th, td {
   text-align: center;
   font-size: 100px;
   padding-top: 50px;
+}
+
+#map {
+  padding-top: 6%;
 }
