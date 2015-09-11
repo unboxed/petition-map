@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="chrome=1">
         <link rel="stylesheet" type="text/css" href="css/map_style.css">
+        <link rel="stylesheet" type="text/css" href="css/party_colours.css">
         <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
 
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -11,6 +12,7 @@
 
     <body>
         <div id="support">
+            <div id="support_cat">🙀</div>
             <div id="support_text">Your resolution is not supported.</div>
         </div>
         <div id="left_column">
@@ -32,11 +34,19 @@
                     <input type="radio" name="area" value="lon" onclick="reload_map()"> London</br></br>
                 </div>
 
-                <p>Enter a petition code</p>
+                <p>Search for constituency</p>
                 <div class="form_section">
-                    <input type="text" id="petition_code" placeholder="e.g. 105991">
+                    <select name="constituency" id="constituency"></select>
+                    </br></br>
+                </div>
+
+                <p>Enter a petition url</p>
+                <div class="form_section">
+                    <input type="text" id="petition_url">
                     <a class="flatButton" type="button" id="petition_button">Submit</a>
                 </div>
+
+
             </form>
 
             <section id="licence">
@@ -53,7 +63,7 @@
         </div>
 
         <div id="right_column">
-            <section id="data-box">
+            <section id="data_box">
             </section>
             <section id="petition_info" hidden>
             </section>
@@ -98,9 +108,9 @@
                 </table>
             </section>
             <section id="controls">
-                <a class="flatButton zoom" type="button" id="zoom_in">+</a>
-                <a class="flatButton zoom" type="button" id="zoom_out">-</a>
-                <a class="flatButton" type="button" id="reset">Reset</a>
+                <button class="flatButton zoom" id="zoom_in">+</button>
+                <button class="flatButton zoom" id="zoom_out">-</button>
+                <button class="flatButton" id="reset">Reset</button>
             </section>
             <section id="map">
             </section>

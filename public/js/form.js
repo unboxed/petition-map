@@ -1,4 +1,5 @@
 var current_petition;
+var mp_data;
 
 $(document).ready(function() {
     $.getJSON("json/petitions/petitions.json", function (data) {
@@ -10,14 +11,37 @@ $(document).ready(function() {
             );
         });
 
+        load_mp_data();
+
         $("#petition").select2();
         var petition_id = $("#petition").val();
-        load_petition(petition_id);
+        load_petition(petition_id, false);
     });
 });
 
-function load_petition(petition_id) {
-    $.getJSON("json/petitions/" + petition_id + ".json", function (data) {
+function load_mp_data() {
+    $.getJSON("json/mps/constituency_party_ons.json", function (data) {
+        mp_data = data;
+        $.each(mp_data, function (index, item) {
+            var dropdown_text = item.constituency;
+            $('#constituency').append(
+                $('<option></option>').val(index).html(dropdown_text)
+            );
+        });
+
+        $("#constituency").select2();
+    });
+}
+
+function load_petition(petition_id, is_url) {
+    var petition;
+    if (is_url) {
+        petition = petition_id;
+    } else {
+        petition = "json/petitions/" + petition_id;
+    }
+
+    $.getJSON(petition + ".json", function (data) {
         current_petition = data;
         display_petition_info(petition_id);
         reload_map();
@@ -33,8 +57,11 @@ function display_petition_info() {
     $('#petition_info').empty();
     $('#petition_info').append('<table></table>');
 
+    var count = number_with_commas(current_petition.data.attributes.signature_count);
+
     var sign_link = "https://petition.parliament.uk/petitions/" + current_petition.data.id + "/signatures/new";
-    var count_html = "<span id=\"data-count\"><b>" + current_petition.data.attributes.signature_count + "</b></span>";
+    var count_html = "<span id=\"data-count\"><b>" + count + "</b></span>";
+
     $('#petition_info').append(
         $('<tr></tr>').html("<b>" + current_petition.data.attributes.action + "</b></br>")
     );
@@ -42,7 +69,7 @@ function display_petition_info() {
         $('<tr></tr>').html("</br>" + current_petition.data.attributes.background + "</br>")
     );
     $('#petition_info').append(
-        $('<tr></tr>').html("</br>" + count_html + " signatures")
+        $('<tr></tr>').html("</br><div id=\"petition_count\"><strong>" + count_html + "</strong> signatures</div>")
     );
     $('#petition_info').append(
         $('<tr></tr>').html("</br><a class=\"flatButton\" href='" + sign_link + "'>Sign Petition</a>")
@@ -62,12 +89,22 @@ function reload_map() {
 $("#petition").on('change', function() {
     var petition_id = $("#petition").val()
 
-    load_petition(petition_id);
+    load_petition(petition_id, false);
+});
+
+$("#constituency").on('change', function() {
+    var ons_code = $("#constituency").val()
+
+    var constituency_data = {
+        "id": ons_code
+    }
+
+    select(constituency_data);
 });
 
 d3.select('#petition_button').on('click', function() {
-    petition_id = $('#petition_code').val()
-    load_petition(petition_id);
+    petition_url = $('#petition_url').val()
+    load_petition(petition_url, true);
 
     recolour_map();
 });

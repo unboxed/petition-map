@@ -34,12 +34,12 @@ th, td {
   padding: 5px 10px;
 }
 
-#data-box {
+#data_box {
   position: fixed;
   top: 40px;
   left: 25%;
   display: none;
-  width: 200px;
+  width: 12%;
   padding: 15px 20px 20px 20px;
   background-color: #812A80;
   color: #fff;
@@ -50,20 +50,24 @@ th, td {
   position: fixed;
   bottom: 40px;
   left: 25%;
-  width: 250px;
+  width: 18%;
   padding: 20px;
   background-color: #812A80;
   color: #fff;
   font-size: 0.9em;
 }
 
-#data-name {
+#constituency_name {
   font-weight: bold;
   padding-bottom: 5px;
 }
 
-#data-count strong {
+#constituency_count strong {
   font-size: 2em;
+}
+
+#petition_count strong {
+  font-size: 2.5em;
 }
 
 #choiceform {
@@ -79,9 +83,11 @@ th, td {
   padding: 3px 10px;
   text-decoration: none;
 }
+
 .flatButton:hover {
   background-color: #c29fd1;
 }
+
 .flatButton:active {
   position: relative;
   top: 1px;
@@ -121,6 +127,12 @@ th, td {
   background-color: #812A80;
 }
 
+@media (max-width: 1024px) {
+  #left_column {
+    display: none;
+  }
+}
+
 #right_column {
   width: 80%;
   float: right;
@@ -147,8 +159,6 @@ th, td {
 .c7 { fill: #447019; }
 .c8 { fill: #306100; }
 
-.coloured {}
-
 .t1 { color: #c0cfb2; }
 .t2 { color: #acbf99; }
 .t3 { color: #97b07f; }
@@ -162,7 +172,11 @@ th, td {
   width: 85%;
 }
 
-#petition_code {
+#constituency {
+  width: 85%;
+}
+
+#petition_url {
   font-size: 1em;
 }
 
@@ -210,13 +224,13 @@ th, td {
   padding: 10px;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1024px) {
   #support {
     display: none;
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   #support {
     position: fixed;
     padding: 0;
@@ -234,5 +248,10 @@ th, td {
   text-align: center;
   font-size: 20px;
   color: White;
-  padding-top: 300px;
+}
+
+#support_cat {
+  text-align: center;
+  font-size: 100px;
+  padding-top: 50px;
 }

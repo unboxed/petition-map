@@ -7,6 +7,8 @@ var zoom = d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoomed);
 var projection, svg, path, g;
 var boundaries, units;
 
+var parties = ["Conservative", "Green", "Independent", "Labour", "LabourCooperative", "LiberalDemocrat", "PlaidCymru", "ScottishNationalParty", "Speaker", "UKIP"];
+
 function compute_size() {
     var margin = 15;
     width = parseInt(d3.select("#map").style("width"));
@@ -36,31 +38,59 @@ function init(width, height) {
 }
 
 function select(d) {
-    $('#data-box').fadeIn("fast");
-    $('#data-box').html("");
+    deselect_party_colours();
+    var party = strip_whitespace(mp_data[d.id].party);
+    d3.select("#" + d.id).classed(party, true);
+
+    $('#data_box').fadeIn("fast");
+    $('#data_box').html("");
     var name, mp, count;
     var data_found;
     $.each(current_petition.data.attributes.signatures_by_constituency, function(i, v) {
         if (v.ons_code === d.id) {
             name = v.name;
             mp = v.mp;
+            party = mp_data[d.id].party;
             count = v.signature_count;
             data_found = true;
             return;
         }
     });
     if (!data_found) {
-        name = "";
-        mp = "";
+        name = mp_data[d.id].constituency;
+        mp = mp_data[d.id].mp;
+        party = mp_data[d.id].party;
         count = "0";
     }
 
-    $('#data-box').append('<div id="data-name">' + name + "</div>");
-    $('#data-box').append('<div id="data-mp">' + mp + '</div>');
-    $('#data-box').append('<div id="data-count"><strong>' + count + '</strong> signatures</div>');
+    $('#data_box').append('<div id="constituency_name">' + name + "</div>");
+    $('#data_box').append('<div id="constituency_mp">' + mp + '</br>' + party + '</div>');
+    $('#data_box').append('<div id="constituency_count"><strong>' + number_with_commas(count) + '</strong> signatures</div>');
 }
 
-function interpolateZoom (translate, scale) {
+function deselect(d) {
+    var party = strip_whitespace(mp_data[d.id].party);
+    d3.select("#" + d.id).classed(party, false);
+
+    $('#data_box').show();
+}
+
+function deselect_party_colours() {
+    $.each(parties, function (index, item) {
+        d3.selectAll(".area").classed(item, false);
+        d3.selectAll(".coloured").classed(item, false);
+    });
+}
+
+function strip_whitespace(string) {
+    return string.replace(/[^a-zA-Z]/g, '');
+}
+
+function number_with_commas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function interpolate_zoom(translate, scale) {
     var self = this;
     return d3.transition().duration(350).tween("zoom", function () {
         var iTranslate = d3.interpolate(zoom.translate(), translate),
@@ -74,7 +104,7 @@ function interpolateZoom (translate, scale) {
     });
 }
 
-function zoomButton() {
+function zoom_button() {
     var clicked = d3.event.target,
         direction = 1,
         factor = 0.2,
@@ -99,7 +129,7 @@ function zoomButton() {
     view.x += center[0] - l[0];
     view.y += center[1] - l[1];
 
-    interpolateZoom([view.x, view.y], view.k);
+    interpolate_zoom([view.x, view.y], view.k);
 }
 
 function zoomed() {
@@ -122,7 +152,7 @@ $("#reset").on('click', function() {
     reset();
 });
 
-d3.selectAll('.zoom').on('click', zoomButton);
+d3.selectAll('.zoom').on('click', zoom_button);
 
 // draw our map on the SVG element
 function draw(boundaries) {
@@ -156,8 +186,8 @@ function draw(boundaries) {
         .attr("class", "area")
         .attr("id", function(d) {return d.id})
         .attr("d", path)
-        .on("mouseenter", function(d){ return select(d)})
-        .on("mouseleave", function(d){ return $('#data-box').show() });
+        .on("mouseenter", function(d){ return select(d) })
+        .on("mouseleave", function(d){ return deselect(d) });
 
     // add a boundary between areas
     g.append("path")
@@ -254,7 +284,7 @@ function place_in_array(slices, count) {
         if (count >= slices[i] && count < (slices[i] + slice)) {
             return i+1;
         }
-        if (count > slice * 8) {
+        if (count >= slice * 8) {
             return 8;
         }
     }
