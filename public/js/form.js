@@ -59,7 +59,7 @@ function display_petition_info() {
         $('<tr></tr>').html("</br>" + current_petition.data.attributes.background + "</br>")
     );
     $('#petition_info').append(
-        $('<tr></tr>').html("</br>" + count_html + " signatures")
+        $('<tr></tr>').html("</br><div id=\"petition_count\"><strong>" + count_html + "</strong> signatures</div>")
     );
     $('#petition_info').append(
         $('<tr></tr>').html("</br><a class=\"flatButton\" href='" + sign_link + "'>Sign Petition</a>")
