@@ -2,7 +2,6 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  color: White;
   background-color: White;
   font-weight: 300;
 }
@@ -10,7 +9,7 @@ body {
 h1 {
   margin: 0 0 20px;
   font-weight: 300;
-  color: #fff;
+  color: White;
   font-size: 2.5em;
 }
 
@@ -19,7 +18,7 @@ p, table {
 }
 
 a {
-  color: #fff;
+  color: White;
   font-weight: 400;
   text-decoration: none;
 }
@@ -142,6 +141,7 @@ th, td {
   float:left;
   padding: 20px;
   background-color: #812A80;
+  color: White;
 }
 
 @media (max-width: 1024px) {
@@ -153,6 +153,7 @@ th, td {
 #right_column {
   width: 80%;
   float: right;
+  color: White;
 }
 
 @media (max-width: 1024px) {
