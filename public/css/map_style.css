@@ -173,23 +173,23 @@ th, td {
   stroke-width: 0.5;
 }
 
-.c1 { fill: #c0cfb2; }
-.c2 { fill: #acbf99; }
-.c3 { fill: #97b07f; }
-.c4 { fill: #82a066; }
-.c5 { fill: #6e904c; }
-.c6 { fill: #598032; }
-.c7 { fill: #447019; }
-.c8 { fill: #306100; }
+.c1 { fill: #fed976; }
+.c2 { fill: #feb24c; }
+.c3 { fill: #fd8d3c; }
+.c4 { fill: #fc4e2a; }
+.c5 { fill: #e31a1c; }
+.c6 { fill: #b10026; }
+.c7 { fill: #8d001e; }
+.c8 { fill: #6a0016; }
 
-.t1 { color: #c0cfb2; }
-.t2 { color: #acbf99; }
-.t3 { color: #97b07f; }
-.t4 { color: #82a066; }
-.t5 { color: #6e904c; }
-.t6 { color: #598032; }
-.t7 { color: #447019; }
-.t8 { color: #306100; }
+.t1 { color: #fed976; }
+.t2 { color: #feb24c; }
+.t3 { color: #fd8d3c; }
+.t4 { color: #fc4e2a; }
+.t5 { color: #e31a1c; }
+.t6 { color: #b10026; }
+.t7 { color: #8d001e; }
+.t8 { color: #6a0016; }
 
 #petition_dropdown {
   width: 85%;
