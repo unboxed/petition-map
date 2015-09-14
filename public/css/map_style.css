@@ -67,6 +67,7 @@ th, td {
 
 .help_header {
   font-weight: 400;
+  font-size: 1.1em;
 }
 
 #petition_action {
@@ -293,4 +294,12 @@ th, td {
 
 #help {
   font-size: 0.9em;
+}
+
+#ubxd {
+  color: Black;
+}
+
+#ubxd:hover {
+  color: #812A80;
 }
