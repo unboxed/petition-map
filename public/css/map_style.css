@@ -1,15 +1,15 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:400,300,100,900);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700);
 
 body {
-  font-family: 'Lato', sans-serif;
-  color:#777;
-  font-weight:300;
+  font-family: 'Roboto', sans-serif;
+  color: White;
   background-color: White;
+  font-weight: 300;
 }
 
 h1 {
   margin: 0 0 20px;
-  line-height: 1.1;
+  font-weight: 300;
   color: #fff;
   font-size: 2.5em;
 }
@@ -42,7 +42,6 @@ th, td {
   width: 12%;
   padding: 15px 20px 20px 20px;
   background-color: #812A80;
-  color: #fff;
   font-size: 0.8em;
 }
 
@@ -53,32 +52,39 @@ th, td {
   max-width: 18%;
   padding: 20px;
   background-color: #812A80;
-  color: #fff;
   font-size: 0.8em;
 }
 
 #constituency_name {
-  font-weight: bold;
+  font-size: 1.2em;
+  font-weight: 400;
   padding-bottom: 5px;
 }
 
-#constituency_count strong {
-  font-size: 2em;
-}
-
-#petition_count strong {
+#data_count {
+  font-weight: 300;
   font-size: 2.5em;
 }
 
-#choiceform {
-  color:#fff;
+.help_header {
+  font-weight: 400;
+}
+
+#petition_action {
+  font-size: 1.2em;
+  font-weight: 400;
+}
+
+#signatures {
+  font-size: 1.5em;
+  padding-left: 2px;
 }
 
 .flat_button {
   background-color: #a478c2;
   display: inline-block;
   cursor: pointer;
-  color: #ffffff;
+  color: White;
   font-size: 1em;
   padding: 5px 10px;
   text-decoration: none;
@@ -108,7 +114,7 @@ th, td {
 }
 
 #geojson_link:hover {
-  color: #ffffff;
+  color: White;
 }
 
 #licence {
@@ -135,7 +141,6 @@ th, td {
   position: absolute;
   float:left;
   padding: 20px;
-  color: #fff;
   background-color: #812A80;
 }
 
@@ -219,6 +224,7 @@ th, td {
   right: 20px;
   text-align: right;
   font-size: 0.8em;
+  color: Grey;
 }
 
 #key {

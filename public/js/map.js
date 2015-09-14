@@ -64,7 +64,7 @@ function select(d) {
 
     $('#data_box').append('<div id="constituency_name">' + name + "</div>");
     $('#data_box').append('<div id="constituency_mp">' + mp + '</br>' + party + '</div>');
-    $('#data_box').append('<div id="constituency_count"><strong>' + number_with_commas(count) + '</strong> signatures</div>');
+    $('#data_box').append('<div><span id="data_count">' + number_with_commas(count) + '</span> <span id="signatures">signatures</span></div>');
 }
 
 function deselect(d) {
