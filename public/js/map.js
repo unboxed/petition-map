@@ -41,8 +41,8 @@ function select(d) {
     var party = strip_whitespace(mp_data[d.id].party);
     d3.select("#" + d.id).classed(party, true);
 
-    $('#data_box').fadeIn("fast");
-    $('#data_box').html("");
+    $('#constituency_info').fadeIn("fast");
+    $('#constituency_info').html("");
     var name, mp, count;
     var data_found;
     $.each(current_petition.data.attributes.signatures_by_constituency, function(i, v) {
@@ -62,16 +62,16 @@ function select(d) {
         count = "0";
     }
 
-    $('#data_box').append('<div id="constituency_name">' + name + "</div>");
-    $('#data_box').append('<div id="constituency_mp">' + mp + '</br>' + party + '</div>');
-    $('#data_box').append('<div><span id="data_count">' + number_with_commas(count) + '</span> <span id="signatures">signatures</span></div>');
+    $('#constituency_info').append('<div id="constituency_name">' + name + "</div>");
+    $('#constituency_info').append('<div id="constituency_mp">' + mp + '</br>' + party + '</div>');
+    $('#constituency_info').append('<div><span id="data_count">' + number_with_commas(count) + '</span> <span id="signatures">signatures</span></div>');
 }
 
 function deselect(d) {
     var party = strip_whitespace(mp_data[d.id].party);
     d3.select("#" + d.id).classed(party, false);
 
-    $('#data_box').show();
+    $('#constituency_info').show();
 }
 
 function deselect_party_colours() {
