@@ -53,7 +53,7 @@ th, td {
   color: White;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 720px) {
   #left_column {
     display: none;
   }
@@ -73,7 +73,7 @@ th, td {
 
 #petition_url {
   font-size: 1em;
-  width: 60%;
+  width: 50%;
 }
 
 #petition_button {
@@ -102,7 +102,7 @@ th, td {
   font-size: 0.75em;
 }
 
-@media (max-height: 1024px) {
+@media (max-height: 720px) {
   #licence {
     font-size: 0.6em;
   }
@@ -125,7 +125,7 @@ th, td {
   color: White;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 720px) {
   #right_column {
     display: none;
   }
@@ -254,13 +254,13 @@ th, td {
 /* Mobile */
 
 
-@media (min-width: 1024px) {
+@media (min-width: 720px) {
   #support {
     display: none;
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 720px) {
   #support {
     position: fixed;
     padding: 0;
