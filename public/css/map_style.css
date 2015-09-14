@@ -19,7 +19,7 @@ p, table {
 }
 
 a {
-  color: #39c;
+  color: #fff;
   font-weight: 400;
   text-decoration: none;
 }
@@ -282,4 +282,8 @@ th, td {
 
 #map {
   padding-top: 6%;
+}
+
+#help {
+  font-size: 0.9em;
 }

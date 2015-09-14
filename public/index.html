@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="css/map_style.css">
         <link rel="stylesheet" type="text/css" href="css/party_colours.css">
         <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     </head>
@@ -46,12 +47,22 @@
                     <button class="flat_button" type="button" id="petition_button">Submit</button>
                     </br></br>
                 </div>
+            </form>
 
+            <hr>
+
+            <div data-collapse>
+                <h3><i class="fa fa-chevron-down"> Settings</i></h3>
                 <div class="form_section">
                     <p><input type="checkbox" id="hide_petition_info"> Hide Petition Info</p>
                     <p><input type="checkbox" id="hide_map_key"> Hide Map Key</p>
                 </div>
-            </form>
+                <h3><i class="fa fa-chevron-down"> Help</i></h3>
+                <div id="help">
+                    <b>Where is Northern Ireland?</b></br>
+                    <p>Unfortunately, the data for NI is not available at this time due to licensing issues.</p>
+                </div>
+            </div>
 
             <section id="licence">
                 <p>
@@ -112,8 +123,8 @@
                 </table>
             </section>
             <section id="controls">
-                <button class="flat_button zoom" id="zoom_in">+</button>
-                <button class="flat_button zoom" id="zoom_out">-</button>
+                <button class="flat_button zoom" id="zoom_in"><i class="fa fa-plus"></i></button>
+                <button class="flat_button zoom" id="zoom_out"><i class="fa fa-minus"></i></button>
                 <button class="flat_button" id="reset">Reset</button>
             </section>
             <section id="map">
@@ -128,6 +139,7 @@
         <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+        <script src="plugins/collapse/jquery.collapse.js"></script>
 
         <script src="js/map.js"></script>
         <script src="js/form.js"></script>
