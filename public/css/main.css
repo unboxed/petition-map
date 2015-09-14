@@ -83,6 +83,9 @@ th, td {
 
 #help {
   font-size: 0.9em;
+  overflow: auto;
+  max-height: 200px;
+  padding-bottom: 20px;
 }
 
 .help_header {
@@ -92,7 +95,6 @@ th, td {
 
 #licence {
   position: absolute;
-  bottom: 5%;
   border-top: 1px solid #e5e5e5;
   padding-top: 10px;
   width: 90%;
