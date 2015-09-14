@@ -1,0 +1,285 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700);
+
+
+/* General */
+
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: White;
+  font-weight: 300;
+}
+
+h1 {
+  margin: 0 0 20px;
+  font-weight: 300;
+  color: White;
+  font-size: 2.5em;
+}
+
+p, table {
+  margin: 0px;
+}
+
+a {
+  color: White;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 5px 10px;
+}
+
+
+/* Left Column */
+
+
+#left_column {
+  height: 100%;
+  width: 20%;
+  top:0;
+  left:0;
+  position: absolute;
+  float:left;
+  padding: 20px;
+  background-color: #812A80;
+  color: White;
+}
+
+@media (max-width: 1024px) {
+  #left_column {
+    display: none;
+  }
+}
+
+.form_section {
+  padding-top: 3px;
+}
+
+#petition_dropdown {
+  width: 85%;
+}
+
+#constituency {
+  width: 85%;
+}
+
+#petition_url {
+  font-size: 1em;
+  width: 60%;
+}
+
+#petition_button {
+  font-size: 0.8em;
+  margin-left: 0.2em;
+}
+
+#help {
+  font-size: 0.9em;
+}
+
+.help_header {
+  font-weight: 400;
+  font-size: 1.1em;
+}
+
+#licence {
+  position: absolute;
+  bottom: 5%;
+  border-top: 1px solid #e5e5e5;
+  padding-top: 10px;
+  width: 90%;
+  vertical-align: bottom;
+  font-size: 0.75em;
+}
+
+@media (max-height: 1024px) {
+  #licence {
+    font-size: 0.6em;
+  }
+}
+
+#geojson_link {
+  color: #c29fd1;
+}
+
+#geojson_link:hover {
+  color: White;
+}
+
+
+/* Right Column */
+
+#right_column {
+  width: 80%;
+  float: right;
+  color: White;
+}
+
+@media (max-width: 1024px) {
+  #right_column {
+    display: none;
+  }
+}
+
+#petition_info {
+  position: fixed;
+  bottom: 40px;
+  left: 25%;
+  max-width: 18%;
+  padding: 20px;
+  background-color: #812A80;
+  font-size: 0.8em;
+}
+
+#petition_action {
+  font-size: 1.2em;
+  font-weight: 400;
+}
+
+#signatures {
+  font-size: 1.5em;
+  padding-left: 2px;
+}
+
+#constituency_info {
+  position: fixed;
+  top: 40px;
+  left: 25%;
+  display: none;
+  width: 12%;
+  padding: 15px 20px 20px 20px;
+  background-color: #812A80;
+  font-size: 0.8em;
+}
+
+#constituency_name {
+  font-size: 1.2em;
+  font-weight: 400;
+  padding-bottom: 5px;
+}
+
+#data_count {
+  font-weight: 300;
+  font-size: 2.5em;
+}
+
+#key {
+  width: 100%;
+  max-width: 150px;
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  color: Black;
+  font-weight: 400;
+  background-color: #f6f6f6;
+  opacity: 0.75;
+  padding: 10px;
+}
+
+#controls {
+  text-align: center;
+  width: 100%;
+  max-width: 150px;
+  position: fixed;
+  bottom: 50%;
+  right: 20px;
+  color: Black;
+  font-weight: 400;
+  background-color: #f6f6f6;
+  opacity: 0.75;
+  padding: 10px;
+}
+
+.logo {
+  position: absolute;
+  bottom: 35px;
+  right: 20px;
+  text-align: right;
+  font-size: 2em;
+  color: Black;
+}
+
+.version {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  text-align: right;
+  font-size: 0.8em;
+  color: Grey;
+}
+
+#ubxd {
+  color: Black;
+}
+
+#ubxd:hover {
+  color: #812A80;
+}
+
+
+/* Buttons */
+
+
+.flat_button {
+  background-color: #a478c2;
+  display: inline-block;
+  cursor: pointer;
+  color: White;
+  font-size: 1em;
+  padding: 5px 10px;
+  text-decoration: none;
+  border: 0;
+}
+
+.flat_button:hover {
+  background-color: #c29fd1;
+}
+
+.flat_button:active {
+  position: relative;
+  top: 1px;
+}
+
+
+/* Mobile */
+
+
+@media (min-width: 1024px) {
+  #support {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  #support {
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #812A80;
+    z-index: 99999;
+  }
+}
+
+#support_text {
+  text-align: center;
+  font-size: 20px;
+  color: White;
+}
+
+#support_cat {
+  text-align: center;
+  font-size: 100px;
+  padding-top: 50px;
+}
