@@ -74,21 +74,22 @@ th, td {
   color:#fff;
 }
 
-.flatButton {
+.flat_button {
   background-color: #a478c2;
   display: inline-block;
   cursor: pointer;
   color: #ffffff;
   font-size: 1em;
-  padding: 3px 10px;
+  padding: 5px 10px;
   text-decoration: none;
+  border: 0;
 }
 
-.flatButton:hover {
+.flat_button:hover {
   background-color: #c29fd1;
 }
 
-.flatButton:active {
+.flat_button:active {
   position: relative;
   top: 1px;
 }
