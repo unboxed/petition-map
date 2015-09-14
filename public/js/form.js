@@ -2,7 +2,7 @@ var current_petition;
 var mp_data;
 
 $(document).ready(function() {
-    $.getJSON("json/petitions/petitions.json", function (data) {
+    $.getJSON("https://petition.parliament.uk/petitions.json?state=open", function (data) {
         petitions = data.data;
         $.each(petitions, function (index, item) {
             var dropdown_text = item.attributes.action;
@@ -38,7 +38,7 @@ function load_petition(petition_id, is_url) {
     if (is_url) {
         petition = petition_id;
     } else {
-        petition = "json/petitions/" + petition_id;
+        petition = "https://petition.parliament.uk/petitions/" + petition_id;
     }
 
     $.getJSON(petition + ".json", function (data) {
