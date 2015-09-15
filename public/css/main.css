@@ -138,7 +138,7 @@ th, td {
 
 @media (max-width: 720px) {
   #right_column {
-    display: none;
+    width: 100%;
   }
 }
 
@@ -150,6 +150,12 @@ th, td {
   padding: 20px;
   background-color: #812A80;
   font-size: 0.8em;
+}
+
+@media (max-width: 720px) {
+  #petition_info {
+    visibility: hidden;
+  }
 }
 
 #petition_action {
@@ -171,6 +177,12 @@ th, td {
   padding: 15px 20px 20px 20px;
   background-color: #812A80;
   font-size: 0.8em;
+}
+
+@media (max-width: 720px) {
+  #constituency_info {
+    visibility: hidden;
+  }
 }
 
 #constituency_name {
@@ -195,6 +207,12 @@ th, td {
   background-color: #f6f6f6;
   opacity: 0.75;
   padding: 10px;
+}
+
+@media (max-width: 720px) {
+  #key {
+    visibility: hidden;
+  }
 }
 
 #controls {
@@ -223,6 +241,16 @@ th, td {
   background-color: #f6f6f6;
   opacity: 0.75;
   padding: 10px;
+}
+
+@media (max-width: 720px) {
+  #controls {
+    bottom: 10%;
+    right: 10px;
+    max-width: 120px;
+    padding: 5px;
+    font-size: 0.7em;
+  }
 }
 
 .logo {
@@ -341,7 +369,7 @@ th, td {
 }
 
 #petition_dropdown_mobile {
-  width: 50%;
+  max-width: 50%;
 }
 
 #area_dropdown {

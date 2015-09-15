@@ -124,9 +124,23 @@ function reload_map() {
 
     var area = $("input[name='area']:checked").val();
 
+    if ($(window).width() < 720) {
+        area = $("#area_dropdown").val();
+    }
+
     var f = 'json/uk/' + area + '/topo_' + units + '.json';
     load_data(f, units);
 }
+
+$("#area_dropdown").on('change', function() {
+    units = "wpc";
+
+    var area = $("#area_dropdown").val()
+    console.log(area);
+
+    var f = 'json/uk/' + area + '/topo_' + units + '.json';
+    load_data(f, units);
+});
 
 $("#petition_dropdown").on('change', function() {
     var petition_id = $("#petition_dropdown").val()
