@@ -9,6 +9,9 @@ $(document).ready(function() {
             $('#petition_dropdown').append(
                 $('<option></option>').val(item.id).html(dropdown_text)
             );
+            $('#petition_dropdown_mobile').append(
+                $('<option></option>').val(item.id).html(dropdown_text)
+            );
         });
 
         load_mp_data();
@@ -16,6 +19,8 @@ $(document).ready(function() {
         var variables = get_url_variables();
 
         $("#petition_dropdown").select2();
+        $("#petition_dropdown_mobile").select2();
+
         var petition_id = $("#petition_dropdown").val();
 
         if (!jQuery.isEmptyObject(variables)) {
