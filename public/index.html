@@ -15,18 +15,25 @@
     <body>
         <div id="mobile_menu">
             <ul>
-                <li>Petition Map</li>
-                <li>One</li>
-                <li>Two</li>
-                <li>Three</li>
+                <li><span id="mobile_heading">Petition Map</span></li>
+                <li>
+                    <span id="area_text">Select Area</span>
+                    <span>
+                        <select id="area_dropdown">
+                            <option value="gb">Great Britain</option>
+                            <option value="eng">England</option>
+                            <option value="sco">Scotland</option>
+                            <option value="wal">Wales</option>
+                            <option value="lon">London</option>
+                        </select>
+                    </span>
+                </li>
             </ul>
         </div>
 
         <div id="mobile_footer">
-            <ul>
-                <li>Select Petition</li>
-                <li><select name="petition" id="petition_dropdown_mobile"></select></li>
-            </ul>
+            <span id="select_text">Select Petition</span>
+            <span><select name="petition" id="petition_dropdown_mobile"></select></span>
         </div>
 
         <div id="left_column">

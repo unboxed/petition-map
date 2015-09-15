@@ -288,9 +288,22 @@ th, td {
     background-color: #812A80;
     color: White;
     font-weight: 300;
-    font-size: 1.2em;
     padding: 10px;
     overflow: auto;
+  }
+}
+
+#mobile_heading {
+  font-size: 1.4em;
+}
+
+#area_text {
+  padding-right: 10px;
+}
+
+@media (min-width: 720px) {
+  #mobile_menu {
+    display: none;
   }
 }
 
@@ -303,45 +316,50 @@ th, td {
     background-color: #812A80;
     color: White;
     font-weight: 300;
-    font-size: 1.2em;
-    padding: 10px;
-    overflow: auto;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+@media (min-width: 720px) {
+  #mobile_footer {
+    display: none;
   }
 }
 
 @media (max-width: 720px) {
   .logo {
-    position: absolute;
-    bottom: 10%;
-    right: 10px;
-    text-align: right;
-    font-size: 1.6em;
-    color: Black;
+    display: none;
   }
 }
 
 @media (max-width: 720px) {
   .version {
-    position: absolute;
-    bottom: 8%;
-    right: 10px;
-    text-align: right;
-    font-size: 0.7em;
-    color: Grey;
+    display: none;
   }
 }
 
 #petition_dropdown_mobile {
-  width: 60%;
+  width: 50%;
 }
 
-ul {
+#area_dropdown {
+  max-width: 30%;
+}
+
+#select_text {
+  font-size: 1.2em;
+  padding-right: 10px;
+}
+
+#mobile_menu ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-li {
+ #mobile_menu li {
   display: inline;
   padding-left: 10px;
 }

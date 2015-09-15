@@ -20,8 +20,16 @@ $(document).ready(function() {
 
         $("#petition_dropdown").select2();
         $("#petition_dropdown_mobile").select2();
+        $("#area_dropdown").select2();
 
-        var petition_id = $("#petition_dropdown").val();
+        var petition_id;
+        if ($(window).width() > 720) {
+            console.log("desktop")
+            petition_id = $("#petition_dropdown").val();
+        } else {
+            console.log("mobile");
+            petition_id = $("#petition_dropdown_mobile").val();
+        }
 
         if (!jQuery.isEmptyObject(variables)) {
             petition_id = variables.petition;
@@ -122,6 +130,12 @@ function reload_map() {
 
 $("#petition_dropdown").on('change', function() {
     var petition_id = $("#petition_dropdown").val()
+
+    load_petition(petition_id, false);
+});
+
+$("#petition_dropdown_mobile").on('change', function() {
+    var petition_id = $("#petition_dropdown_mobile").val()
 
     load_petition(petition_id, false);
 });
