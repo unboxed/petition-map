@@ -149,6 +149,19 @@ $("#hide_map_key").click(function(){
     }
 });
 
+$('#petition_link').click(function() {
+    this.setSelectionRange(0, this.value.length);
+});
+
+$('#petition_get_link').click(function() {
+    var root_url = window.location.origin;
+    var petition = current_petition.data.id;
+    var area = $("input[name='area']:checked").val();
+    var link = root_url + "/?" + "petition=" + petition + "&area=" + area;
+
+    $('#petition_link').val(link);
+});
+
 d3.select('#petition_button').on('click', function() {
     petition_url = $('#petition_url').val()
     load_petition(petition_url, true);
