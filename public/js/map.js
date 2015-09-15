@@ -11,7 +11,11 @@ var parties = ["Conservative", "Green", "Independent", "Labour", "LabourCooperat
 
 function compute_size() {
     width = parseInt(d3.select("#map").style("width"));
-    height = window.innerHeight * 0.85;
+    if ($(window).width() < 720) {
+        height = window.innerHeight * 0.78;
+    } else {
+        height = window.innerHeight * 0.85;
+    }
 }
 
 compute_size();
@@ -171,7 +175,7 @@ function draw(boundaries) {
     if (area === "lon") {
         t = [((width - s * (b[1][0] + b[0][0])) / 2.25), (height - s * (b[1][1] + b[0][1])) / 2];
     } else if (area === "gb") {
-        t = [((width - s * (b[1][0] + b[0][0])) / 1.8), (height - s * (b[1][1] + b[0][1])) / 2];
+        t = [((width - s * (b[1][0] + b[0][0])) / 1.95), (height - s * (b[1][1] + b[0][1])) / 2];
     } else {
         t = [((width - s * (b[1][0] + b[0][0])) / 1.85), (height - s * (b[1][1] + b[0][1])) / 2];
     }
