@@ -154,11 +154,19 @@ th, td {
 
 @media (max-width: 720px) {
   #petition_info {
-    bottom: 17%;
+    bottom: 18%;
     left: 10px;
     font-size: 0.5em;
     max-width: 20%;
     padding: 10px;
+  }
+}
+
+@media (max-height: 480px) {
+  #petition_info {
+    bottom: 23%;
+    font-size: 0.3em;
+    max-width: 25%;
   }
 }
 
@@ -205,6 +213,14 @@ th, td {
   }
 }
 
+@media (max-height: 480px) {
+  #constituency_info {
+    width: 35%;
+    font-size: 0.3em;
+    top: 12%;
+  }
+}
+
 #constituency_name {
   font-size: 1.2em;
   font-weight: 400;
@@ -239,6 +255,14 @@ th, td {
   }
 }
 
+@media (max-height: 480px) {
+  #key {
+    font-size: 0.3em;
+    padding: 2px;
+    top: 12%;
+  }
+}
+
 @media (max-height: 360px) {
   #key {
     visibility: hidden;
@@ -261,11 +285,18 @@ th, td {
 
 @media (max-width: 720px) {
   #controls {
-    bottom: 17%;
+    bottom: 18%;
     right: 10px;
     max-width: 120px;
     padding: 5px;
     font-size: 0.6em;
+  }
+}
+
+@media (max-height: 480px) {
+  #controls {
+    font-size: 0.3em;
+    bottom: 23%;
   }
 }
 
