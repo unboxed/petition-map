@@ -482,11 +482,9 @@ th, td {
   margin-left: 25px;
 }
 
-@media (max-width: 720px) {
-  #petition_link {
-    font-size: 1em;
-    width: 30%;
-    float: left;
-    margin-left: 5px;
-  }
+#petition_link_mobile {
+  font-size: 1em;
+  width: 30%;
+  float: left;
+  margin-left: 5px;
 }

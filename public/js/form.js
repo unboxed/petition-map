@@ -213,8 +213,8 @@ $('#mobile_share').click(function() {
     var area = $("input[name='area']:checked").val();
     var link = root_url + "/?" + "petition=" + petition + "&area=" + area;
 
-    $('#petition_link').val(link);
-    $('#petition_link').focus().select();
+    $('#petition_link_mobile').val(link);
+    $('#petition_link_mobile').focus().select();
 });
 
 $('#hide_ui').click(function() {
