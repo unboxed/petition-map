@@ -247,6 +247,16 @@ th, td {
   padding: 10px;
 }
 
+@media (max-width: 720px) {
+  #controls {
+    bottom: 10%;
+    right: 10px;
+    max-width: 120px;
+    padding: 5px;
+    font-size: 0.7em;
+  }
+}
+
 #share {
   text-align: center;
   width: 100%;
@@ -262,14 +272,15 @@ th, td {
 }
 
 @media (max-width: 720px) {
-  #controls {
-    bottom: 10%;
-    right: 10px;
-    max-width: 120px;
-    padding: 5px;
+  #share {
     font-size: 0.7em;
+    padding: 5px;
+    max-width: 100px;
+    right: 10px;
+    bottom: 18%;
   }
 }
+
 
 .logo {
   position: absolute;
