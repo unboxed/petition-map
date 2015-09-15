@@ -210,7 +210,7 @@ $('#petition_get_link').click(function() {
 $('#mobile_share').click(function() {
     var root_url = window.location.origin;
     var petition = current_petition.data.id;
-    var area = $("input[name='area']:checked").val();
+    var area = $("#area_dropdown").val();
     var link = root_url + "/?" + "petition=" + petition + "&area=" + area;
 
     $('#petition_link_mobile').val(link);
