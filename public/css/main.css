@@ -154,7 +154,17 @@ th, td {
 
 @media (max-width: 720px) {
   #petition_info {
-    visibility: hidden;
+    bottom: 10%;
+    left: 10px;
+    font-size: 0.5em;
+    max-width: 20%;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 720px) {
+  .sign {
+    max-width: 40%;
   }
 }
 
@@ -181,7 +191,11 @@ th, td {
 
 @media (max-width: 720px) {
   #constituency_info {
-    visibility: hidden;
+    top: 10%;
+    left: 10px;
+    width: 18%;
+    font-size: 0.5em;
+    padding: 10px;
   }
 }
 
@@ -211,7 +225,11 @@ th, td {
 
 @media (max-width: 720px) {
   #key {
-    visibility: hidden;
+    top: 10%;
+    right: 10px;
+    max-width: 100px;
+    padding: 5px;
+    font-size: 0.5em;
   }
 }
 

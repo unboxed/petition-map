@@ -102,21 +102,34 @@ function display_petition_info() {
 
     var sign_link = "https://petition.parliament.uk/petitions/" + current_petition.data.id + "/signatures/new";
     var count_html = "<span id=\"data_count\">" + count + "</span>";
-    var sign_html = "<a class=\"flat_button\" href='" + sign_link + "'><i class=\"fa fa-pencil\"></i> Sign Petition</a>";
+    var sign_html = "<a class=\"flat_button sign\" href='" + sign_link + "'><i class=\"fa fa-pencil\"></i> Sign Petition</a>";
 
-    $('#petition_info').append(
-        $('<tr></tr>').html("<div id=\"petition_action\">" + current_petition.data.attributes.action + "<div>")
-    );
-    $('#petition_info').append(
-        $('<tr></tr>').html("</br>" + current_petition.data.attributes.background + "</br>")
-    );
-    $('#petition_info').append(
-        $('<tr></tr>').html("</br><div>" + count_html + " <span id=\"signatures\">signatures</span></div>")
-    );
-    $('#petition_info').append(
-        $('<tr></tr>').html("</br>" + sign_html)
-    );
-    $('#petition_info').show();
+    if ($(window).width() > 720) {
+        $('#petition_info').append(
+            $('<tr></tr>').html("<div id=\"petition_action\">" + current_petition.data.attributes.action + "<div>")
+        );
+        $('#petition_info').append(
+            $('<tr></tr>').html("</br>" + current_petition.data.attributes.background + "</br>")
+        );
+        $('#petition_info').append(
+            $('<tr></tr>').html("</br><div>" + count_html + " <span id=\"signatures\">signatures</span></div>")
+        );
+        $('#petition_info').append(
+            $('<tr></tr>').html("</br>" + sign_html)
+        );
+        $('#petition_info').show();
+    } else {
+        $('#petition_info').append(
+            $('<tr></tr>').html("<div id=\"petition_action\">" + current_petition.data.attributes.action + "<div>")
+        );
+        $('#petition_info').append(
+            $('<tr></tr>').html("</br><div>" + count_html + " <span id=\"signatures\">signatures</span></div>")
+        );
+        $('#petition_info').append(
+            $('<tr></tr>').html("</br>" + sign_html)
+        );
+        $('#petition_info').show();
+    }
 }
 
 function reload_map() {
