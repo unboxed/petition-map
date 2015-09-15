@@ -15,6 +15,11 @@
   stroke-width: 0.5;
 }
 
+.selected_boundary {
+  stroke: Black;
+  stroke-width: 1.5;
+}
+
 .c1 { fill: #fed976; }
 .c2 { fill: #feb24c; }
 .c3 { fill: #fd8d3c; }

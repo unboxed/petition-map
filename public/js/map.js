@@ -40,6 +40,7 @@ function select(d) {
     deselect_party_colours();
     var party = strip_whitespace(mp_data[d.id].party);
     d3.select("#" + d.id).classed(party, true);
+    d3.select("#" + d.id).classed("selected_boundary", true);
 
     $('#constituency_info').fadeIn("fast");
     $('#constituency_info').html("");
@@ -70,6 +71,7 @@ function select(d) {
 function deselect(d) {
     var party = strip_whitespace(mp_data[d.id].party);
     d3.select("#" + d.id).classed(party, false);
+    d3.select("#" + d.id).classed("selected_boundary", false);
 
     $('#constituency_info').show();
 }
