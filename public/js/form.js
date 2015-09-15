@@ -1,5 +1,6 @@
 var current_petition;
 var mp_data;
+var ui_hidden = false;
 
 $(document).ready(function() {
     $.getJSON("https://petition.parliament.uk/petitions.json?state=open", function (data) {
@@ -9,6 +10,9 @@ $(document).ready(function() {
             $('#petition_dropdown').append(
                 $('<option></option>').val(item.id).html(dropdown_text)
             );
+            $('#petition_dropdown_mobile').append(
+                $('<option></option>').val(item.id).html(dropdown_text)
+            );
         });
 
         load_mp_data();
@@ -16,7 +20,15 @@ $(document).ready(function() {
         var variables = get_url_variables();
 
         $("#petition_dropdown").select2();
-        var petition_id = $("#petition_dropdown").val();
+
+        var petition_id;
+        if ($(window).width() > 720) {
+            console.log("desktop")
+            petition_id = $("#petition_dropdown").val();
+        } else {
+            console.log("mobile");
+            petition_id = $("#petition_dropdown_mobile").val();
+        }
 
         if (!jQuery.isEmptyObject(variables)) {
             petition_id = variables.petition;
@@ -89,21 +101,34 @@ function display_petition_info() {
 
     var sign_link = "https://petition.parliament.uk/petitions/" + current_petition.data.id + "/signatures/new";
     var count_html = "<span id=\"data_count\">" + count + "</span>";
-    var sign_html = "<a class=\"flat_button\" href='" + sign_link + "'><i class=\"fa fa-pencil\"></i> Sign Petition</a>";
+    var sign_html = "<a class=\"flat_button sign\" href='" + sign_link + "'><i class=\"fa fa-pencil\"></i> Sign Petition</a>";
 
-    $('#petition_info').append(
-        $('<tr></tr>').html("<div id=\"petition_action\">" + current_petition.data.attributes.action + "<div>")
-    );
-    $('#petition_info').append(
-        $('<tr></tr>').html("</br>" + current_petition.data.attributes.background + "</br>")
-    );
-    $('#petition_info').append(
-        $('<tr></tr>').html("</br><div>" + count_html + " <span id=\"signatures\">signatures</span></div>")
-    );
-    $('#petition_info').append(
-        $('<tr></tr>').html("</br>" + sign_html)
-    );
-    $('#petition_info').show();
+    if ($(window).width() > 720) {
+        $('#petition_info').append(
+            $('<tr></tr>').html("<div id=\"petition_action\">" + current_petition.data.attributes.action + "<div>")
+        );
+        $('#petition_info').append(
+            $('<tr></tr>').html("</br>" + current_petition.data.attributes.background + "</br>")
+        );
+        $('#petition_info').append(
+            $('<tr></tr>').html("</br><div>" + count_html + " <span id=\"signatures\">signatures</span></div>")
+        );
+        $('#petition_info').append(
+            $('<tr></tr>').html("</br>" + sign_html)
+        );
+        $('#petition_info').show();
+    } else {
+        $('#petition_info').append(
+            $('<tr></tr>').html("<div id=\"petition_action\">" + current_petition.data.attributes.action + "<div>")
+        );
+        $('#petition_info').append(
+            $('<tr></tr>').html("</br><div>" + count_html + " <span id=\"signatures\">signatures</span></div>")
+        );
+        $('#petition_info').append(
+            $('<tr></tr>').html("</br>" + sign_html)
+        );
+        $('#petition_info').show();
+    }
 }
 
 function reload_map() {
@@ -111,12 +136,32 @@ function reload_map() {
 
     var area = $("input[name='area']:checked").val();
 
+    if ($(window).width() < 720) {
+        area = $("#area_dropdown").val();
+    }
+
     var f = 'json/uk/' + area + '/topo_' + units + '.json';
     load_data(f, units);
 }
 
+$("#area_dropdown").on('change', function() {
+    units = "wpc";
+
+    var area = $("#area_dropdown").val()
+    console.log(area);
+
+    var f = 'json/uk/' + area + '/topo_' + units + '.json';
+    load_data(f, units);
+});
+
 $("#petition_dropdown").on('change', function() {
     var petition_id = $("#petition_dropdown").val()
+
+    load_petition(petition_id, false);
+});
+
+$("#petition_dropdown_mobile").on('change', function() {
+    var petition_id = $("#petition_dropdown_mobile").val()
 
     load_petition(petition_id, false);
 });
@@ -160,8 +205,30 @@ $('#petition_get_link').click(function() {
     $('#petition_link').focus().select();
 
     $('#link_help').fadeIn();
+});
 
-    console.log(link);
+$('#mobile_share').click(function() {
+    var root_url = window.location.origin;
+    var petition = current_petition.data.id;
+    var area = $("#area_dropdown").val();
+    var link = root_url + "/?" + "petition=" + petition + "&area=" + area;
+
+    $('#petition_link_mobile').val(link);
+    $('#petition_link_mobile').focus().select();
+});
+
+$('#hide_ui').click(function() {
+    if (ui_hidden) {
+        $('#petition_info').fadeIn();
+        $('#key').fadeIn();
+        $('#hide_ui').html("Hide UI");
+        ui_hidden = false;
+    } else {
+        $('#petition_info').fadeOut();
+        $('#key').fadeOut();
+        $('#hide_ui').html("Show UI");
+        ui_hidden = true;
+    }
 });
 
 d3.select('#petition_button').on('click', function() {

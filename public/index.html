@@ -13,10 +13,34 @@
     </head>
 
     <body>
-        <div id="support">
-            <div id="support_cat">🙀</div>
-            <div id="support_text">Your resolution is not supported.</div>
+        <div id="mobile_menu">
+            <ul>
+                <li><span id="mobile_heading">Petition Map</span></li>
+                <li>
+                    <span id="area_text">Select Area</span>
+                    <span>
+                        <select id="area_dropdown">
+                            <option value="gb">Great Britain</option>
+                            <option value="eng">England</option>
+                            <option value="sco">Scotland</option>
+                            <option value="wal">Wales</option>
+                            <option value="lon">London</option>
+                        </select>
+                    </span>
+                </li>
+            </ul>
         </div>
+
+        <div id="mobile_footer">
+            <span id="select_text">Select Petition</span>
+            <span><select name="petition" id="petition_dropdown_mobile"></select></span>
+            <div id="settings">
+                <span><button class="flat_button" type="button" id="mobile_share">Share Map</button>
+                <input type="text" id="petition_link_mobile"></span>
+                <button class="flat_button" id="hide_ui">Hide UI</button>
+            </div>
+        </div>
+
         <div id="left_column">
             <h1>Petition Map <i class="fa fa-map"></i></h1>
 
@@ -140,8 +164,8 @@
             </section>
         </div>
 
+        <span class="built_by">built by</span>
         <span class="logo"><a id="ubxd" href="https://www.unboxedconsulting.com/">Unboxed</a></span>
-        <span class="version">ALPHA</span>
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.1.0/topojson.min.js"></script>

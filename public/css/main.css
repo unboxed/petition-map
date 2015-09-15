@@ -78,7 +78,7 @@ th, td {
 
 #petition_link {
   font-size: 1em;
-  width: 80%;
+  max-width: 80%;
 }
 
 #link_help {
@@ -138,7 +138,7 @@ th, td {
 
 @media (max-width: 720px) {
   #right_column {
-    display: none;
+    width: 100%;
   }
 }
 
@@ -150,6 +150,36 @@ th, td {
   padding: 20px;
   background-color: #812A80;
   font-size: 0.8em;
+}
+
+@media (max-width: 720px) {
+  #petition_info {
+    bottom: 18%;
+    left: 10px;
+    font-size: 0.5em;
+    max-width: 20%;
+    padding: 10px;
+  }
+}
+
+@media (max-height: 480px) {
+  #petition_info {
+    bottom: 23%;
+    font-size: 0.3em;
+    max-width: 25%;
+  }
+}
+
+@media (max-height: 360px) {
+  #petition_info {
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 720px) {
+  .sign {
+    max-width: 40%;
+  }
 }
 
 #petition_action {
@@ -171,6 +201,24 @@ th, td {
   padding: 15px 20px 20px 20px;
   background-color: #812A80;
   font-size: 0.8em;
+}
+
+@media (max-width: 720px) {
+  #constituency_info {
+    top: 10%;
+    left: 10px;
+    width: 18%;
+    font-size: 0.5em;
+    padding: 10px;
+  }
+}
+
+@media (max-height: 480px) {
+  #constituency_info {
+    width: 35%;
+    font-size: 0.3em;
+    top: 12%;
+  }
 }
 
 #constituency_name {
@@ -197,6 +245,30 @@ th, td {
   padding: 10px;
 }
 
+@media (max-width: 720px) {
+  #key {
+    top: 10%;
+    right: 10px;
+    max-width: 100px;
+    padding: 5px;
+    font-size: 0.5em;
+  }
+}
+
+@media (max-height: 480px) {
+  #key {
+    font-size: 0.3em;
+    padding: 2px;
+    top: 12%;
+  }
+}
+
+@media (max-height: 360px) {
+  #key {
+    visibility: hidden;
+  }
+}
+
 #controls {
   text-align: center;
   width: 100%;
@@ -209,6 +281,29 @@ th, td {
   background-color: #f6f6f6;
   opacity: 0.75;
   padding: 10px;
+}
+
+@media (max-width: 720px) {
+  #controls {
+    bottom: 18%;
+    right: 10px;
+    max-width: 120px;
+    padding: 5px;
+    font-size: 0.6em;
+  }
+}
+
+@media (max-height: 480px) {
+  #controls {
+    font-size: 0.3em;
+    bottom: 23%;
+  }
+}
+
+@media (max-height: 360px) {
+  #controls {
+    display: none;
+  }
 }
 
 #share {
@@ -225,6 +320,12 @@ th, td {
   padding: 10px;
 }
 
+@media (max-width: 720px) {
+  #share {
+    display: none;
+  }
+}
+
 .logo {
   position: absolute;
   bottom: 35px;
@@ -234,12 +335,10 @@ th, td {
   color: Black;
 }
 
-.version {
+.built_by {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
-  text-align: right;
-  font-size: 0.8em;
+  bottom: 70px;
+  right: 94px;
   color: Grey;
 }
 
@@ -279,34 +378,111 @@ th, td {
 /* Mobile */
 
 
+@media (max-width: 720px) {
+  #mobile_menu {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: #812A80;
+    color: White;
+    font-weight: 300;
+    padding: 8px;
+    overflow: auto;
+    font-size: 0.7em;
+  }
+}
+
+#mobile_heading {
+  font-size: 1.5em;
+}
+
+#area_text {
+  padding-right: 10px;
+}
+
 @media (min-width: 720px) {
-  #support {
+  #mobile_menu {
     display: none;
   }
 }
 
 @media (max-width: 720px) {
-  #support {
+  #mobile_footer {
     position: fixed;
-    padding: 0;
-    margin: 0;
-    top: 0;
-    left: 0;
+    bottom: 0px;
+    left: 0px;
     width: 100%;
-    height: 100%;
-    background: #812A80;
-    z-index: 99999;
+    background-color: #812A80;
+    color: White;
+    font-weight: 300;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 0.8em;
   }
 }
 
-#support_text {
-  text-align: center;
-  font-size: 20px;
-  color: White;
+@media (min-width: 720px) {
+  #mobile_footer {
+    display: none;
+  }
 }
 
-#support_cat {
-  text-align: center;
-  font-size: 100px;
-  padding-top: 50px;
+@media (max-width: 720px) {
+  .logo {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .built_by {
+    display: none;
+  }
+}
+
+#petition_dropdown_mobile {
+  max-width: 50%;
+}
+
+#area_dropdown {
+  max-width: 30%;
+}
+
+#select_text {
+  padding-right: 10px;
+}
+
+#mobile_menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ #mobile_menu li {
+  display: inline;
+  padding-left: 10px;
+}
+
+#settings {
+  padding-top: 8px;
+}
+
+#hide_ui {
+  font-size: 0.8em;
+  float: right;
+  margin-right: 25px;
+}
+
+#mobile_share {
+  font-size: 0.8em;
+  float: left;
+  margin-left: 25px;
+}
+
+#petition_link_mobile {
+  font-size: 1em;
+  width: 30%;
+  float: left;
+  margin-left: 5px;
 }

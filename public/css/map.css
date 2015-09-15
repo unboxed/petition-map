@@ -17,7 +17,7 @@
 
 .selected_boundary {
   stroke: Black;
-  stroke-width: 1.5;
+  stroke-width: 1;
 }
 
 .c1 { fill: #fed976; }
