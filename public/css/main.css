@@ -335,12 +335,10 @@ th, td {
   color: Black;
 }
 
-.version {
+.built_by {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
-  text-align: right;
-  font-size: 0.8em;
+  bottom: 70px;
+  right: 94px;
   color: Grey;
 }
 
@@ -438,7 +436,7 @@ th, td {
 }
 
 @media (max-width: 720px) {
-  .version {
+  .built_by {
     display: none;
   }
 }
