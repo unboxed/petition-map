@@ -19,8 +19,6 @@ $(document).ready(function() {
         var variables = get_url_variables();
 
         $("#petition_dropdown").select2();
-        $("#petition_dropdown_mobile").select2();
-        $("#area_dropdown").select2();
 
         var petition_id;
         if ($(window).width() > 720) {
