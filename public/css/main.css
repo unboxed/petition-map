@@ -78,15 +78,16 @@ th, td {
 
 #petition_link {
   font-size: 1em;
-  width: 50%;
+  width: 80%;
+}
+
+#link_help {
+  font-size: 0.9em;
+  margin-top: 10px;
+  margin-bottom: 3px;
 }
 
 #petition_button {
-  font-size: 0.8em;
-  margin-left: 0.2em;
-}
-
-#petition_get_link {
   font-size: 0.8em;
   margin-left: 0.2em;
 }
@@ -203,6 +204,20 @@ th, td {
   position: fixed;
   bottom: 50%;
   right: 20px;
+  color: Black;
+  font-weight: 400;
+  background-color: #f6f6f6;
+  opacity: 0.75;
+  padding: 10px;
+}
+
+#share {
+  text-align: center;
+  width: 100%;
+  max-width: 150px;
+  position: fixed;
+  bottom: 5%;
+  right: 30%;
   color: Black;
   font-weight: 400;
   background-color: #f6f6f6;

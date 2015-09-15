@@ -149,10 +149,6 @@ $("#hide_map_key").click(function(){
     }
 });
 
-$('#petition_link').click(function() {
-    this.setSelectionRange(0, this.value.length);
-});
-
 $('#petition_get_link').click(function() {
     var root_url = window.location.origin;
     var petition = current_petition.data.id;
@@ -160,6 +156,12 @@ $('#petition_get_link').click(function() {
     var link = root_url + "/?" + "petition=" + petition + "&area=" + area;
 
     $('#petition_link').val(link);
+    $('#petition_link').fadeIn();
+    $('#petition_link').focus().select();
+
+    $('#link_help').fadeIn();
+
+    console.log(link);
 });
 
 d3.select('#petition_button').on('click', function() {
