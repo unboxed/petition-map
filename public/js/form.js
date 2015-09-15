@@ -1,5 +1,6 @@
 var current_petition;
 var mp_data;
+var ui_hidden = false;
 
 $(document).ready(function() {
     $.getJSON("https://petition.parliament.uk/petitions.json?state=open", function (data) {
@@ -204,8 +205,30 @@ $('#petition_get_link').click(function() {
     $('#petition_link').focus().select();
 
     $('#link_help').fadeIn();
+});
 
-    console.log(link);
+$('#mobile_share').click(function() {
+    var root_url = window.location.origin;
+    var petition = current_petition.data.id;
+    var area = $("input[name='area']:checked").val();
+    var link = root_url + "/?" + "petition=" + petition + "&area=" + area;
+
+    $('#petition_link').val(link);
+    $('#petition_link').focus().select();
+});
+
+$('#hide_ui').click(function() {
+    if (ui_hidden) {
+        $('#petition_info').fadeIn();
+        $('#key').fadeIn();
+        $('#hide_ui').html("Hide UI");
+        ui_hidden = false;
+    } else {
+        $('#petition_info').fadeOut();
+        $('#key').fadeOut();
+        $('#hide_ui').html("Show UI");
+        ui_hidden = true;
+    }
 });
 
 d3.select('#petition_button').on('click', function() {
