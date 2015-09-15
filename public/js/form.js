@@ -13,11 +13,37 @@ $(document).ready(function() {
 
         load_mp_data();
 
+        var variables = get_url_variables();
+
         $("#petition_dropdown").select2();
         var petition_id = $("#petition_dropdown").val();
+
+        if (!jQuery.isEmptyObject(variables)) {
+            petition_id = variables.petition;
+            $("input[name='area'][value=" + variables.area + "]").prop("checked",true);
+        }
+
         load_petition(petition_id, false);
     });
 });
+
+function get_url_variables() {
+    var variables = {}, hash;
+    var hashes = window.location.href
+                    .slice(window.location.href.indexOf('?') + 1)
+                    .split('&');
+
+    for (var i = 0; i < hashes.length; i++) {
+        hash = hashes[i].split('=');
+        variables[hash[0]] = hash[1];
+    }
+
+    if (!hash[1]) {
+        variables = {};
+    }
+
+    return variables;
+}
 
 function load_mp_data() {
     $.getJSON("json/mps/constituency_party_ons.json", function (data) {
@@ -121,6 +147,19 @@ $("#hide_map_key").click(function(){
     else if($(this).prop("checked") == false){
         $('#key').fadeIn();
     }
+});
+
+$('#petition_link').click(function() {
+    this.setSelectionRange(0, this.value.length);
+});
+
+$('#petition_get_link').click(function() {
+    var root_url = window.location.origin;
+    var petition = current_petition.data.id;
+    var area = $("input[name='area']:checked").val();
+    var link = root_url + "/?" + "petition=" + petition + "&area=" + area;
+
+    $('#petition_link').val(link);
 });
 
 d3.select('#petition_button').on('click', function() {
