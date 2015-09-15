@@ -154,11 +154,17 @@ th, td {
 
 @media (max-width: 720px) {
   #petition_info {
-    bottom: 14%;
+    bottom: 17%;
     left: 10px;
     font-size: 0.5em;
     max-width: 20%;
     padding: 10px;
+  }
+}
+
+@media (max-height: 360px) {
+  #petition_info {
+    visibility: hidden;
   }
 }
 
@@ -233,6 +239,12 @@ th, td {
   }
 }
 
+@media (max-height: 360px) {
+  #key {
+    visibility: hidden;
+  }
+}
+
 #controls {
   text-align: center;
   width: 100%;
@@ -249,11 +261,17 @@ th, td {
 
 @media (max-width: 720px) {
   #controls {
-    bottom: 14%;
+    bottom: 17%;
     right: 10px;
     max-width: 120px;
     padding: 5px;
-    font-size: 0.7em;
+    font-size: 0.6em;
+  }
+}
+
+@media (max-height: 360px) {
+  #controls {
+    display: none;
   }
 }
 
@@ -340,13 +358,14 @@ th, td {
     background-color: #812A80;
     color: White;
     font-weight: 300;
-    padding: 10px;
+    padding: 8px;
     overflow: auto;
+    font-size: 0.7em;
   }
 }
 
 #mobile_heading {
-  font-size: 1.4em;
+  font-size: 1.5em;
 }
 
 #area_text {
@@ -371,6 +390,7 @@ th, td {
     text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
+    font-size: 0.8em;
   }
 }
 
@@ -401,7 +421,6 @@ th, td {
 }
 
 #select_text {
-  font-size: 1.2em;
   padding-right: 10px;
 }
 
