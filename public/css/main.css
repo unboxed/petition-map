@@ -486,3 +486,9 @@ th, td {
   float: left;
   margin-left: 5px;
 }
+
+#built_by_unboxed {
+  font-size: 0.9em;
+  padding-left: 11px;
+  margin-top: -3px;
+}
