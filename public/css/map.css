@@ -38,7 +38,12 @@
 .t7 { color: #8d001e; }
 .t8 { color: #6a0016; }
 
-
 #map {
-  padding-top: 6%;
+  padding-top: 3%;
+}
+
+@media (min-width: 720px) {
+  #map {
+    padding-top: 6%;
+  }
 }
