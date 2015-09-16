@@ -7,6 +7,9 @@ var zoom = d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoomed);
 var projection, svg, path, g;
 var boundaries, units;
 
+var translate_saved;
+var scale_saved;
+
 var parties = ["Conservative", "Green", "Independent", "Labour", "LabourCooperative", "LiberalDemocrat", "PlaidCymru", "ScottishNationalParty", "Speaker", "UKIP"];
 
 function compute_size() {
@@ -96,6 +99,8 @@ function number_with_commas(x) {
 }
 
 function interpolate_zoom(translate, scale) {
+    translate_saved = translate;
+    scale_saved = scale;
     var self = this;
     return d3.transition().duration(350).tween("zoom", function () {
         var iTranslate = d3.interpolate(zoom.translate(), translate),
@@ -224,6 +229,10 @@ function load_data(filename, u) {
         display_petition_info();
         $('#key').fadeIn();
         spinner.stop();
+
+        if (translate_saved && scale_saved) {
+            interpolate_zoom(translate_saved, scale_saved);
+        }
     });
 }
 
