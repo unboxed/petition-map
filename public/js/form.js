@@ -245,6 +245,7 @@ $('#mobile_share').click(function() {
 
     $('#petition_link_mobile').val(link);
     $('#petition_link_mobile').focus().select();
+    $('#petition_link_mobile').fadeIn();
 });
 
 $('#hide_ui').click(function() {

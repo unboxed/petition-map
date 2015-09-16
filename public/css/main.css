@@ -484,12 +484,14 @@ th, td {
   font-size: 0.8em;
   float: right;
   margin-right: 25px;
+  margin-bottom: 6px;
 }
 
 #mobile_share {
   font-size: 0.8em;
   float: left;
   margin-left: 25px;
+  margin-bottom: 6px;
 }
 
 #petition_link_mobile {
