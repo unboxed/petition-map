@@ -155,6 +155,11 @@ function display_petition_info() {
     }
 }
 
+function change_area() {
+    reset();
+    reload_map();
+}
+
 function reload_map() {
     units = "wpc";
 
