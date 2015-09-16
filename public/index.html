@@ -12,6 +12,12 @@
         <link rel="stylesheet" href="plugins/vex/css/vex-theme-plain.css" />
 
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+        <meta property="og:url"           content="http://petitionmap.unboxedconsulting.com" />
+        <meta property="og:type"          content="website" />
+        <meta property="og:title"         content="Petition Map (by Unboxed)" />
+        <meta property="og:description"   content="Visualise UK Government Petitions" />
+        <meta property="og:image"         content="https://www.unboxedconsulting.com/assets/1x/logo-10-e0144432c31143f09c2622dc03f0efc1.png" />
     </head>
 
     <body>
@@ -184,4 +190,14 @@
         <script src="js/map.js"></script>
         <script src="js/form.js"></script>
     </body>
+
+    <div id="modal" hidden>
+        <div class="modal_header">Link</div> <input type="text" id="petition_link"> <div class="modal_header">Social</div>
+        <a href="https://twitter.com/share" class="twitter-share-button" id="twitter" data-text="Check out this petition map" data-size="large" data-count="none" data-hashtags="petitionmap">Tweet</a>
+    </div>
+
+    <script>
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+    </script>
+</script>
 </html>

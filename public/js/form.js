@@ -235,18 +235,16 @@ $('#petition_get_link').click(function() {
     var area = $("input[name='area']:checked").val();
     var link = root_url + "/?" + "petition=" + petition + "&area=" + area;
 
-    vex.dialog.open({
-        message:
-        '<div class="modal_header">Link</div> <input type="text" id="petition_link"> <div class="modal_header">Share</div> <a href="https://twitter.com/share" class="twitter-share-button" id="twitter_share" data-url="http://petitionmap.unboxedconsulting.com/" data-text="Check out this petition map" data-size="large" data-count="none" data-hashtags="petitionmap">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?\'http\':\'https\';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+\'://platform.twitter.com/widgets.js\';fjs.parentNode.insertBefore(js,fjs);}}(document, \'script\', \'twitter-wjs\');</script>',
-
-        buttons:
-        [$.extend({}, vex.dialog.buttons.NO, { text: 'Close' })],
-    });
-
     $('#petition_link').val(link);
     $('#petition_link').focus().select();
 
-    document.getElementById("twitter_share").setAttribute("data-url", link);
+    var modal = $("#modal").clone();
+
+    vex.dialog.open({
+        message: $(modal).show(),
+        buttons:
+        [$.extend({}, vex.dialog.buttons.NO, { text: 'Close' })],
+    });
 });
 
 $('#mobile_share').click(function() {
