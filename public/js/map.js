@@ -14,7 +14,7 @@ function compute_size() {
     if ($(window).width() < 720) {
         height = window.innerHeight * 0.78;
     } else {
-        height = window.innerHeight * 0.85;
+        height = window.innerHeight * 0.89;
     }
 }
 
