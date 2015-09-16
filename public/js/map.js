@@ -222,6 +222,8 @@ function load_data(filename, u) {
         redraw();
         recolour_map();
         display_petition_info();
+        $('#key').fadeIn();
+        spinner.stop();
     });
 }
 

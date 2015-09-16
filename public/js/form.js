@@ -2,6 +2,31 @@ var current_petition;
 var mp_data;
 var ui_hidden = false;
 
+var opts = {
+    lines: 13,
+    length: 28,
+    width: 14,
+    radius: 42,
+    scale: 0.5,
+    corners: 1,
+    color: '#000',
+    opacity: 0.25,
+    rotate: 0,
+    direction: 1,
+    speed: 1,
+    trail: 60,
+    fps: 20,
+    zIndex: 2e9,
+    className: 'spinner',
+    top: '50%',
+    left: '50%',
+    shadow: false,
+    hwaccel: false
+}
+
+var target = document.getElementById('spinner_area')
+var spinner = new Spinner(opts).spin(target);
+
 $(document).ready(function() {
     $.getJSON("https://petition.parliament.uk/petitions.json?state=open", function (data) {
         petitions = data.data;
@@ -83,7 +108,6 @@ function load_petition(petition_id, is_url) {
         current_petition = data;
         display_petition_info(petition_id);
         reload_map();
-        $('#key').fadeIn();
     })
     .fail(function() {
         alert("Petition not found!");
@@ -145,6 +169,8 @@ function reload_map() {
 }
 
 $("#area_dropdown").on('change', function() {
+    spinner.spin(target);
+
     units = "wpc";
 
     var area = $("#area_dropdown").val()
@@ -155,12 +181,16 @@ $("#area_dropdown").on('change', function() {
 });
 
 $("#petition_dropdown").on('change', function() {
+    spinner.spin(target);
+
     var petition_id = $("#petition_dropdown").val()
 
     load_petition(petition_id, false);
 });
 
 $("#petition_dropdown_mobile").on('change', function() {
+    spinner.spin(target);
+
     var petition_id = $("#petition_dropdown_mobile").val()
 
     load_petition(petition_id, false);

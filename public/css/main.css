@@ -374,6 +374,18 @@ th, td {
   top: 1px;
 }
 
+#spinner_area {
+  position: fixed;
+  top: 50%;
+  left: 61%;
+}
+
+@media (max-width: 720px) {
+  #spinner_area {
+    left: 50%;
+  }
+}
+
 
 /* Mobile */
 
