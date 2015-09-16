@@ -78,13 +78,7 @@ th, td {
 
 #petition_link {
   font-size: 1em;
-  max-width: 80%;
-}
-
-#link_help {
-  font-size: 0.9em;
-  margin-top: 10px;
-  margin-bottom: 3px;
+  width: 100%;
 }
 
 #petition_button {

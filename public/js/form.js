@@ -235,11 +235,12 @@ $('#petition_get_link').click(function() {
     var area = $("input[name='area']:checked").val();
     var link = root_url + "/?" + "petition=" + petition + "&area=" + area;
 
-    $('#petition_link').val(link);
-    $('#petition_link').fadeIn();
-    $('#petition_link').focus().select();
+    vex.dialog.open({
+        message: '<input type="text" id="petition_link">'
+    });
 
-    $('#link_help').fadeIn();
+    $('#petition_link').val(link);
+    $('#petition_link').focus().select();
 });
 
 $('#mobile_share').click(function() {
