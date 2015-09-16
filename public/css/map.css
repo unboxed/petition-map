@@ -42,7 +42,7 @@
   padding-top: 3%;
 }
 
-@media (min-width: 720px) {
+@media (max-width: 720px) {
   #map {
     padding-top: 6%;
   }
