@@ -79,6 +79,7 @@ th, td {
 #petition_link {
   font-size: 1em;
   width: 100%;
+  margin-bottom: 10px;
 }
 
 #petition_button {
@@ -499,4 +500,11 @@ th, td {
   font-size: 0.9em;
   padding-left: 11px;
   margin-top: -3px;
+}
+
+
+/* Modal Header */
+
+.modal_header {
+  padding-bottom: 5px;
 }
