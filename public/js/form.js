@@ -27,6 +27,25 @@ var opts = {
 var target = document.getElementById('spinner_area')
 var spinner = new Spinner(opts).spin(target);
 
+var previousOrientation = window.orientation;
+var check_orientation = function(){
+    if(window.orientation !== previousOrientation){
+        previousOrientation = window.orientation;
+
+        if (window.orientation !== 0) {
+            $("#support").fadeIn();
+            setTimeout(function () {
+                alert("Landscape mode is not supported on mobile devices")
+            }, 1000);
+        } else {
+            $("#support").fadeOut();
+        }
+    }
+};
+
+window.addEventListener("resize", check_orientation, false);
+window.addEventListener("orientationchange", check_orientation, false);
+
 $(document).ready(function() {
     $.getJSON("https://petition.parliament.uk/petitions.json?state=open", function (data) {
         petitions = data.data;
@@ -262,7 +281,6 @@ $('#mobile_share').click(function() {
     var link = root_url + "/?" + "petition=" + petition + "&area=" + area;
 
     $('#petition_link').val(link);
-    $('#petition_link').focus().select();
 
     var modal = $("#modal").clone();
 

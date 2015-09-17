@@ -482,7 +482,7 @@ th, td {
   padding: 0;
 }
 
- #mobile_menu li {
+#mobile_menu li {
   display: inline;
   padding-left: 10px;
 }
@@ -509,6 +509,16 @@ th, td {
   font-size: 0.9em;
   padding-left: 11px;
   margin-top: -3px;
+}
+
+#support {
+  background-color: #812A80;
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
 }
 
 
