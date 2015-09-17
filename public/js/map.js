@@ -88,6 +88,7 @@ function deselect_party_colours() {
         d3.selectAll(".area").classed(item, false);
         d3.selectAll(".coloured").classed(item, false);
     });
+    d3.selectAll(".selected_boundary").classed("selected_boundary", false);
 }
 
 function strip_whitespace(string) {
