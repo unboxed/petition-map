@@ -82,6 +82,14 @@ function get_url_variables() {
     return variables;
 }
 
+function get_link() {
+    var root_url = window.location.origin;
+    var petition = current_petition.data.id;
+    var area = $("input[name='area']:checked").val();
+    var link = root_url + "/?" + "petition=" + petition + "&area=" + area;
+    return link;
+}
+
 function load_mp_data() {
     $.getJSON("json/mps/constituency_party_ons.json", function (data) {
         mp_data = data;
@@ -236,10 +244,15 @@ $('#petition_get_link').click(function() {
     var link = root_url + "/?" + "petition=" + petition + "&area=" + area;
 
     $('#petition_link').val(link);
-    $('#petition_link').fadeIn();
     $('#petition_link').focus().select();
 
-    $('#link_help').fadeIn();
+    var modal = $("#modal").clone();
+
+    vex.dialog.open({
+        message: $(modal).show(),
+        buttons:
+        [$.extend({}, vex.dialog.buttons.NO, { text: 'Close' })],
+    });
 });
 
 $('#mobile_share').click(function() {

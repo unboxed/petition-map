@@ -8,8 +8,16 @@
         <link rel="stylesheet" type="text/css" href="css/party_colours.css">
         <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="plugins/vex/css/vex.css" />
+        <link rel="stylesheet" href="plugins/vex/css/vex-theme-plain.css" />
 
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+        <meta property="og:url"           content="http://petitionmap.unboxedconsulting.com" />
+        <meta property="og:type"          content="website" />
+        <meta property="og:title"         content="Petition Map (by Unboxed)" />
+        <meta property="og:description"   content="Visualise UK Government Petitions" />
+        <meta property="og:image"         content="http://petitionmap.unboxedconsulting.com/images/petitionmap_meta.png" />
     </head>
 
     <body>
@@ -105,6 +113,8 @@
                     Contains Ordnance Survey, Office of National Statistics and National Records Scotland data © Crown copyright and database right [2014]. Ordnance Survey data covered by OS OpenData Licence.
                 </p>
             </section>
+
+
         </div>
 
         <div id="right_column">
@@ -159,8 +169,6 @@
             </section>
             <section id="share">
                 <button class="flat_button" type="button" id="petition_get_link">Share Map</button>
-                <div id="link_help" hidden>Copy the link below</div>
-                <input type="text" id="petition_link" hidden>
             </section>
             <section id="map">
                 <div id="spinner_area">
@@ -178,8 +186,33 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
         <script src="plugins/collapse/jquery.collapse.js"></script>
         <script src="plugins/spin/spin.min.js"></script>
+        <script src="plugins/vex/js/vex.combined.min.js"></script>
+        <script>vex.defaultOptions.className = 'vex-theme-plain';</script>
 
         <script src="js/map.js"></script>
         <script src="js/form.js"></script>
     </body>
+
+    <div id="modal" hidden>
+        <div class="modal_header">Link</div> <input type="text" id="petition_link"> <div class="modal_header">Social</div>
+        <a class="flat_button twitter" href="javascript:tweet_current_page()" target="_blank" alt="Tweet this page">Tweet <i class="fa fa-twitter"></i></a>
+        <a class="flat_button facebook" href="javascript:facebook_current_page()" target="_blank" alt="Share on Facebook">Facebook <i class="fa fa-facebook"></i></a>
+    </div>
+
+    <script>
+        function tweet_current_page() {
+            var link = get_link();
+            window.open("https://twitter.com/share?url="+escape(link)+"&text="+"Check out this petition map"+"&hashtags="+"petitionmap", '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+            return false;
+        }
+    </script>
+
+    <script>
+        function facebook_current_page() {
+            var link = get_link();
+            window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(link)+"&t="+"Petition Map (By Unboxed)", '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+            return false;
+        }
+    </script>
+</script>
 </html>

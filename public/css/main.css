@@ -78,13 +78,8 @@ th, td {
 
 #petition_link {
   font-size: 1em;
-  max-width: 80%;
-}
-
-#link_help {
-  font-size: 0.9em;
-  margin-top: 10px;
-  margin-bottom: 3px;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 #petition_button {
@@ -350,6 +345,18 @@ th, td {
   color: #812A80;
 }
 
+#spinner_area {
+  position: fixed;
+  top: 50%;
+  left: 61%;
+}
+
+@media (max-width: 720px) {
+  #spinner_area {
+    left: 50%;
+  }
+}
+
 
 /* Buttons */
 
@@ -374,16 +381,20 @@ th, td {
   top: 1px;
 }
 
-#spinner_area {
-  position: fixed;
-  top: 50%;
-  left: 61%;
+.twitter {
+  background-color: #00aced;
 }
 
-@media (max-width: 720px) {
-  #spinner_area {
-    left: 50%;
-  }
+.twitter:hover {
+  opacity: 0.5;
+}
+
+.facebook {
+  background-color: #3b5998;
+}
+
+.facebook:hover {
+  opacity: 0.5;
 }
 
 
@@ -505,4 +516,15 @@ th, td {
   font-size: 0.9em;
   padding-left: 11px;
   margin-top: -3px;
+}
+
+
+/* Modal */
+
+.modal_header {
+  padding-bottom: 5px;
+}
+
+.tweet {
+  color: Black;
 }
