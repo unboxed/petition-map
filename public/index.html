@@ -20,6 +20,8 @@
     </head>
 
     <body>
+        <div id="support" hidden>
+        </div>
         <div id="mobile_menu">
             <ul>
                 <li><span id="mobile_heading">Petition Map</span></li>
@@ -45,7 +47,6 @@
             <span><select name="petition" id="petition_dropdown_mobile"></select></span>
             <div id="settings">
                 <span><button class="flat_button" type="button" id="mobile_share">Share Map</button>
-                <input type="text" id="petition_link_mobile" hidden></span>
                 <button class="flat_button" id="hide_ui">Hide UI</button>
             </div>
         </div>
@@ -165,8 +166,6 @@
                 <button class="flat_button zoom" id="zoom_in"><i class="fa fa-plus"></i></button>
                 <button class="flat_button zoom" id="zoom_out"><i class="fa fa-minus"></i></button>
                 <button class="flat_button" id="reset">Reset</button>
-            </section>
-            <section id="share">
                 <button class="flat_button" type="button" id="petition_get_link">Share Map</button>
             </section>
             <section id="map">

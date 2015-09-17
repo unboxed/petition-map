@@ -27,6 +27,25 @@ var opts = {
 var target = document.getElementById('spinner_area')
 var spinner = new Spinner(opts).spin(target);
 
+var previousOrientation = window.orientation;
+var check_orientation = function(){
+    if(window.orientation !== previousOrientation){
+        previousOrientation = window.orientation;
+
+        if (window.orientation !== 0) {
+            $("#support").fadeIn();
+            setTimeout(function () {
+                alert("Landscape mode is not supported on mobile devices")
+            }, 1000);
+        } else {
+            $("#support").fadeOut();
+        }
+    }
+};
+
+window.addEventListener("resize", check_orientation, false);
+window.addEventListener("orientationchange", check_orientation, false);
+
 $(document).ready(function() {
     $.getJSON("https://petition.parliament.uk/petitions.json?state=open", function (data) {
         petitions = data.data;
@@ -258,12 +277,18 @@ $('#petition_get_link').click(function() {
 $('#mobile_share').click(function() {
     var root_url = window.location.origin;
     var petition = current_petition.data.id;
-    var area = $("#area_dropdown").val();
+    var area = $("input[name='area']:checked").val();
     var link = root_url + "/?" + "petition=" + petition + "&area=" + area;
 
-    $('#petition_link_mobile').val(link);
-    $('#petition_link_mobile').focus().select();
-    $('#petition_link_mobile').fadeIn();
+    $('#petition_link').val(link);
+
+    var modal = $("#modal").clone();
+
+    vex.dialog.open({
+        message: $(modal).show(),
+        buttons:
+        [$.extend({}, vex.dialog.buttons.NO, { text: 'Close' })],
+    });
 });
 
 $('#hide_ui').click(function() {
