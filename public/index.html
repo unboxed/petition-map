@@ -188,6 +188,7 @@
 
         <script src="js/map.js"></script>
         <script src="js/form.js"></script>
+        <script src="js/share.js"></script>
     </body>
 
     <div id="modal" hidden>
@@ -195,21 +196,4 @@
         <a class="flat_button twitter" href="javascript:tweet_current_page()" target="_blank" alt="Tweet this page">Tweet <i class="fa fa-twitter"></i></a>
         <a class="flat_button facebook" href="javascript:facebook_current_page()" target="_blank" alt="Share on Facebook">Facebook <i class="fa fa-facebook"></i></a>
     </div>
-
-    <script>
-        function tweet_current_page() {
-            var link = get_link();
-            window.open("https://twitter.com/share?url="+escape(link)+"&text="+"Check out this petition map"+"&hashtags="+"petitionmap", '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
-            return false;
-        }
-    </script>
-
-    <script>
-        function facebook_current_page() {
-            var link = get_link();
-            window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(link)+"&t="+"Petition Map (By Unboxed)", '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
-            return false;
-        }
-    </script>
-</script>
 </html>

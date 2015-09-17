@@ -305,7 +305,7 @@ $('#hide_ui').click(function() {
     }
 });
 
-d3.select('#petition_button').on('click', function() {
+$('#petition_button').on('click', function() {
     petition_url = $('#petition_url').val()
     load_petition(petition_url, true);
 
