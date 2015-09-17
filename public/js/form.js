@@ -258,12 +258,19 @@ $('#petition_get_link').click(function() {
 $('#mobile_share').click(function() {
     var root_url = window.location.origin;
     var petition = current_petition.data.id;
-    var area = $("#area_dropdown").val();
+    var area = $("input[name='area']:checked").val();
     var link = root_url + "/?" + "petition=" + petition + "&area=" + area;
 
-    $('#petition_link_mobile').val(link);
-    $('#petition_link_mobile').focus().select();
-    $('#petition_link_mobile').fadeIn();
+    $('#petition_link').val(link);
+    $('#petition_link').focus().select();
+
+    var modal = $("#modal").clone();
+
+    vex.dialog.open({
+        message: $(modal).show(),
+        buttons:
+        [$.extend({}, vex.dialog.buttons.NO, { text: 'Close' })],
+    });
 });
 
 $('#hide_ui').click(function() {
