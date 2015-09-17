@@ -307,6 +307,12 @@ th, td {
   font-size: 1.2em;
 }
 
+@media (max-width: 720px) {
+  #petition_get_link {
+    display: none;
+  }
+}
+
 .logo {
   position: absolute;
   bottom: 35px;
@@ -512,8 +518,4 @@ th, td {
 
 .modal_header {
   padding-bottom: 5px;
-}
-
-.tweet {
-  color: Black;
 }

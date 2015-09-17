@@ -1,17 +1,33 @@
 var width, height;
 
-var active = d3.select(null);
-
-var zoom = d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoomed);
-
 var projection, svg, path, g;
 var boundaries, units;
 
+// Zoom variables
+var zoom = d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoomed);
 var translate_saved = [0, 0];
 var scale_saved = 1;
 
-var parties = ["Conservative", "Green", "Independent", "Labour", "LabourCooperative", "LiberalDemocrat", "PlaidCymru", "ScottishNationalParty", "Speaker", "UKIP"];
+var active = d3.select(null);
 
+// Party colour class names
+var parties = [
+    "Conservative",
+    "Green",
+    "Independent",
+    "Labour",
+    "LabourCooperative",
+    "LiberalDemocrat",
+    "PlaidCymru",
+    "ScottishNationalParty",
+    "Speaker",
+    "UKIP"
+];
+
+compute_size();
+init(width, height);
+
+// Compute size for map
 function compute_size() {
     width = parseInt(d3.select("#map").style("width"));
     if ($(window).width() < 720) {
@@ -21,11 +37,8 @@ function compute_size() {
     }
 }
 
-compute_size();
-init(width, height);
-
+// Initialise map
 function init(width, height) {
-
     projection = d3.geo.albers()
         .rotate([0, 0]);
 
@@ -37,12 +50,170 @@ function init(width, height) {
         .attr("height", height)
         .append("g")
             .call(zoom)
-        .append("g")
         .on("click", stopped, true);
 
     g = svg.append("g");
 }
 
+// Draw map on SVG element
+function draw(boundaries) {
+
+    projection
+        .scale(1)
+        .translate([0,0]);
+
+    // Compute the correct bounds and scaling from the topoJSON
+    var b = path.bounds(topojson.feature(boundaries, boundaries.objects[units]));
+    var s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height);
+    var t;
+
+    var area = $("input[name='area']:checked").val();
+    if (area === "lon") {
+        t = [((width - s * (b[1][0] + b[0][0])) / 2.25), (height - s * (b[1][1] + b[0][1])) / 2];
+    } else if (area === "gb") {
+        t = [((width - s * (b[1][0] + b[0][0])) / 1.95), (height - s * (b[1][1] + b[0][1])) / 2];
+    } else {
+        t = [((width - s * (b[1][0] + b[0][0])) / 1.85), (height - s * (b[1][1] + b[0][1])) / 2];
+    }
+
+    projection
+        .scale(s)
+        .translate(t);
+
+    // Add an area for each feature in the topoJSON (constituency)
+    g.selectAll(".area")
+        .data(topojson.feature(boundaries, boundaries.objects[units]).features)
+        .enter().append("path")
+        .attr("class", "area")
+        .attr("id", function(d) {return d.id})
+        .attr("d", path)
+        .on("mouseenter", function(d){ return select(d) })
+        .on("mouseleave", function(d){ return deselect(d) });
+
+    // Add a boundary between areas
+    g.append("path")
+        .datum(topojson.mesh(boundaries, boundaries.objects[units], function(a, b){ return a !== b }))
+        .attr('d', path)
+        .attr('class', 'boundary');
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+// Redraw the map - remove map completely and start from scratch
+function redraw() {
+    compute_size();
+
+    d3.select("svg").remove();
+
+    init(width, height);
+    draw(boundaries);
+}
+
+// Loads data from the given file and redraws and recolours the map
+function load_data(filename, u) {
+    units = u;
+    var f = filename;
+
+    d3.json(f, function(error, b) {
+        if (error) return console.error(error);
+        boundaries = b;
+        redraw();
+        recolour_map();
+        display_petition_info();
+        $('#key').fadeIn();
+        spinner.stop();
+        interpolate_zoom(translate_saved, scale_saved);
+    });
+}
+
+// Recolour the map for a given petition
+function recolour_map() {
+    highest_count = get_highest_count();
+    slices = calculate_slices(highest_count);
+    colour_classes(slices);
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+// Get the highest constituency signature count
+function get_highest_count() {
+    var highest_count = 0;
+    var top_constituency;
+
+    constituencies = current_petition.data.attributes.signatures_by_constituency;
+    $.each(constituencies, function (index, item) {
+        if (item.signature_count >= highest_count) {
+            highest_count = item.signature_count;
+            top_constituency = item.name;
+        }
+    });
+
+    return highest_count;
+}
+
+// Calculate the ranges for signature colouring based on highest count
+function calculate_slices(highest_count) {
+    var goalBinSize = Math.floor(highest_count / 8)
+    var roundBy = Math.pow(10, Math.floor(goalBinSize.toString().length / 2))
+    var binSize = Math.round(goalBinSize/ roundBy) * roundBy;
+
+    slices = {};
+    for (i = 0; i <= 8; i++) {
+        slices[i] = i * Math.round(goalBinSize / roundBy) * roundBy;
+    }
+
+    for (i = 0; i <= 8; i++) {
+        $('#t' + (i+1)).html("");
+        if (i === 0) {
+            $('#t' + (i+1)).html("1 - " +  slices[i + 1]);
+        } else if (i === 7) {
+            $('#t' + (i + 1)).html(slices[i] + " +");
+        } else {
+            $('#t' + (i + 1)).html(slices[i] + " - " +  slices[i + 1]);
+        }
+    }
+
+    return slices;
+}
+
+// Colour the areas on the map based on their place in the ranges
+function colour_classes(slices) {
+    d3.selectAll(".coloured").attr("class", "area");
+
+    constituencies = current_petition.data.attributes.signatures_by_constituency;
+    $.each(constituencies, function (index, item) {
+        var id = "#" + item.ons_code;
+        var index = place_in_array(slices, item.signature_count);
+        var colour_class = "c" + index + " coloured";
+        d3.select(id)
+            .attr("class", colour_class);
+    });
+}
+
+
+// Find the place of constituency in the slices array
+function place_in_array(slices, count) {
+    var slice = slices[1];
+    for (i = 0; i < 8; i++) {
+        if (count >= slices[i] && count < (slices[i] + slice)) {
+            return i+1;
+        }
+        if (count >= slice * 8) {
+            return 8;
+        }
+    }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+// Show constituency info and party colours on select
+// (hover on desktop or click on mobile)
 function select(d) {
     deselect_party_colours();
     var party = strip_whitespace(mp_data[d.id].party);
@@ -75,6 +246,7 @@ function select(d) {
     $('#constituency_info').append('<div><span id="data_count">' + number_with_commas(count) + '</span> <span id="signatures">signatures</span></div>');
 }
 
+// Remove classes from other constituencies on deselect
 function deselect(d) {
     var party = strip_whitespace(mp_data[d.id].party);
     d3.select("#" + d.id).classed(party, false);
@@ -83,6 +255,8 @@ function deselect(d) {
     $('#constituency_info').show();
 }
 
+
+// Removes all other party colour classes from constituencies
 function deselect_party_colours() {
     $.each(parties, function (index, item) {
         d3.selectAll(".area").classed(item, false);
@@ -91,14 +265,25 @@ function deselect_party_colours() {
     d3.selectAll(".selected_boundary").classed("selected_boundary", false);
 }
 
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+// Strips whitespace from a string
 function strip_whitespace(string) {
     return string.replace(/[^a-zA-Z]/g, '');
 }
 
+// Adds commas to a number (e.g. 1000 to 1,000)
 function number_with_commas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+// Zoom transition
 function interpolate_zoom(translate, scale) {
     translate_saved = translate;
     scale_saved = scale;
@@ -115,6 +300,8 @@ function interpolate_zoom(translate, scale) {
     });
 }
 
+
+// Zoom in and out based on plus or minus button
 function zoom_button() {
     var clicked = d3.event.target,
         direction = 1,
@@ -151,6 +338,7 @@ function stopped() {
   if (d3.event.defaultPrevented) d3.event.stopPropagation();
 }
 
+// Reset scale and translation
 function reset() {
     active.classed("active", false);
     active = d3.select(null);
@@ -162,150 +350,17 @@ function reset() {
     scale_saved = 1;
 }
 
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+// Button to reset zoom
 $("#reset").on('click', function() {
     reset();
 });
 
+// Buttons to zoom in and out
 d3.selectAll('.zoom').on('click', zoom_button);
-
-// draw our map on the SVG element
-function draw(boundaries) {
-
-    projection
-        .scale(1)
-        .translate([0,0]);
-
-    // compute the correct bounds and scaling from the topoJSON
-    var b = path.bounds(topojson.feature(boundaries, boundaries.objects[units]));
-    var s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height);
-    var t;
-
-    var area = $("input[name='area']:checked").val();
-    if (area === "lon") {
-        t = [((width - s * (b[1][0] + b[0][0])) / 2.25), (height - s * (b[1][1] + b[0][1])) / 2];
-    } else if (area === "gb") {
-        t = [((width - s * (b[1][0] + b[0][0])) / 1.95), (height - s * (b[1][1] + b[0][1])) / 2];
-    } else {
-        t = [((width - s * (b[1][0] + b[0][0])) / 1.85), (height - s * (b[1][1] + b[0][1])) / 2];
-    }
-
-    projection
-        .scale(s)
-        .translate(t);
-
-    // add an area for each feature in the topoJSON
-    g.selectAll(".area")
-        .data(topojson.feature(boundaries, boundaries.objects[units]).features)
-        .enter().append("path")
-        .attr("class", "area")
-        .attr("id", function(d) {return d.id})
-        .attr("d", path)
-        .on("mouseenter", function(d){ return select(d) })
-        .on("mouseleave", function(d){ return deselect(d) });
-
-    // add a boundary between areas
-    g.append("path")
-        .datum(topojson.mesh(boundaries, boundaries.objects[units], function(a, b){ return a !== b }))
-        .attr('d', path)
-        .attr('class', 'boundary');
-}
-
-// called to redraw the map - removes map completely and starts from scratch
-function redraw() {
-    compute_size();
-
-    d3.select("svg").remove();
-
-    init(width, height);
-    draw(boundaries);
-}
-
-// loads data from the given file and redraws and recolours the map
-function load_data(filename, u) {
-    units = u;
-    var f = filename;
-
-    d3.json(f, function(error, b) {
-        if (error) return console.error(error);
-        boundaries = b;
-        redraw();
-        recolour_map();
-        display_petition_info();
-        $('#key').fadeIn();
-        spinner.stop();
-        interpolate_zoom(translate_saved, scale_saved);
-    });
-}
-
-function recolour_map() {
-    highest_count = get_highest_count();
-    slices = draw_slices(highest_count);
-    colour_classes(slices);
-}
-
-function get_highest_count() {
-    var highest_count = 0;
-    var top_constituency;
-
-    constituencies = current_petition.data.attributes.signatures_by_constituency;
-    $.each(constituencies, function (index, item) {
-        if (item.signature_count >= highest_count) {
-            highest_count = item.signature_count;
-            top_constituency = item.name;
-        }
-    });
-
-    return highest_count;
-}
-
-function draw_slices(highest_count) {
-    var goalBinSize = Math.floor(highest_count / 8)
-    var roundBy = Math.pow(10, Math.floor(goalBinSize.toString().length / 2))
-    var binSize = Math.round(goalBinSize/ roundBy) * roundBy;
-
-    slices = {};
-    for (i = 0; i <= 8; i++) {
-        slices[i] = i * Math.round(goalBinSize / roundBy) * roundBy;
-    }
-
-    for (i = 0; i <= 8; i++) {
-        $('#t' + (i+1)).html("");
-        if (i === 0) {
-            $('#t' + (i+1)).html("1 - " +  slices[i + 1]);
-        } else if (i === 7) {
-            $('#t' + (i + 1)).html(slices[i] + " +");
-        } else {
-            $('#t' + (i + 1)).html(slices[i] + " - " +  slices[i + 1]);
-        }
-    }
-
-    return slices;
-}
-
-function colour_classes(slices) {
-    d3.selectAll(".coloured").attr("class", "area");
-
-    constituencies = current_petition.data.attributes.signatures_by_constituency;
-    $.each(constituencies, function (index, item) {
-        var id = "#" + item.ons_code;
-        var index = place_in_array(slices, item.signature_count);
-        var colour_class = "c" + index + " coloured";
-        d3.select(id)
-            .attr("class", colour_class);
-    });
-}
-
-function place_in_array(slices, count) {
-    var slice = slices[1];
-    for (i = 0; i < 8; i++) {
-        if (count >= slices[i] && count < (slices[i] + slice)) {
-            return i+1;
-        }
-        if (count >= slice * 8) {
-            return 8;
-        }
-    }
-}
 
 // when the window is resized, redraw the map
 window.addEventListener('resize', redraw);
