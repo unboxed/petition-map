@@ -83,6 +83,7 @@ function draw(boundaries) {
         .attr("class", "area")
         .attr("id", function(d) {return d.id})
         .attr("d", path)
+        .attr('vector-effect', 'non-scaling-stroke')
         .on("mouseenter", function(d){ return select(d) })
         .on("mouseleave", function(d){ return deselect(d) });
 
@@ -90,7 +91,8 @@ function draw(boundaries) {
     g.append("path")
         .datum(topojson.mesh(boundaries, boundaries.objects[units], function(a, b){ return a !== b }))
         .attr('d', path)
-        .attr('class', 'boundary');
+        .attr('class', 'boundary')
+        .attr('vector-effect', 'non-scaling-stroke');
 }
 
 
