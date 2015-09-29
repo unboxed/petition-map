@@ -124,7 +124,7 @@ function load_data(filename, u) {
         display_petition_info();
         $('#key').fadeIn();
         spinner.stop();
-        interpolate_zoom(translate_saved, scale_saved);
+        interpolate_zoom_and_pan(translate_saved, scale_saved);
     });
 }
 
@@ -255,7 +255,6 @@ function deselect(d) {
     $('#constituency_info').show();
 }
 
-
 // Removes all other party colour classes from constituencies
 function deselect_party_colours() {
     $.each(parties, function (index, item) {
@@ -264,7 +263,6 @@ function deselect_party_colours() {
     });
     d3.selectAll(".selected_boundary").classed("selected_boundary", false);
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -283,8 +281,8 @@ function number_with_commas(x) {
 ////////////////////////////////////////////////////////////////////////////////
 
 
-// Zoom transition
-function interpolate_zoom(translate, scale) {
+// Zoom and pan transition
+function interpolate_zoom_and_pan(translate, scale) {
     translate_saved = translate;
     scale_saved = scale;
     var self = this;
@@ -299,7 +297,6 @@ function interpolate_zoom(translate, scale) {
         };
     });
 }
-
 
 // Zoom in and out based on plus or minus button
 function zoom_button() {
@@ -327,7 +324,7 @@ function zoom_button() {
     view.x += center[0] - l[0];
     view.y += center[1] - l[1];
 
-    interpolate_zoom([view.x, view.y], view.k);
+    interpolate_zoom_and_pan([view.x, view.y], view.k);
 }
 
 function zoomed() {
@@ -350,6 +347,36 @@ function reset() {
     scale_saved = 1;
 }
 
+// Pan around based on N, E, S, W buttons
+function pan_button() {
+    var clicked = d3.event.target,
+        offsetX = 0,
+        offsetY = 0,
+        center = [width / 2, height / 2],
+        translate = zoom.translate(),
+        translate0 = [],
+        l = [],
+        view = {x: translate[0], y: translate[1], k: zoom.scale()};
+
+    d3.event.preventDefault();
+    if (this.id == 'pan_west') {
+      offsetX -= 50;
+    } else if (this.id === 'pan_north') {
+      offsetY -= 50;
+    } else if (this.id === 'pan_south') {
+      offsetY += 50;
+    } else if (this.id === 'pan_east') {
+      offsetX += 50;
+    }
+
+    translate0 = [(center[0] - view.x) / view.k, (center[1] - view.y) / view.k];
+    l = [translate0[0] * view.k + view.x + offsetX, translate0[1] * view.k + view.y + offsetY];
+
+    view.x += center[0] - l[0];
+    view.y += center[1] - l[1];
+
+    interpolate_zoom_and_pan([view.x, view.y], view.k);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -361,6 +388,9 @@ $("#reset").on('click', function() {
 
 // Buttons to zoom in and out
 d3.selectAll('.zoom').on('click', zoom_button);
+
+// Buttons to pan around
+d3.selectAll('.pan').on('click', pan_button);
 
 // when the window is resized, redraw the map
 window.addEventListener('resize', redraw);
