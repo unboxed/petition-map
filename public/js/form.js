@@ -227,28 +227,8 @@ $("#hide_map_key").click(function(){
     }
 });
 
-
-// Create & open sharing modal (desktop)
-$('#petition_get_link').click(function() {
-    var link = get_link();
-
-    $('#petition_link').val(link);
-    $('#petition_link').focus().select();
-
-    // Clone modal
-    var modal = $("#modal").clone();
-
-    // Open modal
-    vex.dialog.open({
-        message: $(modal).show(),
-        buttons:
-        [$.extend({}, vex.dialog.buttons.NO, { text: 'Close' })],
-    });
-});
-
-
-// Create & open sharing modal (mobile)
-$('#mobile_share').click(function() {
+// Create & open sharing modal
+$('#share_button').click(function() {
     var link = get_link();
 
     $('#petition_link').val(link);
@@ -264,7 +244,7 @@ $('#mobile_share').click(function() {
     });
 });
 
-// Button to hide UI (mobile)
+// Button to hide UI
 $('#hide_ui').click(function() {
     if (ui_hidden) {
         $('#petition_info').fadeIn();
