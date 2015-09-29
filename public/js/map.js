@@ -30,11 +30,7 @@ init(width, height);
 // Compute size for map
 function compute_size() {
     width = parseInt(d3.select("#map").style("width"));
-    if ($(window).width() < 720) {
-        height = window.innerHeight * 0.78;
-    } else {
-        height = window.innerHeight * 0.89;
-    }
+    height = window.innerHeight * 0.78;
 }
 
 // Initialise map
