@@ -164,7 +164,7 @@ function reload_map() {
 ////////////////////////////////////////////////////////////////////////////////
 
 
-// Area selection (mobile)
+// Area selection
 $("#area_dropdown").on('change', function() {
     spinner.spin(target);
 
@@ -178,7 +178,7 @@ $("#area_dropdown").on('change', function() {
 });
 
 
-// Petition selection (desktop)
+// Petition selection
 $("#petition_dropdown").on('change', function() {
     spinner.spin(target);
 
@@ -187,16 +187,7 @@ $("#petition_dropdown").on('change', function() {
     load_petition(petition_id, false);
 });
 
-// Petition selection (mobile)
-$("#petition_dropdown_mobile").on('change', function() {
-    spinner.spin(target);
-
-    var petition_id = $("#petition_dropdown_mobile").val()
-
-    load_petition(petition_id, false);
-});
-
-// Constituency selection (desktop only)
+// Constituency selection
 $("#constituency").on('change', function() {
     var ons_code = $("#constituency").val()
 
@@ -205,26 +196,6 @@ $("#constituency").on('change', function() {
     }
 
     select(constituency_data);
-});
-
-// Button to hide petition info (desktop)
-$("#hide_petition_info").click(function(){
-    if($(this).prop("checked") == true){
-        $('#petition_info').fadeOut();
-    }
-    else if($(this).prop("checked") == false){
-        $('#petition_info').fadeIn();
-    }
-});
-
-// Button to hide map key (desktop)
-$("#hide_map_key").click(function(){
-    if($(this).prop("checked") == true){
-        $('#key').fadeOut();
-    }
-    else if($(this).prop("checked") == false){
-        $('#key').fadeIn();
-    }
 });
 
 // Create & open sharing modal
