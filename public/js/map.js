@@ -105,6 +105,8 @@ function redraw() {
 
     init(width, height);
     draw(boundaries);
+    recolour_map();
+    svg.attr("transform", "translate(" + translate_saved + ")scale(" + scale_saved + ")");
 }
 
 // Loads data from the given file and redraws and recolours the map
@@ -375,7 +377,6 @@ function pan_button() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-
 
 // Button to reset zoom
 $("#reset").on('click', function() {
