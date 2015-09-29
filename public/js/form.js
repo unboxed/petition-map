@@ -38,44 +38,21 @@ $(document).ready(function() {
             $('#petition_dropdown').append(
                 $('<option></option>').val(item.id).html(dropdown_text)
             );
-            $('#petition_dropdown_mobile').append(
-                $('<option></option>').val(item.id).html(dropdown_text)
-            );
         });
 
         load_mp_data();
 
-        // Initialise the petition dropdown to use select2
-        $("#petition_dropdown").select2();
+        var variables = get_url_variables(),
+          petition_id = $("#petition_dropdown").val();
 
-        load_petition(get_petition_id(), false);
+        if (!jQuery.isEmptyObject(variables)) {
+            petition_id = variables.petition;
+            $("input[name='area'][value=" + variables.area + "]").prop("checked",true);
+        }
+
+        load_petition(petition_id, false);
     });
 });
-
-
-// Get petition id to load
-function get_petition_id() {
-    var petition_id;
-
-    // Check if mobile or desktop interface
-    if ($(window).width() > 720) {
-        console.log("desktop")
-        petition_id = $("#petition_dropdown").val();
-    } else {
-        console.log("mobile");
-        petition_id = $("#petition_dropdown_mobile").val();
-    }
-
-    // Get variables from url
-    var variables = get_url_variables();
-
-    if (!jQuery.isEmptyObject(variables)) {
-        petition_id = variables.petition;
-        $("input[name='area'][value=" + variables.area + "]").prop("checked",true);
-    }
-
-    return petition_id;
-}
 
 // Extracts variables from url
 function get_url_variables() {
@@ -116,9 +93,6 @@ function load_mp_data() {
                 $('<option></option>').val(index).html(dropdown_text)
             );
         });
-
-        // Initialise the constituency dropdown to use select2
-        $("#constituency").select2();
     });
 }
 
@@ -160,18 +134,11 @@ function display_petition_info() {
     $('#petition_info').append(
         $('<tr></tr>').html("<div id=\"petition_action\">" + current_petition.data.attributes.action + "<div>")
     );
-
-    if ($(window).width() > 720) {
-        $('#petition_info').append(
-            $('<tr></tr>').html("</br>" + current_petition.data.attributes.background + "</br>")
-        );
-    }
-
     $('#petition_info').append(
-        $('<tr></tr>').html("</br><div>" + count_html + " <span id=\"signatures\">signatures</span></div>")
+      $('<tr></tr>').html("</br><div>" + count_html + " <span id=\"signatures\">signatures</span></div>")
     );
     $('#petition_info').append(
-        $('<tr></tr>').html("</br>" + sign_html)
+      $('<tr></tr>').html("</br>" + sign_html)
     );
     $('#petition_info').show();
 }
@@ -187,11 +154,7 @@ function change_area() {
 function reload_map() {
     var units = "wpc";
 
-    var area = $("input[name='area']:checked").val();
-
-    if ($(window).width() < 720) {
-        area = $("#area_dropdown").val();
-    }
+    var area = $("#area_dropdown").val();
 
     var f = 'json/uk/' + area + '/topo_' + units + '.json';
     load_data(f, units);
