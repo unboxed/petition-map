@@ -42,12 +42,12 @@ $(document).ready(function() {
 
         load_mp_data();
 
-        prepareInitialPetitionAndView();
+        preparePetitionAndView();
     });
 });
 
 // Setup petition ui and map based on initial url params
-function prepareInitialPetitionAndView() {
+function preparePetitionAndView() {
   var variables = getURLVariables(),
       area,
       petition_id;
@@ -85,15 +85,6 @@ function getURLVariables() {
   return variables;
 };
 
-// Get link for specific petition and area
-function get_link() {
-    var root_url = window.location.origin;
-    var petition = current_petition.data.id;
-    var area = $("input[name='area']:checked").val();
-    var link = root_url + "/?" + "petition=" + petition + "&area=" + area;
-    return link;
-}
-
 // Loads MP JSON data and fills constituency dropdown
 function load_mp_data() {
     $.getJSON("json/mps/constituency_party_ons.json", function (data) {
@@ -127,7 +118,7 @@ function load_petition(petition_id, is_url) {
 
     $.getJSON(petition + ".json", function (data) {
         current_petition = data;
-        display_petition_info(petition_id);
+        display_petition_info();
         reload_map();
     })
     .fail(function() {
@@ -161,6 +152,7 @@ function change_area() {
     spinner.spin(target);
     reset();
     reload_map();
+    pushstateHandler();
 }
 
 
@@ -188,6 +180,7 @@ $("#petition_dropdown").on('change', function() {
     var petition_id = $("#petition_dropdown").val()
 
     load_petition(petition_id, false);
+    pushstateHandler();
 });
 
 // Constituency selection
@@ -203,9 +196,10 @@ $("#constituency").on('change', function() {
 
 // Create & open sharing modal
 $('#share_button').on('click', function() {
-    var link = get_link();
+    var state = buildCurrentState(),
+      url = buildCurrentURL(state);
 
-    $('#petition_link').val(link);
+    $('#petition_link').val(url);
 
     // Clone modal
     var modal = $("#modal").clone();
@@ -240,8 +234,51 @@ $('#petition_button').on('click', function() {
     load_petition(petition_url, true);
 
     recolour_map();
+    pushstateHandler();
 });
 
+
+function popstateHandler() {
+  if (history.state && (history.state.area || history.state.petitionId)) {
+    preparePetitionAndView();
+  }
+};
+
+function buildCurrentState() {
+  var area = $("input[name='area']:checked").val(),
+    state = {};
+  if (current_petition !== undefined) {
+    state.petition = current_petition.data.id;
+  }
+  if (area !== undefined) {
+    state.area = area;
+  }
+  return state;
+}
+
+function buildCurrentURL(state) {
+  var new_url = document.createElement('a'),
+    search = '?';
+
+  for(key in state) {
+    search += '' + key + '=' + encodeURIComponent(state[key]) + '&';
+  }
+
+  new_url.href = window.location.href
+  new_url.search = search.slice(0,-1);
+
+  return new_url.href;
+}
+
+function pushstateHandler() {
+  var state = buildCurrentState();
+  if (history.pushState) {
+    var url = buildCurrentURL(state);
+    history.pushState(state, '', url);
+  }
+};
+
+$(window).on('popstate', popstateHandler);
 
 // Lock screen to portrait on mobile
 var previousOrientation = window.orientation;
@@ -262,4 +299,3 @@ var check_orientation = function(){
 
 window.addEventListener("resize", check_orientation, false);
 window.addEventListener("orientationchange", check_orientation, false);
-
