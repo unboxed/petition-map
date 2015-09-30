@@ -202,7 +202,7 @@ $("#constituency").on('change', function() {
 });
 
 // Create & open sharing modal
-$('#share_button').click(function() {
+$('#share_button').on('click', function() {
     var link = get_link();
 
     $('#petition_link').val(link);
@@ -219,7 +219,7 @@ $('#share_button').click(function() {
 });
 
 // Button to hide UI
-$('#hide_ui').click(function() {
+$('#hide_ui').on('click', function() {
     if (ui_hidden) {
         $('#petition_info').fadeIn();
         $('#key').fadeIn();
