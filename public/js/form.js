@@ -32,7 +32,7 @@ var spinner = new Spinner(opts).spin(target);
 // On start load the petition data
 $(document).ready(function() {
     $.getJSON("https://petition.parliament.uk/petitions.json?state=open", function (data) {
-        petitions = data.data;
+        var petitions = data.data;
         $.each(petitions, function (index, item) {
             var dropdown_text = item.attributes.action;
             $('#petition_dropdown').append(
@@ -42,36 +42,48 @@ $(document).ready(function() {
 
         load_mp_data();
 
-        var variables = get_url_variables(),
-          petition_id = $("#petition_dropdown").val();
-
-        if (!jQuery.isEmptyObject(variables)) {
-            petition_id = variables.petition;
-            $("input[name='area'][value=" + variables.area + "]").prop("checked",true);
-        }
-
-        load_petition(petition_id, false);
+        prepareInitialPetitionAndView();
     });
 });
 
-// Extracts variables from url
-function get_url_variables() {
-    var variables = {}, hash;
-    var hashes = window.location.href
-                    .slice(window.location.href.indexOf('?') + 1)
-                    .split('&');
+// Setup petition ui and map based on initial url params
+function prepareInitialPetitionAndView() {
+  var variables = getURLVariables(),
+      area,
+      petition_id;
 
-    for (var i = 0; i < hashes.length; i++) {
-        hash = hashes[i].split('=');
-        variables[hash[0]] = hash[1];
-    }
+  if (variables.petition !== undefined) {
+    petition_id = variables.petition;
+  } else {
+    petition_id = $("#petition_dropdown").val();
+  }
 
-    if (!hash[1]) {
-        variables = {};
-    }
+  if (variables.area !== undefined) {
+    area = variables.area;
+  } else {
+    area = 'gb';
+  }
 
-    return variables;
+  $("input[name='area'][value=" + area + "]").prop("checked",true);
+  $('#petition_dropdown').val(petition_id);
+  load_petition(petition_id, false);
 }
+
+// Extracts variables from url
+function getURLVariables() {
+  var variables = {},
+    keyValuePairs = window.location.search.substring(1).split('&');
+
+  if (keyValuePairs == "") return {};
+  for (var i = 0; i < keyValuePairs.length; ++i) {
+    var keyValuePair = keyValuePairs[i].split('=', 2);
+    if (keyValuePair.length == 1)
+      variables[keyValuePair[0]] = "";
+    else
+      variables[keyValuePair[0]] = decodeURIComponent(keyValuePair[1].replace(/\+/g, " "));
+  }
+  return variables;
+};
 
 // Get link for specific petition and area
 function get_link() {
@@ -81,7 +93,6 @@ function get_link() {
     var link = root_url + "/?" + "petition=" + petition + "&area=" + area;
     return link;
 }
-
 
 // Loads MP JSON data and fills constituency dropdown
 function load_mp_data() {
