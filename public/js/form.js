@@ -242,13 +242,6 @@ $('#petition_button').on('click', function() {
     pushstateHandler();
 });
 
-
-function popstateHandler() {
-  if (history.state && (history.state.area || history.state.petitionId)) {
-    preparePetitionAndView();
-  }
-};
-
 function buildCurrentState() {
   var area = $("input[name='area']:checked").val(),
     state = {};
@@ -280,6 +273,12 @@ function pushstateHandler() {
   if (history.pushState) {
     var url = buildCurrentURL(state);
     history.pushState(state, '', url);
+  }
+};
+
+function popstateHandler() {
+  if (history.state && (history.state.area || history.state.petitionId)) {
+    preparePetitionAndView();
   }
 };
 
