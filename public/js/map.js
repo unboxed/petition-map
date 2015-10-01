@@ -217,7 +217,7 @@
 
   // Show constituency info and party colours on select
   // (hover on desktop or click on mobile)
-  function highlightConstituencyOnMap(constituency) {
+  function highlightConstituencyOnMap(_event, constituency) {
       var mpForConstituency = PetitionMap.mp_data[constituency.id],
         party_class = strip_whitespace(mpForConstituency.party);
       deselect_party_colours();
@@ -226,10 +226,10 @@
   }
 
   // Remove classes from other constituencies on deselect
-  function dehighlightConstituencyOnMap(constituency) {
-      var party_class = strip_whitespace(PetitionMap.mp_data[constituency.id].party);
-      d3.select("#" + constituency.id).classed(party_class, false);
-      d3.select("#" + constituency.id).classed("selected_boundary", false);
+  function dehighlightConstituencyOnMap(_event, constituency) {
+      // var party_class = strip_whitespace(PetitionMap.mp_data[constituency.id].party);
+      // d3.select("#" + constituency.id).classed(party_class, false);
+      // d3.select("#" + constituency.id).classed("selected_boundary", false);
   }
 
   // Removes all other party colour classes from constituencies

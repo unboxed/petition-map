@@ -218,10 +218,14 @@
     $(window).trigger('petitionmap:constituency-on', constituency_data);
   };
 
-  function displayConstituencyInfo(constituency) {
+  function selectConstituencyInDropdown(_event, constituency) {
+    $('#constituency option[value='+constituency.id+']').prop('selected', true);
+  }
+
+  function displayConstituencyInfo(_event, constituency) {
     var mpForConstituency = PetitionMap.mp_data[constituency.id];
 
-    $('#constituency_info').fadeOut();
+    $('#constituency_info').hide();
     $('#constituency_info').html("");
     var name, mp, count, party,
       data_found = false;
@@ -246,11 +250,11 @@
     $('#constituency_info').append('<p class="mp">' + mp + '</p>');
     $('#constituency_info').append('<p class="party">' + party + '</p>');
     $('#constituency_info').append('<p class="signatures_count"><span class="data">' + numberWithCommas(count) + '</span> signatures</p>');
-    $('#constituency_info').fadeIn();
+    $('#constituency_info').show();
   }
 
-  function hideConstituencyInfo(constituency) {
-    $('#constituency_info').hide();
+  function hideConstituencyInfo(_event, _constituency) {
+    //$('#constituency_info').show();
   }
 
   function toggleFormUI() {
@@ -300,6 +304,8 @@
 
   // React to constituency change events
   $(window).on('petitionmap:constituency-on', displayConstituencyInfo);
+  $(window).on('petitionmap:constituency-on', selectConstituencyInDropdown);
+
   $(window).on('petitionmap:constituency-off', hideConstituencyInfo);
 
   // Create & open sharing modal
