@@ -8,7 +8,7 @@
   var boundaries, units;
 
   // Zoom variables
-  var zoom = d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoomed);
+  var zoom = d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", applyZoomAndPan);
   var translate_saved = [0, 0];
   var scale_saved = 1;
 
@@ -110,7 +110,7 @@
     init(width, height);
     draw(boundaries);
     recolourMap();
-    svg.attr("transform", "translate(" + translate_saved + ")scale(" + scale_saved + ")");
+    applyZoomAndPan();
   }
 
   // Loads data from the given file and redraws and recolours the map
@@ -121,8 +121,6 @@
       .done(function(data) {
         boundaries = data;
         redraw();
-        recolourMap();
-        interpolateZoomAndPan(translate_saved, scale_saved);
       })
       .fail(function(error) {
         console.error(error);
@@ -259,7 +257,7 @@
         zoom
           .scale(iScale(t))
           .translate(iTranslate(t));
-        zoomed();
+        applyZoomAndPan();
       };
     });
   }
@@ -293,7 +291,7 @@
     interpolateZoomAndPan([view.x, view.y], view.k);
   }
 
-  function zoomed() {
+  function applyZoomAndPan() {
     svg.attr("transform", "translate(" + zoom.translate() + ")scale(" + zoom.scale() + ")");
   }
 
