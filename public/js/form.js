@@ -313,15 +313,19 @@
     if (ui_hidden) {
       $('#petition_info').fadeIn();
       $('#key').fadeIn();
-      $('#hide_ui').html("Hide UI");
+      $('footer .hide-ui').html("Hide UI");
       ui_hidden = false;
     } else {
       $('#petition_info').fadeOut();
       $('#key').fadeOut();
-      $('#hide_ui').html("Show UI");
+      $('footer .hide-ui').html("Show UI");
       ui_hidden = true;
     }
   };
+
+  function toggleAboutUI() {
+    $('#about').toggle();
+  }
 
   function invokeShareModal() {
     var state = buildCurrentState(),
@@ -361,10 +365,12 @@
   $(window).on('petitionmap:constituency-off', hideConstituencyInfo);
 
   // Create & open sharing modal
-  $('#share_button').on('click', invokeShareModal);
+  $('.share-button').on('click', invokeShareModal);
 
   // Button to hide UI
-  $('#hide_ui').on('click', toggleFormUI);
+  $('.hide-ui').on('click', toggleFormUI);
+
+  $('.about-button').on('click', toggleAboutUI);
 
   function buildCurrentState() {
     var state = {};
