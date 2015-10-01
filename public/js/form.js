@@ -302,7 +302,9 @@
     $('#constituency_info').append('<p class="mp">' + mp + '</p>');
     $('#constituency_info').append('<p class="party">' + party + '</p>');
     $('#constituency_info').append('<p class="signatures_count"><span class="data">' + numberWithCommas(count) + '</span> signatures</p>');
-    $('#constituency_info').show();
+    if (!ui_hidden) {
+      $('#constituency_info').show();
+    }
   }
 
   function hideConstituencyInfo(_event, _constituency) {
@@ -311,13 +313,11 @@
 
   function toggleFormUI() {
     if (ui_hidden) {
-      $('#petition_info').fadeIn();
-      $('#key').fadeIn();
+      $('#petition_info, #key, #controls, #constituency_info').fadeIn();
       $('footer .hide-ui').html("Hide UI");
       ui_hidden = false;
     } else {
-      $('#petition_info').fadeOut();
-      $('#key').fadeOut();
+      $('#petition_info, #key, #controls, #constituency_info').fadeOut();
       $('footer .hide-ui').html("Show UI");
       ui_hidden = true;
     }
