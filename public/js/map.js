@@ -88,8 +88,8 @@
           .attr("id", function(d) {return d.id})
           .attr("d", path)
           .attr('vector-effect', 'non-scaling-stroke')
-          .on("mouseenter", function(d){ return selectConstituency(d) })
-          .on("mouseleave", function(d){ return deselectConstituency(d) });
+          .on("mouseenter", function(constituency){ $(window).trigger('petitionmap:constituency-on', constituency); })
+          .on("mouseleave", function(constituency){ $(window).trigger('petitionmap:constituency-off', constituency); });
 
       // Add a boundary between areas
       g.append("path")
@@ -217,47 +217,19 @@
 
   // Show constituency info and party colours on select
   // (hover on desktop or click on mobile)
-  function selectConstituency(constituency) {
-    var mpForConstituency = PetitionMap.mp_data[constituency.id],
-      party_class = strip_whitespace(mpForConstituency.party);
+  function highlightConstituencyOnMap(constituency) {
+      var mpForConstituency = PetitionMap.mp_data[constituency.id],
+        party_class = strip_whitespace(mpForConstituency.party);
       deselect_party_colours();
       d3.select("#" + constituency.id).classed(party_class, true);
       d3.select("#" + constituency.id).classed("selected_boundary", true);
-
-      $('#constituency_info').fadeIn("fast");
-      $('#constituency_info').html("");
-      var name, mp, count, party,
-        data_found;
-      $.each(PetitionMap.current_petition.data.attributes.signatures_by_constituency, function(i, v) {
-          if (v.ons_code === constituency.id) {
-              name = v.name;
-              mp = v.mp;
-              party = mpForConstituency.party;
-              count = v.signature_count;
-              data_found = true;
-              return;
-          }
-      });
-      if (!data_found) {
-          name = mpForConstituency.constituency;
-          mp = mpForConstituency.mp;
-          party = mpForConstituency.party;
-          count = "0";
-      }
-
-      $('#constituency_info').append('<h2>' + name + "</h2>");
-      $('#constituency_info').append('<p class="mp">' + mp + '</p>');
-      $('#constituency_info').append('<p class="party">' + party + '</p>');
-      $('#constituency_info').append('<p class="signatures_count"><span class="data">' + numberWithCommas(count) + '</span> signatures</p>');
   }
 
   // Remove classes from other constituencies on deselect
-  function deselectConstituency(constituency) {
+  function dehighlightConstituencyOnMap(constituency) {
       var party_class = strip_whitespace(PetitionMap.mp_data[constituency.id].party);
       d3.select("#" + constituency.id).classed(party_class, false);
       d3.select("#" + constituency.id).classed("selected_boundary", false);
-
-      $('#constituency_info').show();
   }
 
   // Removes all other party colour classes from constituencies
@@ -275,11 +247,6 @@
   // Strips whitespace from a string
   function strip_whitespace(string) {
       return string.replace(/[^a-zA-Z]/g, '');
-  }
-
-  // Adds commas to a number (e.g. 1000 to 1,000)
-  function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
 
@@ -385,6 +352,13 @@
 
   ////////////////////////////////////////////////////////////////////////
 
+  // React to constituency highlight events
+  $(window).on('petitionmap:constituency-off', dehighlightConstituencyOnMap);
+  $(window).on('petitionmap:constituency-on', highlightConstituencyOnMap);
+
+  // when the window is resized, redraw the map
+  $(window).on('resize', redraw);
+
   // Button to reset zoom
   $("#reset").on('click', resetMapState);
 
@@ -394,12 +368,7 @@
   // Buttons to pan around
   d3.selectAll('.pan').on('click', pan_button);
 
-  // when the window is resized, redraw the map
-  window.addEventListener('resize', redraw);
-
-  PetitionMap.selectConstituency = selectConstituency;
   PetitionMap.loadMapData = loadMapData;
   PetitionMap.resetMapState = resetMapState;
-  PetitionMap.numberWithCommas = numberWithCommas;
 
 })(window.jQuery, window.d3, window.PetitionMap = window.PetitionMap || {});
