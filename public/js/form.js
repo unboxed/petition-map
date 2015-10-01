@@ -155,12 +155,13 @@ function change_area() {
 
 // Reload map
 function reload_map() {
-    var units = "wpc";
-
-    var area = $("input[name='area']:checked").val();
-
-    var f = 'json/uk/' + area + '/topo_' + units + '.json';
-    load_data(f, units);
+  var area = $("input[name='area']:checked").val();
+    dataFile = 'json/uk/' + area + '/topo_wpc.json';
+  return $.when(loadData(dataFile, 'wpc')).then(function() {
+    display_petition_info();
+    $('#key').fadeIn();
+    spinner.stop();
+  });
 }
 
 
