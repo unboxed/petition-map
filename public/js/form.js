@@ -1,9 +1,7 @@
 var current_petition,
-  mp_data,
-  ui_hidden = false;
-
-// Options for loading spinner
-var opts = {
+  mp_data, // NOTE: used in map.js
+  ui_hidden = false,
+  spinnerOpts = { // Options for loading spinner
     lines: 13,
     length: 28,
     width: 14,
@@ -23,11 +21,10 @@ var opts = {
     left: '50%',
     shadow: false,
     hwaccel: false
-}
-
-// Start spinner and attach to target
-var target = document.getElementById('spinner_area')
-var spinner = new Spinner(opts).spin(target);
+  },
+  // Start spinner and attach to target
+  target = document.getElementById('spinner_area'),
+  spinner = new Spinner(spinnerOpts).spin(target);
 
 // On start load the petition data
 $(document).ready(function() {
