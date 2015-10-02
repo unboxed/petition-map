@@ -262,41 +262,42 @@ footer {
   height: 3em;
 }
 
-#about {
+.about-panel {
   background-color: #812A80;
   color: white;
-  position: fixed;
+/*  position: fixed;
   overflow: scroll;
   top: 5.5em; /* header height: 3em + 2em * 0.7 */
   bottom: 6em; /* footer height: 3em + 2em * 0.8 */
   left: 2em;
   right: 2em;
   padding: 2em;
+*/
 }
 
-#about div {
+.about-panel div {
   margin-bottom: 2em;
 }
 
-#about .help {
+.about-panel .help {
   font-size: 0.9em;
 }
 
-#about .licence {
+.about-panel .licence {
   border-top: 1px solid #c29fd1;
   padding-top: 2em;
   font-size: 0.6em;
 }
 
-#about .licence a {
+.about-panel .licence a {
   color: #c29fd1;
 }
 
-#about .licence a:hover {
+.about-panel .licence a:hover {
   color: white;
 }
 
-footer .hide_ui {
+footer .hide-ui {
   font-size: 0.8em;
   float: right;
   margin-right: 1.25em;

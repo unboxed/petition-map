@@ -323,8 +323,17 @@
     }
   };
 
-  function toggleAboutUI() {
-    $('#about').toggle();
+  function invokeAboutModal() {
+    // Clone modal
+    var modal_panel = $("#about-modal .about-panel").clone();
+
+    // Open modal
+    vex.dialog.open({
+      message: modal_panel,
+      buttons: [
+        $.extend({}, vex.dialog.buttons.NO, { text: 'Close' })
+      ]
+    });
   }
 
   function invokeShareModal() {
@@ -370,7 +379,8 @@
   // Button to hide UI
   $('.hide-ui').on('click', toggleFormUI);
 
-  $('.about-button').on('click', toggleAboutUI);
+  // Create & open about modal
+  $('.about-button').on('click', invokeAboutModal);
 
   function buildCurrentState() {
     var state = {};
