@@ -6,14 +6,15 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: White;
+  background-color: white;
   font-weight: 300;
+  margin: 0em;
 }
 
 h1 {
   margin: 0 0 20px;
   font-weight: 300;
-  color: White;
+  color: white;
   font-size: 2.5em;
 }
 
@@ -22,7 +23,7 @@ p, table {
 }
 
 a {
-  color: White;
+  color: white;
   font-weight: 400;
   text-decoration: none;
 }
@@ -37,129 +38,26 @@ th, td {
   padding: 5px 10px;
 }
 
-
-/* Left Column */
-
-
-#left_column {
-  height: 100%;
-  width: 20%;
-  top:0;
-  left:0;
-  position: absolute;
-  float:left;
-  padding: 20px;
-  background-color: #812A80;
-  color: White;
-}
-
-@media (max-width: 720px) {
-  #left_column {
-    display: none;
-  }
-}
-
-.form_section {
-  padding-top: 3px;
-}
-
-#petition_dropdown {
-  width: 85%;
-}
-
-#constituency {
-  width: 85%;
-}
-
-#petition_url {
-  font-size: 1em;
-  width: 50%;
-}
-
-#petition_link {
-  font-size: 1em;
+main {
   width: 100%;
-  margin-bottom: 10px;
-}
-
-#petition_button {
-  font-size: 0.8em;
-  margin-left: 0.2em;
-}
-
-#help {
-  font-size: 0.9em;
-  overflow: auto;
-  max-height: 200px;
-  padding-bottom: 20px;
-}
-
-.help_header {
-  font-weight: 400;
-  font-size: 1.1em;
-}
-
-#licence {
   position: absolute;
-  border-top: 1px solid #e5e5e5;
-  padding-top: 10px;
-  width: 90%;
-  vertical-align: bottom;
-  font-size: 0.75em;
-}
-
-@media (max-height: 720px) {
-  #licence {
-    font-size: 0.6em;
-  }
-}
-
-#geojson_link {
-  color: #c29fd1;
-}
-
-#geojson_link:hover {
-  color: White;
-}
-
-
-/* Right Column */
-
-#right_column {
-  width: 80%;
-  float: right;
-  color: White;
-}
-
-@media (max-width: 720px) {
-  #right_column {
-    width: 100%;
-  }
+  top: 3.5em; /* header height: 3em + 2em * 0.7 */
+  bottom: 4em; /* footer height: 3em + 2em * 0.8 */
+  color: white;
 }
 
 #petition_info {
-  position: fixed;
-  bottom: 40px;
-  left: 25%;
-  max-width: 18%;
-  padding: 20px;
+  position: absolute;
   background-color: #812A80;
-  font-size: 0.8em;
-}
-
-@media (max-width: 720px) {
-  #petition_info {
-    bottom: 18%;
-    left: 10px;
-    font-size: 0.5em;
-    max-width: 20%;
-    padding: 10px;
-  }
+  bottom: 1em;
+  left: 1em;
+  font-size: 0.5em;
+  max-width: 20%;
+  padding: 1em;
 }
 
 @media (max-height: 480px) {
   #petition_info {
-    bottom: 23%;
     font-size: 0.3em;
     max-width: 25%;
   }
@@ -171,90 +69,90 @@ th, td {
   }
 }
 
-@media (max-width: 720px) {
-  .sign {
-    max-width: 40%;
-  }
+#constituency_info > * {
+  margin-bottom: 0.5em;
 }
-
-#petition_action {
+#constituency_info *:last-child {
+  margin-bottom: 0em;
+}
+#constituency_info h2 {
   font-size: 1.2em;
   font-weight: 400;
+  margin-top: 0em;
 }
 
-#signatures {
+#petition_info .petition-details > * {
+  margin-bottom: 0.5em;
+}
+#petition_info .petition-details h2 {
+  font-size: 1.2em;
+  font-weight: 400;
+  margin-top: 0em;
+}
+.signatures_count {
   font-size: 1.5em;
-  padding-left: 2px;
+}
+.signatures_count .data {
+  font-weight: 300;
+  font-size: 1.7em;
+}
+
+#petition_info .petition-choice .choice-row {
+  margin-top: 1em;
+}
+#petition_info .petition-choice label {
+  display: block;
+  margin-bottom: 0.5em;
+}
+#petition_info .petition-choice input[type=text] {
+  width: 92%;
+  padding: 4%;
+  border-width: 0px;
+}
+
+#petition_info .petition-choice select {
+  width: 100%;
+}
+#petition_info .petition-choice button {
+  width: 100%;
 }
 
 #constituency_info {
-  position: fixed;
-  top: 40px;
-  left: 25%;
+  position: absolute;
   display: none;
-  width: 12%;
-  padding: 15px 20px 20px 20px;
   background-color: #812A80;
-  font-size: 0.8em;
-}
-
-@media (max-width: 720px) {
-  #constituency_info {
-    top: 10%;
-    left: 10px;
-    width: 18%;
-    font-size: 0.5em;
-    padding: 10px;
-  }
+  top: 1em;
+  left: 1em;
+  width: 18%;
+  font-size: 0.5em;
+  padding: 1em;
 }
 
 @media (max-height: 480px) {
   #constituency_info {
     width: 35%;
     font-size: 0.3em;
-    top: 12%;
   }
-}
-
-#constituency_name {
-  font-size: 1.2em;
-  font-weight: 400;
-  padding-bottom: 5px;
-}
-
-#data_count {
-  font-weight: 300;
-  font-size: 2.5em;
 }
 
 #key {
   width: 100%;
-  max-width: 150px;
-  position: fixed;
-  right: 20px;
-  top: 20px;
-  color: Black;
+  position: absolute;
+  color: black;
   font-weight: 400;
   background-color: #f6f6f6;
   opacity: 0.75;
-  padding: 10px;
-}
-
-@media (max-width: 720px) {
-  #key {
-    top: 10%;
-    right: 10px;
-    max-width: 100px;
-    padding: 5px;
-    font-size: 0.5em;
-  }
+  top: 1em;
+  right: 1em;
+  max-width: 100px;
+  padding: 0.5em;
+  font-size: 0.5em;
 }
 
 @media (max-height: 480px) {
   #key {
     font-size: 0.3em;
     padding: 2px;
-    top: 12%;
   }
 }
 
@@ -262,79 +160,6 @@ th, td {
   #key {
     visibility: hidden;
   }
-}
-
-#controls {
-  text-align: center;
-  width: 100%;
-  max-width: 150px;
-  position: fixed;
-  bottom: 50%;
-  right: 20px;
-  color: Black;
-  font-weight: 400;
-  background-color: #f6f6f6;
-  opacity: 0.75;
-  padding: 10px;
-}
-
-@media (max-width: 720px) {
-  #controls {
-    bottom: 18%;
-    right: 10px;
-    max-width: 120px;
-    padding: 5px;
-    font-size: 0.6em;
-  }
-}
-
-@media (max-height: 480px) {
-  #controls {
-    font-size: 0.3em;
-    bottom: 23%;
-  }
-}
-
-@media (max-height: 360px) {
-  #controls {
-    display: none;
-  }
-}
-
-#petition_get_link {
-  width: 91%;
-  margin-top: 5px;
-  font-size: 1.2em;
-}
-
-@media (max-width: 720px) {
-  #petition_get_link {
-    display: none;
-  }
-}
-
-.logo {
-  position: absolute;
-  bottom: 35px;
-  right: 20px;
-  text-align: right;
-  font-size: 2em;
-  color: Black;
-}
-
-.built_by {
-  position: absolute;
-  bottom: 70px;
-  right: 94px;
-  color: Grey;
-}
-
-#ubxd {
-  color: Black;
-}
-
-#ubxd:hover {
-  color: #812A80;
 }
 
 #spinner_area {
@@ -357,7 +182,7 @@ th, td {
   background-color: #a478c2;
   display: inline-block;
   cursor: pointer;
-  color: White;
+  color: white;
   font-size: 1em;
   padding: 5px 10px;
   text-decoration: none;
@@ -389,118 +214,105 @@ th, td {
   opacity: 0.5;
 }
 
-
-/* Mobile */
-
-
-@media (max-width: 720px) {
-  #mobile_menu {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    background-color: #812A80;
-    color: White;
-    font-weight: 300;
-    padding: 8px;
-    overflow: auto;
-    font-size: 0.7em;
-  }
+#spinner_area {
+  position: fixed;
+  top: 50%;
+  left: 50%;
 }
 
-#mobile_heading {
+header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  background-color: #812A80;
+  color: white;
+  font-weight: 300;
+  padding: 1em;
+  overflow: auto;
+  font-size: 0.7em;
+  height: 3em;
+}
+
+header h1 {
   font-size: 1.5em;
+  margin-bottom: 0em;
 }
 
-#area_text {
-  padding-right: 10px;
+h1 .built-by {
+  display: block  ;
+  font-size: 0.6em;
+}
+h1 .built-by a {
+  font-weight: bold;
 }
 
-@media (min-width: 720px) {
-  #mobile_menu {
-    display: none;
-  }
+footer {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  background-color: #812A80;
+  color: white;
+  font-weight: 300;
+  text-align: center;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  font-size: 0.8em;
+  height: 3em;
 }
 
-@media (max-width: 720px) {
-  #mobile_footer {
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-    width: 100%;
-    background-color: #812A80;
-    color: White;
-    font-weight: 300;
-    text-align: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-size: 0.8em;
-  }
+.about-panel {
+  background-color: #812A80;
+  color: white;
+/*  position: fixed;
+  overflow: scroll;
+  top: 5.5em; /* header height: 3em + 2em * 0.7 */
+  bottom: 6em; /* footer height: 3em + 2em * 0.8 */
+  left: 2em;
+  right: 2em;
+  padding: 2em;
+*/
 }
 
-@media (min-width: 720px) {
-  #mobile_footer {
-    display: none;
-  }
+.about-panel div {
+  margin-bottom: 2em;
 }
 
-@media (max-width: 720px) {
-  .logo {
-    display: none;
-  }
+.about-panel .help {
+  font-size: 0.9em;
 }
 
-@media (max-width: 720px) {
-  .built_by {
-    display: none;
-  }
+.about-panel .licence {
+  border-top: 1px solid #c29fd1;
+  padding-top: 2em;
+  font-size: 0.6em;
 }
 
-#petition_dropdown_mobile {
-  max-width: 50%;
+.about-panel .licence a {
+  color: #c29fd1;
 }
 
-#area_dropdown {
-  max-width: 30%;
+.about-panel .licence a:hover {
+  color: white;
 }
 
-#select_text {
-  padding-right: 10px;
-}
-
-#mobile_menu ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-#mobile_menu li {
-  display: inline;
-  padding-left: 10px;
-}
-
-#settings {
-  padding-top: 8px;
-}
-
-#hide_ui {
+footer .hide-ui {
   font-size: 0.8em;
   float: right;
-  margin-right: 25px;
-  margin-bottom: 6px;
+  margin-right: 1.25em;
 }
 
-#mobile_share {
+footer .share-button {
   font-size: 0.8em;
   float: left;
-  margin-left: 25px;
-  margin-bottom: 6px;
+  margin-left: 1.25em;
 }
 
-#built_by_unboxed {
-  font-size: 0.9em;
-  padding-left: 11px;
-  margin-top: -3px;
+footer .about-button {
+  font-size: 0.8em;
+  float: left;
+  margin-left: 1.25em;
 }
 
 #support {
@@ -514,8 +326,83 @@ th, td {
 }
 
 
-/* Modal */
+/* Share Modal */
 
-.modal_header {
-  padding-bottom: 5px;
+.share-panel h2 {
+  margin-top: 0em;
+  font-size: 1em;
+  margin-bottom: 0.5em;
+}
+
+.share-panel input[name=petition-link] {
+  font-size: 1em;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+/* Map Controls */
+
+#controls {
+  position: absolute;
+  color: black;
+  font-weight: 400;
+  background-color: #f6f6f6;
+  opacity: 0.75;
+  bottom: 1em;
+  right: 1em;
+  width: 11em;
+  padding: 0.5em;
+  font-size: 0.6em;
+}
+
+@media (max-height: 480px) {
+  #controls {
+    font-size: 0.3em;
+  }
+}
+
+@media (max-height: 360px) {
+  #controls {
+    display: none;
+  }
+}
+
+#controls .controls-col {
+  display: inline-block;
+  width: 2em;
+  height: 6em;
+  float: left;
+  margin-right: 1em;
+}
+#controls .controls-col:last-of-type {
+  margin-right: 0em;
+}
+#controls .controls-col .flat_button {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+#controls .controls-col .flat_button.row-span {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  padding: 0.5em;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+#controls .controls-row {
+  clear: both;
+  overflow: auto;
+  margin-bottom: 0.5em;
+}
+#controls .controls-row:last-of-type {
+  margin-bottom: 0em;
+}
+#controls .controls-row label.inline {
+  display: block;
+}
+#controls .controls-row .flat_button.row {
+  width: 11em;
 }

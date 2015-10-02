@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-gb">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
         <link rel="stylesheet" type="text/css" href="css/main.css">
         <link rel="stylesheet" type="text/css" href="css/map.css">
         <link rel="stylesheet" type="text/css" href="css/party_colours.css">
-        <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="plugins/vex/css/vex.css" />
         <link rel="stylesheet" href="plugins/vex/css/vex-theme-plain.css" />
@@ -32,103 +31,43 @@
         <div id="support" hidden>
         </div>
 
-        <div id="mobile_menu">
-            <ul>
-                <li><span id="mobile_heading">Petition Map</span></li>
-                <li>
-                    <span id="area_text">Select Area</span>
-                    <span>
-                        <select id="area_dropdown">
-                            <option value="gb">Great Britain</option>
-                            <option value="eng">England</option>
-                            <option value="sco">Scotland</option>
-                            <option value="wal">Wales</option>
-                            <option value="lon">London</option>
-                        </select>
-                    </span>
-                </li>
-            </ul>
+        <header>
+          <h1>Petition Map <span class="built-by">built by <a href="https://www.unboxedconsulting.com/">Unboxed</a></span></h1>
+        </header>
 
-            <div id="built_by_unboxed">built by <a href="https://www.unboxedconsulting.com/"><b>Unboxed</b></a></div>
-        </div>
+        <footer>
+          <div class="footer-item">
+            <label for="constituency">Find constituency</label>
+            <select name="constituency" id="constituency"></select>
+          </div>
+          <button class="flat_button share-button">Share map</button>
+          <button class="flat_button about-button">About</button>
+          <button class="flat_button hide-ui">Hide UI</button>
+        </footer>
 
-        <div id="mobile_footer">
-            <span id="select_text">Select Petition</span>
-            <span><select name="petition" id="petition_dropdown_mobile"></select></span>
-            <div id="settings">
-                <span><button class="flat_button" type="button" id="mobile_share">Share Map</button>
-                <button class="flat_button" id="hide_ui">Hide UI</button>
-            </div>
-        </div>
-
-        <div id="left_column">
-            <h1>Petition Map</h1>
-
-            <form>
-                <p>Search for petition</p>
-                <div class="form_section">
-                    <select name="petition" id="petition_dropdown"></select>
-                    </br></br>
-                </div>
-
-                <p>Select area</p>
-                <div class="form_section">
-                    <input type="radio" name="area" checked="yes" value="gb" onclick="change_area()"/>  Great Britain</br>
-                    <input type="radio" name="area" value="eng" onclick="change_area()"> England</br>
-                    <input type="radio" name="area" value="sco" onclick="change_area()"> Scotland</br>
-                    <input type="radio" name="area" value="wal" onclick="change_area()"> Wales</br>
-                    <input type="radio" name="area" value="lon" onclick="change_area()"> London</br></br>
-                </div>
-
-                <p>Search for constituency</p>
-                <div class="form_section">
-                    <select name="constituency" id="constituency"></select>
-                    </br></br>
-                </div>
-
-                <p>Enter a petition url</p>
-                <div class="form_section">
-                    <input type="text" id="petition_url">
-                    <button class="flat_button" type="button" id="petition_button">Submit</button>
-                    </br></br>
-                </div>
-            </form>
-
-            <hr>
-
-            <div data-collapse>
-                <h3><i class="fa fa-chevron-down"> Settings</i></h3>
-                <div class="form_section">
-                    <p><input type="checkbox" id="hide_petition_info"> Hide Petition Info</p>
-                    <p><input type="checkbox" id="hide_map_key"> Hide Map Key</p>
-                </div>
-                <h3><i class="fa fa-chevron-down"> Help</i></h3>
-                <div id="help">
-                    <span class="help_header">Where is Northern Ireland?</span></br>
-                    <p>Unfortunately, the data for NI is not available at this time due to licensing issues.</p>
-                    </br>
-                    <span class="help_header">I can't find a petition in the drop down list!</span></br>
-                    <p>You can generate a heatmap for any petition by entering the url from the Government Petitions site in the entry box above.</p>
-                </div>
-            </div>
-
-            <section id="licence">
-                <p>
-                    <a id="geojson_link" href="https://github.com/martinjc/UK-GeoJson">
-                        GeoJSON and TopoJSON UK Boundary Data
-                    </a>
-                    by Martin Chorley is licensed under a Creative Commons Attribution 4.0 International License.
-                </p></br>
-                <p>
-                    Contains Ordnance Survey, Office of National Statistics and National Records Scotland data © Crown copyright and database right [2014]. Ordnance Survey data covered by OS OpenData Licence.
-                </p>
-            </section>
-        </div>
-
-        <div id="right_column">
+        <main>
             <section id="constituency_info">
             </section>
             <section id="petition_info" hidden>
+              <div class="petition-details"></div>
+
+              <details class="petition-choice">
+                <summary class="flat_button">Show a different petition</summary>
+                <div>
+                  <div class="choice-row">
+                    <label for="petition_url">Enter a petition url</label>
+                    <input type="text" id="petition_url" placeholder="https://petitions.parliament.uk/petitions/105991">
+                    <button class="flat_button" type="button" id="petition_button">and show it</button>
+                  </div>
+
+                  <p class="choice-row">Or</p>
+
+                  <div class="choice-row">
+                    <label for="petition_dropdown" id="select_text">Choose a popular Petition</label>
+                    <select name="petition" id="petition_dropdown"></select>
+                  </div>
+                </div>
+              </details>
             </section>
             <section id="key" hidden>
                 <table>
@@ -171,38 +110,96 @@
                 </table>
             </section>
             <section id="controls">
-                <button class="flat_button zoom" id="zoom_in"><i class="fa fa-plus"></i></button>
-                <button class="flat_button zoom" id="zoom_out"><i class="fa fa-minus"></i></button>
-                <button class="flat_button" id="reset">Reset</button>
-                <button class="flat_button" type="button" id="petition_get_link">Share Map</button>
+              <div class="controls-row">
+                <div class="controls-col">
+                  <button class="flat_button zoom" id="zoom_in" tabindex="1" title="zoom map in"><i class="fa fa-plus"></i></button>
+                  <button class="flat_button zoom" id="zoom_out"  tabindex="2" title="zoom map out"><i class="fa fa-minus"></i></button>
+                </div>
+                <div class="controls-col">
+                  <button class="flat_button pan row-span" id="pan_west" tabindex="3" title="pan map west"><i class="fa fa-angle-left"></i></button>
+                </div>
+                <div class="controls-col">
+                  <button class="flat_button pan" id="pan_north" tabindex="4" title="pan map north"><i class="fa fa-angle-up"></i></button>
+                  <button class="flat_button pan" id="pan_south" tabindex="5" title="pan map south"><i class="fa fa-angle-down"></i></button>
+                </div>
+                <div class="controls-col">
+                  <button class="flat_button pan row-span" id="pan_east" tabindex="6" title="pan map east"><i class="fa fa-angle-right"></i></button>
+                </div>
+              </div>
+              <div class="controls-row">
+                <button class="flat_button row" id="reset" tabindex="7" title="Reset map zoom &amp; pan">Reset zoom &amp; pan</button>
+              </div>
+              <div class="controls-row">
+                <details>
+                  <summary class="flat_button" tabindex="8" title="Choose map area">Choose map area</summary>
+                  <div>
+                    <label class="inline" title="Show full Great Britain map"><input type="radio" name="area" value="gb" checked tabindex="9">Great Britain</label>
+                    <label class="inline" title="Show only England map"><input type="radio" name="area" value="eng" tabindex="9">England</label>
+                    <label class="inline" title="Show only Scotland map"><input type="radio" name="area" value="sco" tabindex="9">Scotland</label>
+                    <label class="inline" title="Show only Wales map"><input type="radio" name="area" value="wal" tabindex="9">Wales</label>
+                    <label class="inline" title="Show only London map"><input type="radio" name="area" value="lon" tabindex="9">London</label>
+                  </div>
+                </details>
+              </div>
             </section>
             <section id="map">
                 <div id="spinner_area">
                 </div>
             </section>
-        </div>
-
-        <span class="built_by">built by</span>
-        <span class="logo"><a id="ubxd" href="https://www.unboxedconsulting.com/">Unboxed</a></span>
+        </main>
 
         <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.1.0/topojson.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
         <script src="plugins/collapse/jquery.collapse.js"></script>
         <script src="plugins/spin/spin.min.js"></script>
         <script src="plugins/vex/js/vex.combined.min.js"></script>
         <script>vex.defaultOptions.className = 'vex-theme-plain';</script>
+        <script src="plugins/details/details.polyfill.js"></script>
+
+        <!--[if lt IE 9]>
+          <script src="plugins/html5shiv/html5shiv.js"></script>
+          <script src="plugins/html5shiv/html5shiv-printshiv.js"></script>
+        <![endif]-->
 
         <script src="js/map.js"></script>
         <script src="js/form.js"></script>
         <script src="js/share.js"></script>
     </body>
 
-    <div id="modal" hidden>
-        <div class="modal_header">Link</div> <input type="text" id="petition_link"> <div class="modal_header">Social</div>
-        <a class="flat_button twitter" href="javascript:tweet_current_page()" target="_blank" alt="Tweet this page">Tweet <i class="fa fa-twitter"></i></a>
-        <a class="flat_button facebook" href="javascript:facebook_current_page()" target="_blank" alt="Share on Facebook">Facebook <i class="fa fa-facebook"></i></a>
-    </div>
+    <section id="share-modal" hidden>
+      <div class="share-panel">
+        <h2>Link</h2>
+        <input type="text" name="petition-link" />
+        <h2>Social</h2>
+        <button class="flat_button twitter" alt="Tweet this page">Tweet <i class="fa fa-twitter"></i></button>
+        <button class="flat_button facebook" alt="Share on Facebook">Facebook <i class="fa fa-facebook"></i></button>
+      </div>
+    </section>
+
+    <section id="about-modal" hidden>
+      <div class="about-panel">
+        <h1>Petition Map <span class="built-by">built by <a href="https://www.unboxedconsulting.com/">Unboxed</a></span></h1>
+
+        <div class="help">
+          <h2>Where is Northern Ireland?</h2>
+          <p>Unfortunately, the data for NI is not available at this time due to licensing issues.</p>
+
+          <h2>I can't find a petition in the drop down list!</h2>
+          <p>You can generate a heatmap for any petition by copying its url from the <a href="https://petition.parliament.uk/">UK Government and Parliament site</a> and pasting it into the entry box in the "Show a different petition" section to the bottom right of the map.</p>
+        </div>
+
+        <div class="licence">
+          <p>
+              <a href="https://github.com/martinjc/UK-GeoJson">GeoJSON and TopoJSON UK Boundary Data</a>
+              by Martin Chorley is licensed under a Creative Commons Attribution 4.0 International License.
+          </p>
+          <p>
+              Contains Ordnance Survey, Office of National Statistics and National Records Scotland data © Crown copyright and database right [2014]. Ordnance Survey data covered by OS OpenData Licence.
+          </p>
+        </div>
+      </div>
+    </section>
+
 </html>
