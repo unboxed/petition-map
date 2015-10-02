@@ -325,15 +325,15 @@ footer .about-button {
 }
 
 
-/* Modal */
+/* Share Modal */
 
-#modal h2 {
+.share-panel h2 {
   margin-top: 0em;
   font-size: 1em;
   margin-bottom: 0.5em;
 }
 
-#modal input[name=petition-link] {
+.share-panel input[name=petition-link] {
   font-size: 1em;
   width: 100%;
   margin-bottom: 1em;

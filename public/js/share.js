@@ -1,13 +1,27 @@
-// Creates and opens window for twitter sharing
-function tweet_current_page() {
-    var link = get_link();
-    window.open("https://twitter.com/share?url="+escape(link)+"&text="+"Check out this petition map"+"&hashtags="+"petitionmap", '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
-    return false;
-}
+(function($) {
 
-// Creates and opens window for facebook sharing
-function facebook_current_page() {
-    var link = get_link();
-    window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(link)+"&t="+"Petition Map (By Unboxed)", '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+  function getUrl() {
+    return $('.vex-content .share-panel input[name=petition-link]').val();
+  }
+
+  // Creates and opens window for twitter sharing
+  function tweetCurrentPage() {
+    var link = getUrl();
+
+    window.open("https://twitter.com/share?url="+escape(link)+"&text="+encodeURIComponent("Check out this petition map")+"&hashtags=petitionmap", '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
     return false;
-}
+  }
+
+  // Creates and opens window for facebook sharing
+  function facebookCurrentPage() {
+    var link = getUrl();
+
+    window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(link)+"&t="+encodeURIComponent("Petition Map (By Unboxed)"), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
+    return false;
+  }
+
+  $('body').on('click', '.vex-content .share-panel .twitter', tweetCurrentPage);
+
+  $('body').on('click', '.vex-content .share-panel .facebook', facebookCurrentPage);
+
+})(window.jQuery);

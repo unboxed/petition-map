@@ -331,16 +331,16 @@
     var state = buildCurrentState(),
       url = buildCurrentURL(state);
 
-    $('#modal input[name=petition-link]').val(url);
-
     // Clone modal
-    var modal = $("#modal").clone();
+    var modal_panel = $("#share-modal .share-panel").clone();
+    modal_panel.find('input[name=petition-link]').val(url);
 
     // Open modal
     vex.dialog.open({
-        message: $(modal).show(),
-        buttons:
-        [$.extend({}, vex.dialog.buttons.NO, { text: 'Close' })],
+      message: modal_panel,
+      buttons: [
+        $.extend({}, vex.dialog.buttons.NO, { text: 'Close' })
+      ]
     });
   };
 
