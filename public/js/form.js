@@ -331,7 +331,7 @@
     var state = buildCurrentState(),
       url = buildCurrentURL(state);
 
-    $('#petition_link').val(url);
+    $('#modal input[name=petition-link]').val(url);
 
     // Clone modal
     var modal = $("#modal").clone();

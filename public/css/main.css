@@ -327,9 +327,19 @@ footer .about-button {
 
 /* Modal */
 
-.modal_header {
-  padding-bottom: 5px;
+#modal h2 {
+  margin-top: 0em;
+  font-size: 1em;
+  margin-bottom: 0.5em;
 }
+
+#modal input[name=petition-link] {
+  font-size: 1em;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+/* Map Controls */
 
 #controls {
   position: absolute;
