@@ -1,1 +1,1 @@
-web: bundle exec rackup -p $PORT
+web: ruby -run -e httpd . -p $PORT
