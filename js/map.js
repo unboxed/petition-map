@@ -250,7 +250,7 @@
   }
 
   function applyZoomAndPan() {
-    svg.attr("transform", "translate(" + zoom.translate() + ")scale(" + zoom.scale() + ")");
+    g.attr("transform", "translate(" + zoom.translate() + ")scale(" + zoom.scale() + ")");
   }
 
   function stopped() {
