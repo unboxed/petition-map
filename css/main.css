@@ -187,6 +187,7 @@ main {
   padding: 5px 10px;
   text-decoration: none;
   border: 0;
+  outline: none;
 }
 
 .flat_button:hover {
