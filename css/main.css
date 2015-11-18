@@ -193,11 +193,6 @@ main {
   background-color: #c29fd1;
 }
 
-.flat_button:active {
-  position: relative;
-  top: 1px;
-}
-
 .twitter {
   background-color: #00aced;
 }
