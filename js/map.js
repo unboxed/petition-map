@@ -41,8 +41,13 @@
 
   // Initialise map
   function init(width, height) {
+    // a UK centric projection inspired by http://bost.ocks.org/mike/map/
     projection = d3.geo.albers()
-      .rotate([0, 0]);
+      .center([0, 55.4])
+      .rotate([4.4, 0])
+      .parallels([50, 60])
+      .scale(6000)
+      .translate([width / 2, height / 2]);
 
     path = d3.geo.path()
       .projection(projection);
