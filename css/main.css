@@ -187,15 +187,11 @@ main {
   padding: 5px 10px;
   text-decoration: none;
   border: 0;
+  outline: none;
 }
 
 .flat_button:hover {
   background-color: #c29fd1;
-}
-
-.flat_button:active {
-  position: relative;
-  top: 1px;
 }
 
 .twitter {

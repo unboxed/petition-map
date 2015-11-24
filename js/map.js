@@ -85,6 +85,16 @@
       .scale(s)
       .translate(t);
 
+    // So that we can pan and zoom with the mouse while focused outside of the map (in the
+    // sea) we create a rectangle object covering the whole area so there is _something_ under
+    // the cursor which will trigger the event listener.
+    g.append("rect")
+      .attr("class", "map-background")
+      .attr("x", -width)
+      .attr("y", -height)
+      .attr("width", width * 3)
+      .attr("height", height * 3);
+
     // Add an area for each feature in the topoJSON (constituency)
     g.selectAll(".area")
       .data(topojson.feature(boundaries, boundaries.objects[units]).features)
@@ -240,7 +250,7 @@
   }
 
   function applyZoomAndPan() {
-    svg.attr("transform", "translate(" + zoom.translate() + ")scale(" + zoom.scale() + ")");
+    g.attr("transform", "translate(" + zoom.translate() + ")scale(" + zoom.scale() + ")");
   }
 
   function stopped() {
