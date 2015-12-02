@@ -27,7 +27,11 @@
       "PlaidCymru",
       "ScottishNationalParty",
       "Speaker",
-      "UKIP"
+      "UKIP",
+      "DUP",
+      "SinnFin",
+      "SocialDemocraticandLabourParty",
+      "UUP"
   ];
 
   computeSize();
