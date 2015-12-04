@@ -1307,17 +1307,17 @@
     "constituency": "Brent North",
     "ons_code": "E14000592"
   },
-  "E14000728": {
-    "mp": "Rt Hon Sir Edward Garnier QC MP",
-    "party": "Conservative",
-    "constituency": "Harborough",
-    "ons_code": "E14000728"
-  },
   "E14001058": {
     "mp": "Mark Garnier MP",
     "party": "Conservative",
     "constituency": "Wyre Forest",
     "ons_code": "E14001058"
+  },
+  "E14000728": {
+    "mp": "Rt Hon Sir Edward Garnier QC MP",
+    "party": "Conservative",
+    "constituency": "Harborough",
+    "ons_code": "E14000728"
   },
   "E14000951": {
     "mp": "Mr David Gauke MP",
@@ -2057,17 +2057,17 @@
     "constituency": "Brighton, Kemptown",
     "ons_code": "E14000597"
   },
-  "E14000683": {
-    "mp": "Rt Hon Sir Greg Knight MP",
-    "party": "Conservative",
-    "constituency": "East Yorkshire",
-    "ons_code": "E14000683"
-  },
   "E14000931": {
     "mp": "Julian Knight MP",
     "party": "Conservative",
     "constituency": "Solihull",
     "ons_code": "E14000931"
+  },
+  "E14000683": {
+    "mp": "Rt Hon Sir Greg Knight MP",
+    "party": "Conservative",
+    "constituency": "East Yorkshire",
+    "ons_code": "E14000683"
   },
   "E14000959": {
     "mp": "Kwasi Kwarteng MP",
@@ -2261,11 +2261,119 @@
     "constituency": "Halifax",
     "ons_code": "E14000723"
   },
+  "E14000567": {
+    "mp": "Steve McCabe MP",
+    "party": "Labour",
+    "constituency": "Birmingham, Selly Oak",
+    "ons_code": "E14000567"
+  },
+  "S14000002": {
+    "mp": "Callum McCaig MP",
+    "party": "Scottish National Party",
+    "constituency": "Aberdeen South",
+    "ons_code": "S14000002"
+  },
+  "E14000599": {
+    "mp": "Kerry McCarthy MP",
+    "party": "Labour",
+    "constituency": "Bristol East",
+    "ons_code": "E14000599"
+  },
+  "E14000645": {
+    "mp": "Jason McCartney MP",
+    "party": "Conservative",
+    "constituency": "Colne Valley",
+    "ons_code": "E14000645"
+  },
+  "E14000792": {
+    "mp": "Karl McCartney MP",
+    "party": "Conservative",
+    "constituency": "Lincoln",
+    "ons_code": "E14000792"
+  },
+  "E14000823": {
+    "mp": "Siobhain McDonagh MP",
+    "party": "Labour",
+    "constituency": "Mitcham and Morden",
+    "ons_code": "E14000823"
+  },
+  "E14000819": {
+    "mp": "Andy McDonald MP",
+    "party": "Labour",
+    "constituency": "Middlesbrough",
+    "ons_code": "E14000819"
+  },
+  "S14000034": {
+    "mp": "Stewart Malcolm McDonald MP",
+    "party": "Scottish National Party",
+    "constituency": "Glasgow South",
+    "ons_code": "S14000034"
+  },
+  "S14000012": {
+    "mp": "Stuart C. McDonald MP",
+    "party": "Scottish National Party",
+    "constituency": "Cumbernauld, Kilsyth and Kirkintilloch East",
+    "ons_code": "S14000012"
+  },
+  "N06000003": {
+    "mp": "Dr Alasdair McDonnell MP",
+    "party": "Social Democratic & Labour Party",
+    "constituency": "Belfast South",
+    "ons_code": "N06000003"
+  },
+  "E14000737": {
+    "mp": "John McDonnell MP",
+    "party": "Labour",
+    "constituency": "Hayes and Harlington",
+    "ons_code": "E14000737"
+  },
+  "E14001050": {
+    "mp": "Rt Hon Pat McFadden MP",
+    "party": "Labour",
+    "constituency": "Wolverhampton South East",
+    "ons_code": "E14001050"
+  },
+  "S14000030": {
+    "mp": "Natalie McGarry MP",
+    "party": "Scottish National Party",
+    "constituency": "Glasgow East",
+    "ons_code": "S14000030"
+  },
+  "E14000962": {
+    "mp": "Conor McGinn MP",
+    "party": "Labour",
+    "constituency": "St Helens North",
+    "ons_code": "E14000962"
+  },
+  "E14001043": {
+    "mp": "Alison McGovern MP",
+    "party": "Labour",
+    "constituency": "Wirral South",
+    "ons_code": "E14001043"
+  },
+  "E14000747": {
+    "mp": "Liz McInnes MP",
+    "party": "Labour",
+    "constituency": "Heywood and Middleton",
+    "ons_code": "E14000747"
+  },
+  "S14000028": {
+    "mp": "John McNally MP",
+    "party": "Scottish National Party",
+    "constituency": "Falkirk",
+    "ons_code": "S14000028"
+  },
   "E14000948": {
     "mp": "Craig Mackinlay MP",
     "party": "Conservative",
     "constituency": "South Thanet",
     "ons_code": "E14000948"
+  },
+  "E14000833": {
+    "mp": "Catherine McKinnell MP",
+    "party": "Labour",
+    "constituency": "Newcastle upon Tyne North",
+    "ons_code": "E14000833"
   },
   "E14000862": {
     "mp": "David Mackintosh MP",
@@ -2273,11 +2381,29 @@
     "constituency": "Northampton South",
     "ons_code": "E14000862"
   },
+  "S14000032": {
+    "mp": "Anne McLaughlin MP",
+    "party": "Scottish National Party",
+    "constituency": "Glasgow North East",
+    "ons_code": "S14000032"
+  },
+  "E14000664": {
+    "mp": "Rt Hon Patrick McLoughlin MP",
+    "party": "Conservative",
+    "constituency": "Derbyshire Dales",
+    "ons_code": "E14000664"
+  },
   "S14000027": {
     "mp": "Angus Brendan MacNeil MP",
     "party": "Scottish National Party",
     "constituency": "Na h-Eileanan an Iar",
     "ons_code": "S14000027"
+  },
+  "E14000968": {
+    "mp": "Stephen McPartland MP",
+    "party": "Conservative",
+    "constituency": "Stevenage",
+    "ons_code": "E14000968"
   },
   "E14000930": {
     "mp": "Rt Hon Fiona Mactaggart MP",
@@ -2386,132 +2512,6 @@
     "party": "Conservative",
     "constituency": "Blackpool North and Cleveleys",
     "ons_code": "E14000572"
-  },
-  "E14000567": {
-    "mp": "Steve McCabe MP",
-    "party": "Labour",
-    "constituency": "Birmingham, Selly Oak",
-    "ons_code": "E14000567"
-  },
-  "S14000002": {
-    "mp": "Callum McCaig MP",
-    "party": "Scottish National Party",
-    "constituency": "Aberdeen South",
-    "ons_code": "S14000002"
-  },
-  "E14000599": {
-    "mp": "Kerry McCarthy MP",
-    "party": "Labour",
-    "constituency": "Bristol East",
-    "ons_code": "E14000599"
-  },
-  "E14000645": {
-    "mp": "Jason McCartney MP",
-    "party": "Conservative",
-    "constituency": "Colne Valley",
-    "ons_code": "E14000645"
-  },
-  "E14000792": {
-    "mp": "Karl McCartney MP",
-    "party": "Conservative",
-    "constituency": "Lincoln",
-    "ons_code": "E14000792"
-  },
-  "E14000823": {
-    "mp": "Siobhain McDonagh MP",
-    "party": "Labour",
-    "constituency": "Mitcham and Morden",
-    "ons_code": "E14000823"
-  },
-  "E14000819": {
-    "mp": "Andy McDonald MP",
-    "party": "Labour",
-    "constituency": "Middlesbrough",
-    "ons_code": "E14000819"
-  },
-  "S14000034": {
-    "mp": "Stewart Malcolm McDonald MP",
-    "party": "Scottish National Party",
-    "constituency": "Glasgow South",
-    "ons_code": "S14000034"
-  },
-  "S14000012": {
-    "mp": "Stuart C. McDonald MP",
-    "party": "Scottish National Party",
-    "constituency": "Cumbernauld, Kilsyth and Kirkintilloch East",
-    "ons_code": "S14000012"
-  },
-  "N06000003": {
-    "mp": "Dr Alasdair McDonnell MP",
-    "party": "Social Democratic & Labour Party",
-    "constituency": "Belfast South",
-    "ons_code": "N06000003"
-  },
-  "E14000737": {
-    "mp": "John McDonnell MP",
-    "party": "Labour",
-    "constituency": "Hayes and Harlington",
-    "ons_code": "E14000737"
-  },
-  "E14001050": {
-    "mp": "Rt Hon Pat McFadden MP",
-    "party": "Labour",
-    "constituency": "Wolverhampton South East",
-    "ons_code": "E14001050"
-  },
-  "S14000030": {
-    "mp": "Natalie McGarry MP",
-    "party": "Scottish National Party",
-    "constituency": "Glasgow East",
-    "ons_code": "S14000030"
-  },
-  "E14000962": {
-    "mp": "Conor McGinn MP",
-    "party": "Labour",
-    "constituency": "St Helens North",
-    "ons_code": "E14000962"
-  },
-  "E14001043": {
-    "mp": "Alison McGovern MP",
-    "party": "Labour",
-    "constituency": "Wirral South",
-    "ons_code": "E14001043"
-  },
-  "E14000747": {
-    "mp": "Liz McInnes MP",
-    "party": "Labour",
-    "constituency": "Heywood and Middleton",
-    "ons_code": "E14000747"
-  },
-  "E14000833": {
-    "mp": "Catherine McKinnell MP",
-    "party": "Labour",
-    "constituency": "Newcastle upon Tyne North",
-    "ons_code": "E14000833"
-  },
-  "S14000032": {
-    "mp": "Anne McLaughlin MP",
-    "party": "Scottish National Party",
-    "constituency": "Glasgow North East",
-    "ons_code": "S14000032"
-  },
-  "E14000664": {
-    "mp": "Rt Hon Patrick McLoughlin MP",
-    "party": "Conservative",
-    "constituency": "Derbyshire Dales",
-    "ons_code": "E14000664"
-  },
-  "S14000028": {
-    "mp": "John Mc Nally MP",
-    "party": "Scottish National Party",
-    "constituency": "Falkirk",
-    "ons_code": "S14000028"
-  },
-  "E14000968": {
-    "mp": "Stephen McPartland MP",
-    "party": "Conservative",
-    "constituency": "Stevenage",
-    "ons_code": "E14000968"
   },
   "E14000871": {
     "mp": "Rt Hon Michael Meacher MP",
@@ -2753,17 +2753,17 @@
     "constituency": "Bury North",
     "ons_code": "E14000611"
   },
-  "S14000005": {
-    "mp": "Brendan O'Hara MP",
-    "party": "Scottish National Party",
-    "constituency": "Argyll and Bute",
-    "ons_code": "S14000005"
-  },
   "E14000741": {
     "mp": "Dr Matthew Offord MP",
     "party": "Conservative",
     "constituency": "Hendon",
     "ons_code": "E14000741"
+  },
+  "S14000005": {
+    "mp": "Brendan O'Hara MP",
+    "party": "Scottish National Party",
+    "constituency": "Argyll and Bute",
+    "ons_code": "S14000005"
   },
   "E14000716": {
     "mp": "Melanie Onn MP",
@@ -2800,6 +2800,12 @@
     "party": "Scottish National Party",
     "constituency": "East Renfrewshire",
     "ons_code": "S14000021"
+  },
+  "W07000041": {
+    "mp": "Albert Owen MP",
+    "party": "Labour",
+    "constituency": "Ynys Môn",
+    "ons_code": "W07000041"
   },
   "N06000012": {
     "mp": "Ian Paisley MP",
@@ -3892,11 +3898,5 @@
     "party": "Labour",
     "constituency": "Cambridge",
     "ons_code": "E14000617"
-  },
-  "W07000041": {
-    "mp": "Albert Owen MP",
-    "party": "Labour",
-    "constituency": "Ynys Môn",
-    "ons_code": "W07000041"
   }
 }
