@@ -2335,7 +2335,7 @@
   },
   "S14000030": {
     "mp": "Natalie McGarry MP",
-    "party": "Scottish National Party",
+    "party": "Independent",
     "constituency": "Glasgow East",
     "ons_code": "S14000030"
   },
@@ -2392,6 +2392,12 @@
     "party": "Conservative",
     "constituency": "Derbyshire Dales",
     "ons_code": "E14000664"
+  },
+  "E14000871": {
+    "mp": "Mr Jim McMahon MP",
+    "party": "Labour",
+    "constituency": "Oldham West and Royton",
+    "ons_code": "E14000871"
   },
   "S14000027": {
     "mp": "Angus Brendan MacNeil MP",
@@ -2512,12 +2518,6 @@
     "party": "Conservative",
     "constituency": "Blackpool North and Cleveleys",
     "ons_code": "E14000572"
-  },
-  "E14000871": {
-    "mp": "Rt Hon Michael Meacher MP",
-    "party": "Labour",
-    "constituency": "Oldham West and Royton",
-    "ons_code": "E14000871"
   },
   "E14000810": {
     "mp": "Sir Alan Meale MP",
@@ -3511,7 +3511,7 @@
   },
   "S14000026": {
     "mp": "Michelle Thomson MP",
-    "party": "Scottish National Party",
+    "party": "Independent",
     "constituency": "Edinburgh West",
     "ons_code": "S14000026"
   },
