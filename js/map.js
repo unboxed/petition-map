@@ -19,19 +19,19 @@
   // Party colour class names
   var parties = [
       "Conservative",
-      "Green",
+      "GreenParty",
       "Independent",
       "Labour",
-      "LabourCooperative",
+      "LabourCoop",
       "LiberalDemocrat",
       "PlaidCymru",
       "ScottishNationalParty",
       "Speaker",
-      "UKIP",
-      "DUP",
+      "UKIndependenceParty",
+      "DemocraticUnionistParty",
       "SinnFin",
-      "SocialDemocraticandLabourParty",
-      "UUP"
+      "SocialDemocraticLabourParty",
+      "UlsterUnionistParty"
   ];
 
   computeSize();

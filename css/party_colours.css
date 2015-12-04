@@ -1,7 +1,7 @@
 .Conservative {
   fill: #333399;
 }
-.Green {
+.GreenParty {
   fill: #339900;
 }
 .Independent {
@@ -10,7 +10,7 @@
 .Labour {
   fill: #CC0000;
 }
-.LabourCooperative {
+.LabourCoop {
   fill: #CC0000;
 }
 .LiberalDemocrat {
@@ -25,18 +25,18 @@
 .Speaker {
   fill: #333399;
 }
-.UKIP {
+.UKIndependenceParty {
   fill: #70147A;
 }
-.DUP {
+.DemocraticUnionistParty {
   fill: #D46A4C;
 }
 .SinnFin {
   fill: #008800;
 }
-.SocialDemocraticandLabourParty {
+.SocialDemocraticLabourParty {
   fill: #99FF66;
 }
-.UUP {
+.UlsterUnionistParty {
   fill: #9999FF;
 }
