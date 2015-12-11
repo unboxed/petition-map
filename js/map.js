@@ -78,7 +78,7 @@
       t;
 
     if (PetitionMap.current_area === "lon") {
-      t = [((width - s * (b[1][0] + b[0][0])) / 2.25), (height - s * (b[1][1] + b[0][1])) / 2];
+      t = [((width - s * (b[1][0] + b[0][0])) / 2.00), (height - s * (b[1][1] + b[0][1])) / 2];
     } else if (PetitionMap.current_area === "uk") {
       t = [((width - s * (b[1][0] + b[0][0])) / 1.95), (height - s * (b[1][1] + b[0][1])) / 2];
     } else {
