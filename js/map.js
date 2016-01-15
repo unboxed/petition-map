@@ -48,9 +48,9 @@
     // a UK centric projection inspired by http://bost.ocks.org/mike/map/
     projection = d3.geo.albers()
       .center([0, 55.4])
-      .rotate([4.4, 0])
+      .rotate([3.4, 0])
       .parallels([50, 60])
-      .scale(6000)
+      .scale(5000)
       .translate([width / 2, height / 2]);
 
     path = d3.geo.path()
@@ -68,26 +68,26 @@
 
   // Draw map on SVG element
   function draw(boundaries) {
-    projection
-      .scale(1)
-      .translate([0,0]);
-
-    // Compute the correct bounds and scaling from the topoJSON
-    var b = path.bounds(topojson.feature(boundaries, boundaries.objects[units])),
-      s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
-      t;
-
-    if (PetitionMap.current_area === "lon") {
-      t = [((width - s * (b[1][0] + b[0][0])) / 2.00), (height - s * (b[1][1] + b[0][1])) / 2];
-    } else if (PetitionMap.current_area === "uk") {
-      t = [((width - s * (b[1][0] + b[0][0])) / 1.95), (height - s * (b[1][1] + b[0][1])) / 2];
-    } else {
-      t = [((width - s * (b[1][0] + b[0][0])) / 1.85), (height - s * (b[1][1] + b[0][1])) / 2];
+    if (PetitionMap.current_area === "uk") {
+      projection.center([0, 55.4]);
+    } else if (PetitionMap.current_area === "eng") {
+      projection.center([1.4, 52.9]);
+    } else if (PetitionMap.current_area === "sco") {
+      projection.center([-1.2, 57.7]);
+    } else if (PetitionMap.current_area === "wal") {
+      projection.center([-0.7, 52.4]);
+    } else if (PetitionMap.current_area === "ni") {
+      projection.center([-3.4, 54.65]);
+    } else if (PetitionMap.current_area === "lon") {
+      projection.center([3.28, 51.49]);
     }
 
-    projection
-      .scale(s)
-      .translate(t);
+    var bounds = path.bounds(topojson.feature(boundaries, boundaries.objects[units]));
+    var horizontalScale = width / (bounds[1][0] - bounds[0][0]);
+    var verticalScale = height / (bounds[1][1] - bounds[0][1]);
+    var scale = Math.min(horizontalScale, verticalScale) * 5000 * 0.95;
+
+    projection.scale(scale);
 
     // So that we can pan and zoom with the mouse while focused outside of the map (in the
     // sea) we create a rectangle object covering the whole area so there is _something_ under
