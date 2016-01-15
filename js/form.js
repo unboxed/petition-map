@@ -62,7 +62,7 @@
       petition_id = $("#petition_dropdown").val();
     }
 
-    area = 'gb';
+    area = 'uk';
     if (variables.area !== undefined) {
       if (possibleAreas().indexOf(variables.area) !== -1) {
         area = variables.area;
