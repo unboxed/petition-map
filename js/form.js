@@ -279,28 +279,20 @@
 
     $('#constituency_info').hide();
     $('#constituency_info').html("");
-    var name, mp, count, party,
-      data_found = false;
-    $.each(PetitionMap.current_petition.data.attributes.signatures_by_constituency, function(i, v) {
-        if (v.ons_code === constituency.id) {
-            name = v.name;
-            mp = v.mp;
-            party = mpForConstituency.party;
-            count = v.signature_count;
-            data_found = true;
-            return;
-        }
-    });
-    if (!data_found) {
-        name = mpForConstituency.constituency;
-        mp = mpForConstituency.mp;
-        party = mpForConstituency.party;
-        count = "0";
-    }
 
-    $('#constituency_info').append('<h2>' + name + "</h2>");
-    $('#constituency_info').append('<p class="mp">' + mp + '</p>');
-    $('#constituency_info').append('<p class="party">' + party + '</p>');
+    var count = "0",
+        data_found = false;
+
+    $.each(PetitionMap.current_petition.data.attributes.signatures_by_constituency, function(i, v) {
+      if (v.ons_code === constituency.id) {
+        count = v.signature_count;
+        return;
+      }
+    });
+
+    $('#constituency_info').append('<h2>' + mpForConstituency.constituency + "</h2>");
+    $('#constituency_info').append('<p class="mp">' + mpForConstituency.mp + '</p>');
+    $('#constituency_info').append('<p class="party">' + mpForConstituency.party + '</p>');
     $('#constituency_info').append('<p class="signatures_count"><span class="data">' + numberWithCommas(count) + '</span> signatures</p>');
     if (!ui_hidden) {
       $('#constituency_info').show();
