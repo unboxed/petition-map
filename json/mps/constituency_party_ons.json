@@ -186,7 +186,7 @@
     "ons_code": "E14000663"
   },
   "E14000859": {
-    "mp": "Mr Henry Bellingham MP",
+    "mp": "Sir Henry Bellingham MP",
     "party": "Conservative",
     "constituency": "North West Norfolk",
     "ons_code": "E14000859"
@@ -702,7 +702,7 @@
     "ons_code": "E14000836"
   },
   "E14000763": {
-    "mp": "Jeremy Corbyn MP",
+    "mp": "Rt Hon Jeremy Corbyn MP",
     "party": "Labour",
     "constituency": "Islington North",
     "ons_code": "E14000763"
@@ -780,7 +780,7 @@
     "ons_code": "E14000657"
   },
   "E14000790": {
-    "mp": "John Cryer",
+    "mp": "John Cryer MP",
     "party": "Labour",
     "constituency": "Leyton and Wanstead",
     "ons_code": "E14000790"
@@ -811,7 +811,7 @@
   },
   "E14000897": {
     "mp": "Simon Danczuk MP",
-    "party": "Labour",
+    "party": "Independent",
     "constituency": "Rochdale",
     "ons_code": "E14000897"
   },
@@ -906,7 +906,7 @@
     "ons_code": "E14000757"
   },
   "S14000059": {
-    "mp": "Martin John Docherty MP",
+    "mp": "Martin Docherty-Hughes MP",
     "party": "Scottish National Party",
     "constituency": "West Dunbartonshire",
     "ons_code": "S14000059"
@@ -1307,17 +1307,17 @@
     "constituency": "Brent North",
     "ons_code": "E14000592"
   },
-  "E14001058": {
-    "mp": "Mark Garnier MP",
-    "party": "Conservative",
-    "constituency": "Wyre Forest",
-    "ons_code": "E14001058"
-  },
   "E14000728": {
     "mp": "Rt Hon Sir Edward Garnier QC MP",
     "party": "Conservative",
     "constituency": "Harborough",
     "ons_code": "E14000728"
+  },
+  "E14001058": {
+    "mp": "Mark Garnier MP",
+    "party": "Conservative",
+    "constituency": "Wyre Forest",
+    "ons_code": "E14001058"
   },
   "E14000951": {
     "mp": "Mr David Gauke MP",
@@ -1584,8 +1584,8 @@
     "ons_code": "E14000705"
   },
   "E14000921": {
-    "mp": "Harry Harpham MP",
-    "party": "Labour",
+    "mp": "",
+    "party": "",
     "constituency": "Sheffield, Brightside and Hillsborough",
     "ons_code": "E14000921"
   },
@@ -1722,7 +1722,7 @@
     "ons_code": "E14000839"
   },
   "E14000540": {
-    "mp": "Rt Hon Margaret Hodge MP",
+    "mp": "Rt Hon Dame Margaret Hodge MP",
     "party": "Labour",
     "constituency": "Barking",
     "ons_code": "E14000540"
@@ -2057,17 +2057,17 @@
     "constituency": "Brighton, Kemptown",
     "ons_code": "E14000597"
   },
-  "E14000931": {
-    "mp": "Julian Knight MP",
-    "party": "Conservative",
-    "constituency": "Solihull",
-    "ons_code": "E14000931"
-  },
   "E14000683": {
     "mp": "Rt Hon Sir Greg Knight MP",
     "party": "Conservative",
     "constituency": "East Yorkshire",
     "ons_code": "E14000683"
+  },
+  "E14000931": {
+    "mp": "Julian Knight MP",
+    "party": "Conservative",
+    "constituency": "Solihull",
+    "ons_code": "E14000931"
   },
   "E14000959": {
     "mp": "Kwasi Kwarteng MP",
@@ -2864,7 +2864,7 @@
   "E14001038": {
     "mp": "John Penrose MP",
     "party": "Conservative",
-    "constituency": "Weston-Super-Mare",
+    "constituency": "Weston-super-Mare",
     "ons_code": "E14001038"
   },
   "E14000596": {
@@ -3066,7 +3066,7 @@
     "ons_code": "N06000015"
   },
   "S14000046": {
-    "mp": "Angus Robertson MP",
+    "mp": "Rt Hon Angus Robertson MP",
     "party": "Scottish National Party",
     "constituency": "Moray",
     "ons_code": "S14000046"
@@ -3432,7 +3432,7 @@
     "ons_code": "E14000571"
   },
   "E14000560": {
-    "mp": "Ms Gisela Stuart MP",
+    "mp": "Rt Hon Gisela Stuart MP",
     "party": "Labour",
     "constituency": "Birmingham, Edgbaston",
     "ons_code": "E14000560"
@@ -3840,7 +3840,7 @@
     "ons_code": "E14001011"
   },
   "E14000668": {
-    "mp": "Rt Hon Rosie Winterton MP",
+    "mp": "Rt Hon Dame Rosie Winterton MP",
     "party": "Labour",
     "constituency": "Doncaster Central",
     "ons_code": "E14000668"
