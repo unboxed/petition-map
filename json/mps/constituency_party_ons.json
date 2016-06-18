@@ -2449,7 +2449,7 @@
   },
   "E14000701": {
     "mp": "Seema Malhotra MP",
-    "party": "Labour (Co-op)",
+    "party": "Labour/Co-operative",
     "constituency": "Feltham and Heston",
     "ons_code": "E14000701"
   },
@@ -2485,7 +2485,7 @@
   },
   "E14001061": {
     "mp": "Rachael Maskell MP",
-    "party": "Labour (Co-op)",
+    "party": "Labour/Co-operative",
     "constituency": "York Central",
     "ons_code": "E14001061"
   },
@@ -3157,7 +3157,7 @@
   },
   "E14000589": {
     "mp": "Naz Shah MP",
-    "party": "Labour",
+    "party": "Independent",
     "constituency": "Bradford West",
     "ons_code": "E14000589"
   },
