@@ -65,6 +65,12 @@
     "constituency": "South Cambridgeshire",
     "ons_code": "E14000934"
   },
+  "E14000998": {
+    "mp": "Dr Rosena Allin-Khan MP",
+    "party": "Labour",
+    "constituency": "Tooting",
+    "ons_code": "E14000998",
+  },
   "E14000957": {
     "mp": "Sir David Amess MP",
     "party": "Conservative",
@@ -1097,6 +1103,12 @@
     "constituency": "Bournemouth East",
     "ons_code": "E14000584"
   },
+  "W07000074": {
+    "mp": "Chris Elmore MP",
+    "party": "Labour/Co-operative",
+    "constituency": "Ogmore",
+    "ons_code": "W07000074",
+  },
   "E14000670": {
     "mp": "Charlie Elphicke MP",
     "party": "Conservative",
@@ -1282,6 +1294,12 @@
     "party": "Conservative",
     "constituency": "Bedford",
     "ons_code": "E14000552"
+  },
+  "E14000921": {
+    "mp": "Gill Furniss MP",
+    "party": "Labour",
+    "constituency": "Sheffield, Brightside and Hillsborough",
+    "ons_code": "E14000921",
   },
   "E14001060": {
     "mp": "Marcus Fysh MP",
@@ -1583,12 +1601,6 @@
     "constituency": "Forest of Dean",
     "ons_code": "E14000705"
   },
-  "E14000921": {
-    "mp": "",
-    "party": "",
-    "constituency": "Sheffield, Brightside and Hillsborough",
-    "ons_code": "E14000921"
-  },
   "E14001021": {
     "mp": "Richard Harrington MP",
     "party": "Conservative",
@@ -1853,12 +1865,6 @@
     "constituency": "Bradford East",
     "ons_code": "E14000587"
   },
-  "W07000074": {
-    "mp": "Huw Irranca-Davies MP",
-    "party": "Labour",
-    "constituency": "Ogmore",
-    "ons_code": "W07000074"
-  },
   "E14000878": {
     "mp": "Mr Stewart Jackson MP",
     "party": "Conservative",
@@ -2032,12 +2038,6 @@
     "party": "Scottish National Party",
     "constituency": "Berwickshire, Roxburgh and Selkirk",
     "ons_code": "S14000008"
-  },
-  "E14000998": {
-    "mp": "Rt Hon Sadiq Khan MP",
-    "party": "Labour",
-    "constituency": "Tooting",
-    "ons_code": "E14000998"
   },
   "N06000014": {
     "mp": "Danny Kinahan MP",
