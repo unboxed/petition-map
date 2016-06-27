@@ -236,7 +236,7 @@ header h1 {
 }
 
 h1 .built-by {
-  display: block  ;
+  display: block;
   font-size: 0.6em;
 }
 h1 .built-by a {
@@ -257,18 +257,20 @@ footer {
   font-size: 0.8em;
   height: 3em;
 }
+.vex.vex-theme-plain .vex-content {
+  background-color: #812A80;
+}
+
+.about-modal {
+  background-color: #812A80;
+}
 
 .about-panel {
   background-color: #812A80;
   color: white;
-/*  position: fixed;
-  overflow: scroll;
-  top: 5.5em; /* header height: 3em + 2em * 0.7 */
-  bottom: 6em; /* footer height: 3em + 2em * 0.8 */
   left: 2em;
   right: 2em;
   padding: 2em;
-*/
 }
 
 .about-panel div {
@@ -276,13 +278,15 @@ footer {
 }
 
 .about-panel .help {
-  font-size: 0.9em;
+  font-size: 0.7em;
+  line-height: 1.6em;
 }
 
 .about-panel .licence {
   border-top: 1px solid #c29fd1;
   padding-top: 2em;
   font-size: 0.6em;
+  line-height: 1.6em;
 }
 
 .about-panel .licence a {
@@ -291,6 +295,20 @@ footer {
 
 .about-panel .licence a:hover {
   color: white;
+}
+
+.about-panel h1 {
+  font-size: 1.5em;
+}
+
+.about-panel h2 {
+  font-size: 1em;
+  text-decoration: underline;
+  font-weight: 400;
+}
+
+.about-panel .built-by {
+  display: inline-block;
 }
 
 footer .hide-ui {
