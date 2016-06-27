@@ -243,6 +243,12 @@ h1 .built-by a {
   font-weight: bold;
 }
 
+.weighted-options {
+  float: right;
+  margin-top: -2em;
+  margin-right: 3em;
+}
+
 footer {
   position: fixed;
   bottom: 0px;
