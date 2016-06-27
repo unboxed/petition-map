@@ -1,11 +1,11 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600);
 
 
 /* General */
 
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   background-color: white;
   font-weight: 300;
   margin: 0em;
@@ -41,8 +41,8 @@ th, td {
 main {
   width: 100%;
   position: absolute;
-  top: 3.5em; /* header height: 3em + 2em * 0.7 */
-  bottom: 4em; /* footer height: 3em + 2em * 0.8 */
+  top: 3.5em; /* header height: 2.5em + 2em * 0.7 */
+  bottom: 4.8em; /* footer height: 4em + 2em * 0.8 */
   color: white;
 }
 
@@ -51,21 +51,15 @@ main {
   background-color: #812A80;
   bottom: 1em;
   left: 1em;
-  font-size: 0.5em;
+  font-size: 0.7em;
   max-width: 20%;
   padding: 1em;
 }
 
-@media (max-height: 480px) {
+@media (max-width: 480px) {
   #petition_info {
     font-size: 0.3em;
     max-width: 25%;
-  }
-}
-
-@media (max-height: 360px) {
-  #petition_info {
-    visibility: hidden;
   }
 }
 
@@ -88,9 +82,11 @@ main {
   font-size: 1.2em;
   font-weight: 400;
   margin-top: 0em;
+  line-height: 1.3em;
 }
 .signatures_count {
-  font-size: 1.5em;
+  font-size: 1.3em;
+  padding-bottom: 0.5em;
 }
 .signatures_count .data {
   font-weight: 300;
@@ -124,13 +120,13 @@ main {
   top: 1em;
   left: 1em;
   width: 18%;
-  font-size: 0.5em;
+  font-size: 0.7em;
   padding: 1em;
 }
 
-@media (max-height: 480px) {
+@media (max-width: 480px) {
   #constituency_info {
-    width: 35%;
+    width: 30%;
     font-size: 0.3em;
   }
 }
@@ -144,21 +140,16 @@ main {
   opacity: 0.75;
   top: 1em;
   right: 1em;
-  max-width: 100px;
+  max-width: 150px;
   padding: 0.5em;
-  font-size: 0.5em;
+  font-size: 0.7em;
 }
 
-@media (max-height: 480px) {
+@media (max-width: 480px) {
   #key {
     font-size: 0.3em;
+    max-width: 120px;
     padding: 2px;
-  }
-}
-
-@media (max-height: 360px) {
-  #key {
-    visibility: hidden;
   }
 }
 
@@ -227,20 +218,20 @@ header {
   padding: 1em;
   overflow: auto;
   font-size: 0.7em;
-  height: 3em;
+  height: 2.5em;
 }
 
 header h1 {
-  font-size: 1.5em;
+  font-size: 2em;
   margin-bottom: 0em;
 }
 
 h1 .built-by {
-  display: block;
+  display: inline-block;
   font-size: 0.6em;
 }
 h1 .built-by a {
-  font-weight: bold;
+  font-weight: 600px;
 }
 
 footer {
@@ -255,10 +246,11 @@ footer {
   padding-top: 1em;
   padding-bottom: 1em;
   font-size: 0.8em;
-  height: 3em;
+  height: 4em;
 }
-.vex.vex-theme-plain .vex-content {
-  background-color: #812A80;
+
+.footer-item {
+  padding-bottom: 1em;
 }
 
 .about-modal {
@@ -270,7 +262,7 @@ footer {
   color: white;
   left: 2em;
   right: 2em;
-  padding: 2em;
+  padding: 1em;
 }
 
 .about-panel div {
@@ -346,6 +338,8 @@ footer .about-button {
   margin-top: 0em;
   font-size: 1em;
   margin-bottom: 0.5em;
+  font-weight: 400;
+  color: white;
 }
 
 .share-panel input[name=petition-link] {
