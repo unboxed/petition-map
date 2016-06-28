@@ -295,6 +295,7 @@
     } else {
       PetitionMap.is_weighted = false;
     }
+    spinner.spin(target);
     preparePetitionAndView();
   }
 
