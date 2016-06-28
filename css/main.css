@@ -249,6 +249,17 @@ h1 .built-by a {
   margin-right: 3em;
 }
 
+@media (max-width: 480px) {
+  .weighted-options {
+    font-size: 0.5em;
+  }
+
+  .weighted-options input {
+    position: relative;
+    top: 3px;
+  }
+}
+
 footer {
   position: fixed;
   bottom: 0px;
