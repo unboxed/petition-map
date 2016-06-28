@@ -120,7 +120,7 @@
 }
 /* line 15, ../sass/vex-theme-plain.sass */
 .vex.vex-theme-plain .vex-content {
-  background: white;
+  background: #812A80;
   color: #444444;
   padding: 1em;
   position: relative;
@@ -130,9 +130,18 @@
   font-size: 1.1em;
   line-height: 1.5em;
 }
+
+@media (max-width: 480px) {
+  .vex.vex-theme-plain .vex-content {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+  }
+}
 /* line 27, ../sass/vex-theme-plain.sass */
 .vex.vex-theme-plain .vex-content h1, .vex.vex-theme-plain .vex-content h2, .vex.vex-theme-plain .vex-content h3, .vex.vex-theme-plain .vex-content h4, .vex.vex-theme-plain .vex-content h5, .vex.vex-theme-plain .vex-content h6, .vex.vex-theme-plain .vex-content p, .vex.vex-theme-plain .vex-content ul, .vex.vex-theme-plain .vex-content li {
-  color: inherit;
+  /*color: inherit;*/
 }
 /* line 30, ../sass/vex-theme-plain.sass */
 .vex.vex-theme-plain .vex-close {
