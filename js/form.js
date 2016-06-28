@@ -263,7 +263,7 @@
 
     var count = numberWithCommas(PetitionMap.current_petition.data.attributes.signature_count);
 
-    var sign_link = 'https://petition.parliament.uk/petitions/' + PetitionMap.current_petition.data.id + '/signatures/new';
+    var sign_link = 'https://petition.parliament.uk/petitions/' + PetitionMap.current_petition.data.id;
     var count_html = '<p class="signatures_count"><span class="data">' + count + '</span> signatures</p>';
     var sign_html = '<a class="flat_button sign" href="' + sign_link + '"><i class="fa fa-pencil"></i> Sign Petition</a>';
 
