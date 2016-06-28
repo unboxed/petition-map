@@ -41,9 +41,15 @@ th, td {
 main {
   width: 100%;
   position: absolute;
-  top: 3.5em; /* header height: 2.5em + 2em * 0.7 */
+  top: 3.15em; /* header height: 2.5em + 2em * 0.7 */
   bottom: 4.8em; /* footer height: 4em + 2em * 0.8 */
   color: white;
+}
+
+@media (max-width: 480px) {
+  main {
+    top: 3.5em;
+  }
 }
 
 #petition_info {
@@ -221,14 +227,27 @@ header {
   height: 2.5em;
 }
 
+@media (max-width: 480px) {
+  header {
+    height: 3em;
+  }
+}
+
 header h1 {
-  font-size: 2em;
+  font-size: 1.6em;
   margin-bottom: 0em;
 }
 
 h1 .built-by {
   display: inline-block;
   font-size: 0.6em;
+}
+
+@media (max-width: 480px) {
+  h1 .built-by {
+    display: block;
+    font-size: 0.4em;
+  }
 }
 h1 .built-by a {
   font-weight: 600px;
@@ -243,6 +262,8 @@ h1 .built-by a {
 @media (max-width: 480px) {
   .weighted-options {
     font-size: 0.5em;
+    position: relative;
+    bottom: 5px;
   }
 
   .weighted-options input {
