@@ -327,6 +327,10 @@ footer {
   color: white;
 }
 
+.about-panel .licence p {
+  margin-bottom: 1em;
+}
+
 .about-panel h1 {
   font-size: 1.5em;
 }
