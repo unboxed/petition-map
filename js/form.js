@@ -128,16 +128,21 @@
       });
   }
 
-  function convertedDataToPopulationWeighted(current_petition) {
+  function convertDataToSimplifiedFormat(current_petition) {
     var signatures = current_petition.data.attributes.signatures_by_constituency;
-    var weighted_data = {};
+    var converted_data = {};
     for (i = 0; i < signatures.length; i++) {
         var ons_code = signatures[i].ons_code;
-        var constituency_pop = PetitionMap.population_data[ons_code].population;
-        var weighted = (signatures[i].signature_count / constituency_pop) * 10000;
-        weighted_data[signatures[i].ons_code] = weighted;
+        var converted;
+        if (PetitionMap.is_weighted) {
+          var constituency_pop = PetitionMap.population_data[ons_code].population;
+          converted = (signatures[i].signature_count / constituency_pop) * 10000;
+        } else {
+          converted = signatures[i].signature_count;
+        }
+        converted_data[signatures[i].ons_code] = converted;
     }
-    return weighted_data;
+    return converted_data;
   }
 
   // Get petition Url from ref - might be a number (from params or
@@ -161,12 +166,8 @@
     $.getJSON(petitionUrl + '.json')
       .done(function (data) {
         PetitionMap.current_petition = data;
-        PetitionMap.weighted_current_petition = convertedDataToPopulationWeighted(data);
-        if (PetitionMap.is_weighted) {
-          PetitionMap.signature_buckets = SignatureBuckets(PetitionMap.weighted_current_petition);
-        } else {
-          PetitionMap.signature_buckets = SignatureBuckets(data);
-        }
+        PetitionMap.weighted_current_petition = convertDataToSimplifiedFormat(data);
+        PetitionMap.signature_buckets = SignatureBuckets(PetitionMap.weighted_current_petition);
         updateKey(PetitionMap.signature_buckets.buckets);
         $.when(reloadMap()).then(function () {
           deferredPetitionLoadedAndDrawn.resolve();
@@ -203,15 +204,9 @@
       var highest_count = 0;
 
       $.each(fromConstituencies, function (index, item) {
-        if (PetitionMap.is_weighted) {
           if (item >= highest_count) {
             highest_count = item;
           }
-        } else {
-          if (item.signature_count >= highest_count) {
-            highest_count = item.signature_count;
-          }
-        }
       });
 
       return highest_count;
@@ -230,14 +225,8 @@
       return buckets;
     }
 
-    var extractedBuckets;
-    if (PetitionMap.is_weighted) {
-      extractedBuckets = extractBuckets(getHighestCount(fromPetition));
-    } else {
-      extractedBuckets = extractBuckets(getHighestCount(fromPetition.data.attributes.signatures_by_constituency));
-    }
     return {
-      buckets: extractedBuckets,
+      buckets: extractBuckets(getHighestCount(fromPetition)),
       bucketFor: function(count) {
         for(var i = 0; i < 8; i++) {
           if (count <= this.buckets[i]) {

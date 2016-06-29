@@ -157,23 +157,13 @@
   }
 
   function colourConstituencies(heatmap) {
-    var constituencies;
-    if (PetitionMap.is_weighted) { 
-      constituencies = PetitionMap.weighted_current_petition;
-    } else {
-      constituencies = PetitionMap.current_petition.data.attributes.signatures_by_constituency;
-    }
+    var constituencies = PetitionMap.weighted_current_petition;
 
     d3.selectAll(".coloured").attr("class", "area");
     $.each(constituencies, function (index, item) {
       var id, index;
-      if (PetitionMap.is_weighted) {
-        id = "#" + index;
-        index = heatmap.bucketFor(item);
-      } else {
-        id = "#" + item.ons_code;
-        index = heatmap.bucketFor(item.signature_count);
-      }
+      id = "#" + index;
+      index = heatmap.bucketFor(item);
       var colour_class = "c" + index + " coloured";
       d3.select(id).attr("class", colour_class);
     });
