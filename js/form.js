@@ -230,29 +230,21 @@
       return buckets;
     }
 
+    var extractedBuckets;
     if (PetitionMap.is_weighted) {
-      return {
-        buckets: extractBuckets(getHighestCount(fromPetition)),
-        bucketFor: function(count) {
-          for(var i = 0; i < 8; i++) {
-            if (count <= this.buckets[i]) {
-              return i;
-            }
-          }
-          return 8;
-        }
-      }
+      extractedBuckets = extractBuckets(getHighestCount(fromPetition));
     } else {
-        return {
-        buckets: extractBuckets(getHighestCount(fromPetition.data.attributes.signatures_by_constituency)),
-        bucketFor: function(count) {
-          for(var i = 0; i < 8; i++) {
-            if (count <= this.buckets[i]) {
-              return i;
-            }
+      extractedBuckets = extractBuckets(getHighestCount(fromPetition.data.attributes.signatures_by_constituency));
+    }
+    return {
+      buckets: extractedBuckets,
+      bucketFor: function(count) {
+        for(var i = 0; i < 8; i++) {
+          if (count <= this.buckets[i]) {
+            return i;
           }
-          return 8;
         }
+        return 8;
       }
     }
   }
