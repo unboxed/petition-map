@@ -1,8 +1,11 @@
 (function($, PetitionMap) {
   PetitionMap.current_petition = PetitionMap.current_petition || undefined;
   PetitionMap.mp_data = PetitionMap.mp_data || undefined;
+  PetitionMap.population_data = PetitionMap.population_data || undefined;
   PetitionMap.current_area = PetitionMap.current_area || undefined;
   PetitionMap.signature_buckets = PetitionMap.signature_buckets || undefined;
+  PetitionMap.weighted_current_petition = PetitionMap.weighted_current_petition || undefined;
+  PetitionMap.is_weighted = PetitionMap.is_weighted || false;
 
   var ui_hidden = false,
     spinnerOpts = { // Options for loading spinner
@@ -45,7 +48,7 @@
 
   // On start load the petition data
   $(document).ready(function() {
-    $.when(populatePetitionDropdown(), loadMPData()).then(function() {
+    $.when(populatePetitionDropdown(), loadPopulationData(), loadMPData()).then(function() {
       preparePetitionAndView();
     });
   });
@@ -117,6 +120,31 @@
       });
   }
 
+  // Load population JSON data
+  function loadPopulationData() {
+    return $.getJSON("json/mps/population_ons.json")
+      .done(function (data) {
+        PetitionMap.population_data = data;
+      });
+  }
+
+  function convertDataToSimplifiedFormat(current_petition) {
+    var signatures = current_petition.data.attributes.signatures_by_constituency;
+    var converted_data = {};
+    for (i = 0; i < signatures.length; i++) {
+        var ons_code = signatures[i].ons_code;
+        var converted;
+        if (PetitionMap.is_weighted) {
+          var constituency_pop = PetitionMap.population_data[ons_code].population;
+          converted = (signatures[i].signature_count / constituency_pop) * 10000;
+        } else {
+          converted = signatures[i].signature_count;
+        }
+        converted_data[signatures[i].ons_code] = converted;
+    }
+    return converted_data;
+  }
+
   // Get petition Url from ref - might be a number (from params or
   // dropdown) or a full url (from text input)
   function getPetitionUrlFromReference(petitionReference) {
@@ -138,7 +166,8 @@
     $.getJSON(petitionUrl + '.json')
       .done(function (data) {
         PetitionMap.current_petition = data;
-        PetitionMap.signature_buckets = SignatureBuckets(data);
+        PetitionMap.weighted_current_petition = convertDataToSimplifiedFormat(data);
+        PetitionMap.signature_buckets = SignatureBuckets(PetitionMap.weighted_current_petition);
         updateKey(PetitionMap.signature_buckets.buckets);
         $.when(reloadMap()).then(function () {
           deferredPetitionLoadedAndDrawn.resolve();
@@ -155,11 +184,19 @@
   }
 
   function updateKey(fromBuckets) {
-    $('#t1').html("1 - " +  fromBuckets[1]);
-    for (i = 1; i <= 6; i++) {
-      $('#t' + (i + 1)).html((fromBuckets[i]+1) + " - " +  fromBuckets[i + 1]);
+    if (PetitionMap.is_weighted) {
+      $('#t1').html("0% - " +  (fromBuckets[1] / 100) + "%");
+      for (i = 1; i <= 6; i++) {
+        $('#t' + (i + 1)).html((fromBuckets[i] / 100) + "% - " + (fromBuckets[i + 1] / 100) + "%");
+      }
+      $('#t8').html((fromBuckets[7] / 100) + "% +");
+    } else {
+      $('#t1').html("1 - " +  fromBuckets[1]);
+      for (i = 1; i <= 6; i++) {
+        $('#t' + (i + 1)).html((fromBuckets[i] + 1) + " - " +  fromBuckets[i + 1]);
+      }
+      $('#t8').html((fromBuckets[7] + 1) + " +");
     }
-    $('#t8').html((fromBuckets[7]+1) + " +");
   }
 
   function SignatureBuckets(fromPetition) {
@@ -167,9 +204,9 @@
       var highest_count = 0;
 
       $.each(fromConstituencies, function (index, item) {
-        if (item.signature_count >= highest_count) {
-          highest_count = item.signature_count;
-        }
+          if (item >= highest_count) {
+            highest_count = item;
+          }
       });
 
       return highest_count;
@@ -189,7 +226,7 @@
     }
 
     return {
-      buckets: extractBuckets(getHighestCount(fromPetition.data.attributes.signatures_by_constituency)),
+      buckets: extractBuckets(getHighestCount(fromPetition)),
       bucketFor: function(count) {
         for(var i = 0; i < 8; i++) {
           if (count <= this.buckets[i]) {
@@ -207,7 +244,7 @@
 
     var count = numberWithCommas(PetitionMap.current_petition.data.attributes.signature_count);
 
-    var sign_link = 'https://petition.parliament.uk/petitions/' + PetitionMap.current_petition.data.id + '/signatures/new';
+    var sign_link = 'https://petition.parliament.uk/petitions/' + PetitionMap.current_petition.data.id;
     var count_html = '<p class="signatures_count"><span class="data">' + count + '</span> signatures</p>';
     var sign_html = '<a class="flat_button sign" href="' + sign_link + '"><i class="fa fa-pencil"></i> Sign Petition</a>';
 
@@ -232,6 +269,17 @@
     });
   }
 
+  function changeColouring() {
+    var colouring = $("input[name='weighted']:checked").val();
+    if (colouring === "percentage") {
+      PetitionMap.is_weighted = true;
+    } else {
+      PetitionMap.is_weighted = false;
+    }
+    spinner.spin(target);
+    preparePetitionAndView();
+  }
+
   // Reload map
   function reloadMap() {
     var dataFile = 'json/uk/' + PetitionMap.current_area + '/topo_wpc.json';
@@ -246,7 +294,7 @@
     spinner.spin(target);
     var petition_id = $("#petition_dropdown").val()
 
-    $.when(loadPetition(petition_id)).then(function() {
+    $.when(loadPetition(petition_id, false)).then(function() {
       pushstateHandler();
     });
   };
@@ -256,7 +304,7 @@
 
     var petition_url = $('#petition_url').val()
 
-    $.when(loadPetition(petition_url)).then(function() {
+    $.when(loadPetition(petition_url, false)).then(function() {
       pushstateHandler();
     });
   };
@@ -276,6 +324,9 @@
 
   function displayConstituencyInfo(_event, constituency) {
     var mpForConstituency = PetitionMap.mp_data[constituency.id];
+    var percentage = PetitionMap.weighted_current_petition[constituency.id] / 100;
+    var percentage = Math.round(percentage * 100) / 100;
+    var population = PetitionMap.population_data[constituency.id].population;
 
     $('#constituency_info').hide();
     $('#constituency_info').html("");
@@ -294,6 +345,7 @@
     $('#constituency_info').append('<p class="mp">' + mpForConstituency.mp + '</p>');
     $('#constituency_info').append('<p class="party">' + mpForConstituency.party + '</p>');
     $('#constituency_info').append('<p class="signatures_count"><span class="data">' + numberWithCommas(count) + '</span> signatures</p>');
+    $('#constituency_info').append('<p class="percentage">' + percentage + "% of " + population + " constituents" + '</p>');
     if (!ui_hidden) {
       $('#constituency_info').show();
     }
@@ -350,6 +402,9 @@
 
   // Area selection
   $("input[name='area']").on('change', changeArea);
+
+  // Weighted selection
+  $("input[name='weighted']").on('change', changeColouring);
 
   // Petition selection
   $("#petition_dropdown").on('change', showPetitionFromDropdown);

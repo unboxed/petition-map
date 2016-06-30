@@ -1,11 +1,11 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600);
 
 
 /* General */
 
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   background-color: white;
   font-weight: 300;
   margin: 0em;
@@ -41,9 +41,15 @@ th, td {
 main {
   width: 100%;
   position: absolute;
-  top: 3.5em; /* header height: 3em + 2em * 0.7 */
-  bottom: 4em; /* footer height: 3em + 2em * 0.8 */
+  top: 3.15em; /* header height: 2.5em + 2em * 0.7 */
+  bottom: 4.8em; /* footer height: 4em + 2em * 0.8 */
   color: white;
+}
+
+@media (max-width: 480px) {
+  main {
+    top: 3.5em;
+  }
 }
 
 #petition_info {
@@ -51,21 +57,15 @@ main {
   background-color: #812A80;
   bottom: 1em;
   left: 1em;
-  font-size: 0.5em;
+  font-size: 0.7em;
   max-width: 20%;
   padding: 1em;
 }
 
-@media (max-height: 480px) {
+@media (max-width: 480px) {
   #petition_info {
     font-size: 0.3em;
     max-width: 25%;
-  }
-}
-
-@media (max-height: 360px) {
-  #petition_info {
-    visibility: hidden;
   }
 }
 
@@ -88,9 +88,11 @@ main {
   font-size: 1.2em;
   font-weight: 400;
   margin-top: 0em;
+  line-height: 1.3em;
 }
 .signatures_count {
-  font-size: 1.5em;
+  font-size: 1.3em;
+  padding-bottom: 0.5em;
 }
 .signatures_count .data {
   font-weight: 300;
@@ -124,13 +126,13 @@ main {
   top: 1em;
   left: 1em;
   width: 18%;
-  font-size: 0.5em;
+  font-size: 0.7em;
   padding: 1em;
 }
 
-@media (max-height: 480px) {
+@media (max-width: 480px) {
   #constituency_info {
-    width: 35%;
+    width: 30%;
     font-size: 0.3em;
   }
 }
@@ -144,21 +146,16 @@ main {
   opacity: 0.75;
   top: 1em;
   right: 1em;
-  max-width: 100px;
+  max-width: 150px;
   padding: 0.5em;
-  font-size: 0.5em;
+  font-size: 0.7em;
 }
 
-@media (max-height: 480px) {
+@media (max-width: 480px) {
   #key {
     font-size: 0.3em;
+    max-width: 120px;
     padding: 2px;
-  }
-}
-
-@media (max-height: 360px) {
-  #key {
-    visibility: hidden;
   }
 }
 
@@ -227,20 +224,52 @@ header {
   padding: 1em;
   overflow: auto;
   font-size: 0.7em;
-  height: 3em;
+  height: 2.5em;
+}
+
+@media (max-width: 480px) {
+  header {
+    height: 3em;
+  }
 }
 
 header h1 {
-  font-size: 1.5em;
+  font-size: 1.6em;
   margin-bottom: 0em;
 }
 
 h1 .built-by {
-  display: block  ;
+  display: inline-block;
   font-size: 0.6em;
 }
+
+@media (max-width: 480px) {
+  h1 .built-by {
+    display: block;
+    font-size: 0.4em;
+  }
+}
 h1 .built-by a {
-  font-weight: bold;
+  font-weight: 600px;
+}
+
+.weighted-options {
+  float: right;
+  margin-top: -2em;
+  margin-right: 3em;
+}
+
+@media (max-width: 480px) {
+  .weighted-options {
+    font-size: 0.5em;
+    position: relative;
+    bottom: 5px;
+  }
+
+  .weighted-options input {
+    position: relative;
+    top: 3px;
+  }
 }
 
 footer {
@@ -255,20 +284,23 @@ footer {
   padding-top: 1em;
   padding-bottom: 1em;
   font-size: 0.8em;
-  height: 3em;
+  height: 4em;
+}
+
+.footer-item {
+  padding-bottom: 1em;
+}
+
+.about-modal {
+  background-color: #812A80;
 }
 
 .about-panel {
   background-color: #812A80;
   color: white;
-/*  position: fixed;
-  overflow: scroll;
-  top: 5.5em; /* header height: 3em + 2em * 0.7 */
-  bottom: 6em; /* footer height: 3em + 2em * 0.8 */
   left: 2em;
   right: 2em;
-  padding: 2em;
-*/
+  padding: 1em;
 }
 
 .about-panel div {
@@ -276,13 +308,15 @@ footer {
 }
 
 .about-panel .help {
-  font-size: 0.9em;
+  font-size: 0.7em;
+  line-height: 1.6em;
 }
 
 .about-panel .licence {
   border-top: 1px solid #c29fd1;
   padding-top: 2em;
   font-size: 0.6em;
+  line-height: 1.6em;
 }
 
 .about-panel .licence a {
@@ -291,6 +325,24 @@ footer {
 
 .about-panel .licence a:hover {
   color: white;
+}
+
+.about-panel .licence p {
+  margin-bottom: 1em;
+}
+
+.about-panel h1 {
+  font-size: 1.5em;
+}
+
+.about-panel h2 {
+  font-size: 1em;
+  text-decoration: underline;
+  font-weight: 400;
+}
+
+.about-panel .built-by {
+  display: inline-block;
 }
 
 footer .hide-ui {
@@ -328,6 +380,8 @@ footer .about-button {
   margin-top: 0em;
   font-size: 1em;
   margin-bottom: 0.5em;
+  font-weight: 400;
+  color: white;
 }
 
 .share-panel input[name=petition-link] {

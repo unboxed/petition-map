@@ -1,8 +1,11 @@
 (function($, d3, PetitionMap) {
   PetitionMap.current_petition = PetitionMap.current_petition || undefined;
   PetitionMap.mp_data = PetitionMap.mp_data || undefined;
+  PetitionMap.population_data = PetitionMap.population_data || undefined;
   PetitionMap.current_area = PetitionMap.current_area || undefined;
   PetitionMap.signature_buckets = PetitionMap.signature_buckets || undefined;
+  PetitionMap.weighted_current_petition = PetitionMap.weighted_current_petition || undefined;
+  PetitionMap.is_weighted = PetitionMap.is_weighted || false;
 
   var width, height;
 
@@ -154,12 +157,13 @@
   }
 
   function colourConstituencies(heatmap) {
-    var constituencies = PetitionMap.current_petition.data.attributes.signatures_by_constituency;
+    var constituencies = PetitionMap.weighted_current_petition;
 
     d3.selectAll(".coloured").attr("class", "area");
     $.each(constituencies, function (index, item) {
-      var id = "#" + item.ons_code;
-      var index = heatmap.bucketFor(item.signature_count);
+      var id, index;
+      id = "#" + index;
+      index = heatmap.bucketFor(item);
       var colour_class = "c" + index + " coloured";
       d3.select(id).attr("class", colour_class);
     });
