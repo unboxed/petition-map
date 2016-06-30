@@ -348,7 +348,7 @@
     $('#constituency_info').append('<p class="mp">' + mpForConstituency.mp + '</p>');
     $('#constituency_info').append('<p class="party">' + mpForConstituency.party + '</p>');
     $('#constituency_info').append('<p class="signatures_count"><span class="data">' + numberWithCommas(count) + '</span> signatures</p>');
-    $('#constituency_info').append('<p class="percentage">' + percentage + "% of " + population + " constituents" + '</p>');
+    $('#constituency_info').append('<p class="percentage">' + percentage + "% of " + numberWithCommas(population) + " constituents" + '</p>');
     if (!ui_hidden) {
       $('#constituency_info').show();
     }
