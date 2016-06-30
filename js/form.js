@@ -325,6 +325,9 @@
   function displayConstituencyInfo(_event, constituency) {
     var mpForConstituency = PetitionMap.mp_data[constituency.id];
     var percentage = PetitionMap.weighted_current_petition[constituency.id] / 100;
+    if (!PetitionMap.is_weighted) {
+      percentage = percentage / 10;
+    }
     var percentage = Math.round(percentage * 100) / 100;
     var population = PetitionMap.population_data[constituency.id].population;
 
