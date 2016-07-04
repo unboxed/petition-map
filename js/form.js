@@ -174,6 +174,7 @@
         }, function() {
           deferredPetitionLoadedAndDrawn.reject();
         });
+        addPetitionToDropdown(petitionReference, data.data.attributes.action);
       })
       .fail(function() {
         alert('Petition not found! (Looking for: '+petitionReference+')');
@@ -181,6 +182,16 @@
       });
 
     return deferredPetitionLoadedAndDrawn;
+  }
+
+  // Adds petition to dropdown list if it is not in list of most popular
+  function addPetitionToDropdown(petitionReference, petitionAction) {
+    if (!$('#petition_dropdown option[value=' + petitionReference + ']').val()) {
+      $('#petition_dropdown').append(
+        $('<option></option>').val(petitionReference).html(petitionAction)
+      );
+      $('#petition_dropdown option[value=' + petitionReference + ']').prop('selected', true);
+    }
   }
 
   function updateKey(fromBuckets) {
