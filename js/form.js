@@ -336,14 +336,18 @@
   function displayConstituencyInfo(_event, constituency) {
     var mpForConstituency = PetitionMap.mp_data[constituency.id];
     var population = PetitionMap.population_data[constituency.id].population;
-    var percentage;
-    if (PetitionMap.is_weighted) {
-      percentage = PetitionMap.weighted_current_petition[constituency.id] / 100;
-    } else {
-      percentage = (PetitionMap.weighted_current_petition[constituency.id] / population) * 100;
-    }
+    var percentage = PetitionMap.weighted_current_petition[constituency.id];
 
-    var percentage = Math.round(percentage * 100) / 100;
+    if (percentage !== undefined) {
+      if (PetitionMap.is_weighted) {
+        percentage = PetitionMap.weighted_current_petition[constituency.id] / 100;
+      } else {
+        percentage = (PetitionMap.weighted_current_petition[constituency.id] / population) * 100;
+      }
+      percentage = Math.round(percentage * 100) / 100;
+    } else {
+      percentage = 0;
+    }
 
     $('#constituency_info').hide();
     $('#constituency_info').html("");
