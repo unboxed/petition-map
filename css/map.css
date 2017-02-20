@@ -23,20 +23,12 @@
   stroke-width: 1;
 }
 
-.c1 { fill: #fed976; }
-.c2 { fill: #feb24c; }
-.c3 { fill: #fd8d3c; }
-.c4 { fill: #fc4e2a; }
-.c5 { fill: #e31a1c; }
-.c6 { fill: #b10026; }
-.c7 { fill: #8d001e; }
-.c8 { fill: #6a0016; }
-
-.t1 { color: #fed976; }
-.t2 { color: #feb24c; }
-.t3 { color: #fd8d3c; }
-.t4 { color: #fc4e2a; }
-.t5 { color: #e31a1c; }
-.t6 { color: #b10026; }
-.t7 { color: #8d001e; }
-.t8 { color: #6a0016; }
+.c0 { fill: #C0C0C0; color: #C0C0C0; }
+.c1 { fill: #fed976; color: #fed976; }
+.c2 { fill: #feb24c; color: #feb24c; }
+.c3 { fill: #fd8d3c; color: #fd8d3c; }
+.c4 { fill: #fc4e2a; color: #fc4e2a; }
+.c5 { fill: #e31a1c; color: #e31a1c; }
+.c6 { fill: #b10026; color: #b10026; }
+.c7 { fill: #8d001e; color: #8d001e; }
+.c8 { fill: #6a0016; color: #6a0016; }
