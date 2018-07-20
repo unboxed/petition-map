@@ -257,7 +257,7 @@
 
     var sign_link = 'https://petition.parliament.uk/petitions/' + PetitionMap.current_petition.data.id;
     var count_html = '<p class="signatures_count"><span class="data">' + count + '</span> signatures</p>';
-    var sign_html = '<a class="flat_button sign" href="' + sign_link + '"><i class="fa fa-pencil"></i> Sign Petition</a>';
+    var sign_html = '<a class="flat_button sign" id="sign_petition_btn" href="' + sign_link + '"><i class="fa fa-pencil"></i> Sign Petition</a>';
 
     var petition_details =
       '<div class="petition-details">' +
@@ -268,6 +268,15 @@
 
     $('#petition_info .petition-details').replaceWith(petition_details);
     $('#petition_info').show();
+
+    // returns the status of petition i.e. 'closed', 'open'
+    var petitionStatus = PetitionMap.current_petition.data.attributes.state
+
+    if (petitionStatus === 'open') {
+      $('#sign_petition_btn').show();
+    } else {
+      $('#sign_petition_btn').hide();
+    }
   }
 
   // Reset zoom and reload map with new area
