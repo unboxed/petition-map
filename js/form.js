@@ -149,7 +149,7 @@
   // dropdown) or a full url (from text input)
   function getPetitionUrlFromReference(petitionReference) {
     petitionReference = petitionReference.trim();
-    if (petitionReference.match(/^https:\/\/petition\.parliament\.uk\/petitions\/\d+/i)) {
+    if (petitionReference.match(/^https:\/\/petition\.parliament\.uk(?:\/archived)?\/petitions\/\d+/i)) {
       return petitionReference.replace(/(\/|\.json)$/,'');
     } else if (petitionReference.match(/^\d+$/)) {
       return 'https://petition.parliament.uk/petitions/' + petitionReference;
