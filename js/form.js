@@ -102,7 +102,7 @@
 
   // Loads MP JSON data and fills constituency dropdown
   function loadMPData() {
-    return $.getJSON("json/mps/constituency_party_ons.json")
+    return $.getJSON("https://petition.parliament.uk/constituencies.json")
       .done(function (data) {
         PetitionMap.mp_data = data;
         var sorted_mp_data = []
