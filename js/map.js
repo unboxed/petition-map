@@ -25,7 +25,7 @@
       "GreenParty",
       "Independent",
       "Labour",
-      "LabourCooperative",
+      "LabourCoop",
       "LiberalDemocrat",
       "PlaidCymru",
       "ScottishNationalParty",
