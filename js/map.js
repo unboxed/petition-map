@@ -5,7 +5,7 @@
   PetitionMap.current_area = PetitionMap.current_area || undefined;
   PetitionMap.signature_buckets = PetitionMap.signature_buckets || undefined;
   PetitionMap.weighted_current_petition = PetitionMap.weighted_current_petition || undefined;
-  PetitionMap.is_weighted = PetitionMap.is_weighted || false;
+  PetitionMap.is_weighted = PetitionMap.is_weighted || true;
 
   var width, height;
 
