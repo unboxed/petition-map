@@ -372,8 +372,8 @@
     });
 
     $('#constituency_info').append('<h2>' + mpForConstituency.constituency + "</h2>");
-    $('#constituency_info').append('<p class="mp">' + mpForConstituency.mp + '</p>');
-    $('#constituency_info').append('<p class="party">' + mpForConstituency.party + '</p>');
+    $('#constituency_info').append('<p class="mp">' + (mpForConstituency.mp || "") + '</p>');
+    $('#constituency_info').append('<p class="party">' + (mpForConstituency.party || "") + '</p>');
     $('#constituency_info').append('<p class="signatures_count"><span class="data">' + numberWithCommas(count) + '</span> signatures</p>');
     $('#constituency_info').append('<p class="percentage">' + percentage + "% of " + numberWithCommas(population) + " constituents" + '</p>');
     if (!ui_hidden) {

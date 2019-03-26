@@ -204,7 +204,7 @@
 
   // Strips whitespace from a string
   function stripWhitespace(string) {
-    return string.replace(/[^a-zA-Z]/g, '');
+    return (string || "").replace(/[^a-zA-Z]/g, '');
   }
 
 
