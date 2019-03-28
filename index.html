@@ -150,6 +150,15 @@
                   </div>
                 </details>
               </div>
+              <div class="controls-row">
+                <details>
+                  <summary class="flat_button" tabindex="8" title="Choose map style">Choose map style</summary>
+                  <div>
+                    <label class="inline" title="Show geographic map"><input type="radio" name="map_mode" value="topo" checked tabindex="10">Geographic</label>
+                    <label class="inline" title="Show hexagon map"><input type="radio" name="map_mode" value="hex" tabindex="10">Hexagons</label>
+                  </div>
+                </details>
+              </div>
             </section>
             <section id="map">
                 <div id="spinner_area">
@@ -166,6 +175,7 @@
         <script src="plugins/vex/js/vex.combined.min.js"></script>
         <script>vex.defaultOptions.className = 'vex-theme-plain';</script>
         <script src="plugins/details/details.polyfill.js"></script>
+        <script src="plugins/d3-hexjson/d3-hexjson.min.js"></script>
 
         <!--[if lt IE 9]>
           <script src="plugins/html5shiv/html5shiv.js"></script>
@@ -200,6 +210,14 @@
           <p>
               <a href="https://github.com/martinjc/UK-GeoJson">GeoJSON and TopoJSON UK Boundary Data</a>
               by Martin Chorley is licensed under a Creative Commons Attribution 4.0 International License.
+          </p>
+          <p>
+              <a href="https://github.com/odileeds/hexmaps/">HexJSON UK Constituencies data</a>
+              by ODI Leeds is licensed under an MIT License.
+          </p>
+          <p>
+              <a href="https://github.com/olihawkins/d3-hexjson">D3-HexJSON</a>
+              by Oliver Hawkins is licensed under the BSD 3-Clause "New" or "Revised" License.
           </p>
           <p>
               Contains Ordnance Survey, Office of National Statistics and National Records Scotland data © Crown copyright and database right [2017]. Ordnance Survey data covered by OS OpenData Licence.

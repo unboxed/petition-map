@@ -3,6 +3,7 @@
   PetitionMap.mp_data = PetitionMap.mp_data || undefined;
   PetitionMap.population_data = PetitionMap.population_data || undefined;
   PetitionMap.current_area = PetitionMap.current_area || undefined;
+  PetitionMap.map_mode = PetitionMap.map_mode || undefined;
   PetitionMap.signature_buckets = PetitionMap.signature_buckets || undefined;
   PetitionMap.weighted_current_petition = PetitionMap.weighted_current_petition || undefined;
   PetitionMap.is_weighted = PetitionMap.is_weighted || true;
@@ -71,17 +72,32 @@
         area = variables.area;
       }
     }
-
     PetitionMap.current_area = area;
+
+    map_mode = 'topo';
+    if (variables.map_mode !== undefined) {
+      if (possibleMapModes().indexOf(variables.map_mode) !== -1) {
+        map_mode = variables.map_mode;
+      }
+    }
+    PetitionMap.map_mode = map_mode;
+
     $('input[name=area][value=' + area + ']').prop('checked',true);
+    $('input[name=map_mode][value=' + map_mode + ']').prop('checked',true);
     $('#petition_dropdown option[value=' + petition_id + ']').prop('selected', true);
     return loadPetition(petition_id, false);
   }
 
   function possibleAreas() {
-    var possibleAreas = []
+    var possibleAreas = [];
     $.each($('input[name=area]'), function(idx, elem) { possibleAreas[idx] = $(elem).attr('value'); });
     return possibleAreas;
+  }
+
+  function possibleMapModes() {
+    var possibleMapModes = [];
+    $.each($('input[name=map_mode]'), function(idx, elem) { possibleMapModes[idx] = $(elem).attr('value'); });
+    return possibleMapModes;
   }
 
   // Extracts variables from url
@@ -289,6 +305,16 @@
     });
   }
 
+  // Reset zoom and reload map with new mode
+  function changeMapMode() {
+    spinner.spin(target);
+    PetitionMap.map_mode = $("input[name='map_mode']:checked").val();
+    PetitionMap.resetMapState();
+    $.when(reloadMap()).then(function() {
+      pushstateHandler();
+    });
+  }
+
   function changeColouring() {
     var colouring = $("input[name='weighted']:checked").val();
     if (colouring === "percentage") {
@@ -302,7 +328,7 @@
 
   // Reload map
   function reloadMap() {
-    var dataFile = 'json/uk/' + PetitionMap.current_area + '/topo_wpc.json';
+    var dataFile = 'json/uk/' + PetitionMap.current_area + '/' + PetitionMap.map_mode + '_wpc.json';
     return $.when(PetitionMap.loadMapData(dataFile, 'wpc')).then(function() {
       displayPetitionInfo();
       $('#key').fadeIn();
@@ -330,28 +356,25 @@
   };
 
   function highlightConstituencyFromDropdown() {
-    var ons_code = $("#constituency").val(),
-      constituency_data = {
-        "id": ons_code
-      };
+    var ons_code = $("#constituency").val();
 
-    $(window).trigger('petitionmap:constituency-on', constituency_data);
+    $(window).trigger('petitionmap:constituency-on', ons_code);
   };
 
-  function selectConstituencyInDropdown(_event, constituency) {
-    $('#constituency option[value='+constituency.id+']').prop('selected', true);
+  function selectConstituencyInDropdown(_event, constituency_id) {
+    $('#constituency option[value='+constituency_id+']').prop('selected', true);
   }
 
-  function displayConstituencyInfo(_event, constituency) {
-    var mpForConstituency = PetitionMap.mp_data[constituency.id];
-    var population = PetitionMap.population_data[constituency.id].population;
-    var percentage = PetitionMap.weighted_current_petition[constituency.id];
+  function displayConstituencyInfo(_event, constituency_id) {
+    var mpForConstituency = PetitionMap.mp_data[constituency_id];
+    var population = PetitionMap.population_data[constituency_id].population;
+    var percentage = PetitionMap.weighted_current_petition[constituency_id];
 
     if (percentage !== undefined) {
       if (PetitionMap.is_weighted) {
-        percentage = PetitionMap.weighted_current_petition[constituency.id] / 100;
+        percentage = PetitionMap.weighted_current_petition[constituency_id] / 100;
       } else {
-        percentage = (PetitionMap.weighted_current_petition[constituency.id] / population) * 100;
+        percentage = (PetitionMap.weighted_current_petition[constituency_id] / population) * 100;
       }
       percentage = Math.round(percentage * 100) / 100;
     } else {
@@ -365,7 +388,7 @@
         data_found = false;
 
     $.each(PetitionMap.current_petition.data.attributes.signatures_by_constituency, function(i, v) {
-      if (v.ons_code === constituency.id) {
+      if (v.ons_code === constituency_id) {
         count = v.signature_count;
         return;
       }
@@ -381,7 +404,7 @@
     }
   }
 
-  function hideConstituencyInfo(_event, _constituency) {
+  function hideConstituencyInfo(_event, _constituency_id) {
     //$('#constituency_info').show();
   }
 
@@ -433,6 +456,9 @@
   // Area selection
   $("input[name='area']").on('change', changeArea);
 
+  // Map mode selection
+  $("input[name='map_mode']").on('change', changeMapMode);
+
   // Weighted selection
   $("input[name='weighted']").on('change', changeColouring);
 
@@ -466,6 +492,9 @@
     }
     if (PetitionMap.current_area !== undefined) {
       state.area = PetitionMap.current_area;
+    }
+    if (PetitionMap.map_mode !== undefined) {
+      state.map_mode = PetitionMap.map_mode;
     }
     return state;
   }

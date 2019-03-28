@@ -3,6 +3,7 @@
   PetitionMap.mp_data = PetitionMap.mp_data || undefined;
   PetitionMap.population_data = PetitionMap.population_data || undefined;
   PetitionMap.current_area = PetitionMap.current_area || undefined;
+  PetitionMap.map_mode = PetitionMap.map_mode || undefined;
   PetitionMap.signature_buckets = PetitionMap.signature_buckets || undefined;
   PetitionMap.weighted_current_petition = PetitionMap.weighted_current_petition || undefined;
   PetitionMap.is_weighted = PetitionMap.is_weighted || true;
@@ -48,16 +49,20 @@
 
   // Initialise map
   function init(width, height) {
-    // a UK centric projection inspired by http://bost.ocks.org/mike/map/
-    projection = d3.geo.albers()
-      .center([0, 55.4])
-      .rotate([3.4, 0])
-      .parallels([50, 60])
-      .scale(5000)
-      .translate([width / 2, height / 2]);
+    if (PetitionMap.map_mode === 'topo') {
+      // a UK centric projection inspired by http://bost.ocks.org/mike/map/
+      projection = d3.geo.albers()
+        .center([0, 55.4])
+        .rotate([3.4, 0])
+        .parallels([50, 60])
+        .scale(5000)
+        .translate([width / 2, height / 2]);
 
-    path = d3.geo.path()
-      .projection(projection);
+      path = d3.geo.path()
+        .projection(projection);
+    } else if (PetitionMap.map_mode === 'hex') {
+      projection = path = undefined;
+    }
 
     svg = d3.select("#map").append("svg")
       .attr("width", width)
@@ -71,6 +76,24 @@
 
   // Draw map on SVG element
   function draw(boundaries) {
+    // So that we can pan and zoom with the mouse while focused outside of the map (in the
+    // sea) we create a rectangle object covering the whole area so there is _something_ under
+    // the cursor which will trigger the event listener.
+    g.append("rect")
+      .attr("class", "map-background")
+      .attr("x", -width)
+      .attr("y", -height)
+      .attr("width", width * 3)
+      .attr("height", height * 3);
+
+    if (PetitionMap.map_mode === "topo") {
+      drawTopo(boundaries);
+    } else if (PetitionMap.map_mode === "hex") {
+      drawHex(boundaries);
+    }
+  }
+
+  function drawTopo(boundaries) {
     if (PetitionMap.current_area === "uk") {
       projection.center([0, 55.4]);
     } else if (PetitionMap.current_area === "eng") {
@@ -92,16 +115,6 @@
 
     projection.scale(scale);
 
-    // So that we can pan and zoom with the mouse while focused outside of the map (in the
-    // sea) we create a rectangle object covering the whole area so there is _something_ under
-    // the cursor which will trigger the event listener.
-    g.append("rect")
-      .attr("class", "map-background")
-      .attr("x", -width)
-      .attr("y", -height)
-      .attr("width", width * 3)
-      .attr("height", height * 3);
-
     // Add an area for each feature in the topoJSON (constituency)
     g.selectAll(".area")
       .data(topojson.feature(boundaries, boundaries.objects[units]).features)
@@ -110,8 +123,8 @@
       .attr("id", function(d) {return d.id})
       .attr("d", path)
       .attr('vector-effect', 'non-scaling-stroke')
-      .on("mouseenter", function(constituency){ $(window).trigger('petitionmap:constituency-on', constituency); })
-      .on("mouseleave", function(constituency){ $(window).trigger('petitionmap:constituency-off', constituency); });
+      .on("mouseenter", function(constituency_boundary){ $(window).trigger('petitionmap:constituency-on', constituency_boundary.id); })
+      .on("mouseleave", function(constituency_boundary){ $(window).trigger('petitionmap:constituency-off', constituency_boundary.id); });
 
     // Add a boundary between areas
     g.append("path")
@@ -121,6 +134,57 @@
       .attr('vector-effect', 'non-scaling-stroke');
   }
 
+  function drawHex(hexjson) {
+    var hex_box_width = width * 0.95,
+      hex_box_height = height * 0.95;
+
+    var hexes = d3.renderHexJSON(hexjson, hex_box_width, hex_box_height);
+
+    var hex_half_width = hexes[0].vertices[1].x,
+      hex_radius = hexes[0].vertices[3].y;
+
+    var xmax = d3.max(hexes, function (h) { return +h.x }),
+      ymax = d3.max(hexes, function (h) { return +h.y }),
+      xmin = d3.min(hexes, function (h) { return +h.x }),
+      ymin = d3.min(hexes, function (h) { return +h.y });
+
+    var hex_top = ymin - hex_radius,
+      hex_bottom = ymax + hex_radius,
+      hex_left = xmin - hex_half_width,
+      hex_right = xmax + hex_half_width;
+
+    var hexes_width = hex_right - hex_left,
+      hexes_height = hex_bottom - hex_top;
+
+    var margin_x = (width - hexes_width) / 2,
+      margin_y = (height - hexes_height) / 2;
+
+    var hexmap = g.selectAll(".hex-area")
+      .data(hexes)
+      .enter()
+      .append("g")
+      .attr("class", "hex-area")
+      .attr("id", function(hex) { return "hex-"+hex.key; })
+      .attr("transform", function(hex) {
+        return "translate(" + (margin_x + hex.x) + "," + (margin_y + hex.y) + ")";
+      })
+
+    // Draw the polygons around each data hex's centre
+    hexmap
+      .append("polygon")
+      .attr("points", function(hex) { return hex.points; })
+      .attr("class", "area")
+      .attr("id", function(hex) { return hex.key; })
+      .attr('vector-effect', 'non-scaling-stroke')
+      .on("mouseenter", function(constituency_hex){ $(window).trigger('petitionmap:constituency-on', constituency_hex.key); })
+      .on("mouseleave", function(constituency_hex){ $(window).trigger('petitionmap:constituency-off', constituency_hex.key); });
+
+    hexmap
+      .append("polygon")
+      .attr("points", function(hex) { return hex.points; })
+      .attr("class", "boundary")
+      .attr('vector-effect', 'non-scaling-stroke')
+  }
 
   ////////////////////////////////////////////////////////////////////////
 
@@ -175,19 +239,19 @@
 
   // Show constituency info and party colours on select
   // (hover on desktop or click on mobile)
-  function highlightConstituencyOnMap(_event, constituency) {
-    var mpForConstituency = PetitionMap.mp_data[constituency.id],
+  function highlightConstituencyOnMap(_event, constituency_id) {
+    var mpForConstituency = PetitionMap.mp_data[constituency_id],
       party_class = stripWhitespace(mpForConstituency.party);
     deselectPartyColours();
-    d3.select("#" + constituency.id).classed(party_class, true);
-    d3.select("#" + constituency.id).classed("selected_boundary", true);
+    d3.select("#" + constituency_id).classed(party_class, true);
+    d3.select("#" + constituency_id).classed("selected_boundary", true);
   }
 
   // Remove classes from other constituencies on deselect
-  function dehighlightConstituencyOnMap(_event, constituency) {
-    // var party_class = stripWhitespace(PetitionMap.mp_data[constituency.id].party);
-    // d3.select("#" + constituency.id).classed(party_class, false);
-    // d3.select("#" + constituency.id).classed("selected_boundary", false);
+  function dehighlightConstituencyOnMap(_event, constituency_id) {
+    // var party_class = stripWhitespace(PetitionMap.mp_data[constituency_id].party);
+    // d3.select("#" + constituency_id).classed(party_class, false);
+    // d3.select("#" + constituency_id).classed("selected_boundary", false);
   }
 
   // Removes all other party colour classes from constituencies
@@ -235,7 +299,6 @@
       factor = 0.2,
       target_zoom = 1,
       center = [width / 2, height / 2],
-      extent = zoom.scaleExtent(),
       translate = zoom.translate(),
       translate0 = [],
       l = [],
@@ -244,8 +307,6 @@
     d3.event.preventDefault();
     direction = (this.id === 'zoom_in') ? 1 : -1;
     target_zoom = zoom.scale() * (1 + factor * direction);
-
-    if (target_zoom < extent[0] || target_zoom > extent[1]) { return false; }
 
     translate0 = [(center[0] - view.x) / view.k, (center[1] - view.y) / view.k];
     view.k = target_zoom;
