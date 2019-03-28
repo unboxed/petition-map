@@ -1,0 +1,23 @@
+{
+	"layout":"odd-r",
+	"hexes": {
+		"N06000001":{"n":"Belfast East","q":4,"r":-2,"a":"NI","u":"UKN","p":63157},
+		"N06000002":{"n":"Belfast North","q":3,"r":-1,"a":"NI","u":"UKN","p":68553},
+		"N06000003":{"n":"Belfast South","q":3,"r":-3,"a":"NI","u":"UKN","p":64927},
+		"N06000004":{"n":"Belfast West","q":3,"r":-2,"a":"NI","u":"UKN","p":62697},
+		"N06000005":{"n":"East Antrim","q":4,"r":0,"a":"NI","u":"UKN","p":62811},
+		"N06000006":{"n":"East Londonderry","q":2,"r":0,"a":"NI","u":"UKN","p":66926},
+		"N06000007":{"n":"Fermanagh and South Tyrone","q":1,"r":-2,"a":"NI","u":"UKN","p":70108},
+		"N06000008":{"n":"Foyle","q":1,"r":0,"a":"NI","u":"UKN","p":70036},
+		"N06000009":{"n":"Lagan Valley","q":2,"r":-3,"a":"NI","u":"UKN","p":71152},
+		"N06000010":{"n":"Mid Ulster","q":1,"r":-1,"a":"NI","u":"UKN","p":67832},
+		"N06000011":{"n":"Newry and Armagh","q":3,"r":-4,"a":"NI","u":"UKN","p":77633},
+		"N06000012":{"n":"North Antrim","q":3,"r":0,"a":"NI","u":"UKN","p":75876},
+		"N06000013":{"n":"North Down","q":4,"r":-1,"a":"NI","u":"UKN","p":64207},
+		"N06000014":{"n":"South Antrim","q":2,"r":-1,"a":"NI","u":"UKN","p":67425},
+		"N06000015":{"n":"South Down","q":4,"r":-3,"a":"NI","u":"UKN","p":75220},
+		"N06000016":{"n":"Strangford","q":5,"r":-2,"a":"NI","u":"UKN","p":64289},
+		"N06000017":{"n":"Upper Bann","q":1,"r":-3,"a":"NI","u":"UKN","p":80060},
+		"N06000018":{"n":"West Tyrone","q":0,"r":-1,"a":"NI","u":"UKN","p":63856}
+	}
+}
