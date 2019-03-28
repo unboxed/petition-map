@@ -299,7 +299,6 @@
       factor = 0.2,
       target_zoom = 1,
       center = [width / 2, height / 2],
-      extent = zoom.scaleExtent(),
       translate = zoom.translate(),
       translate0 = [],
       l = [],
@@ -308,8 +307,6 @@
     d3.event.preventDefault();
     direction = (this.id === 'zoom_in') ? 1 : -1;
     target_zoom = zoom.scale() * (1 + factor * direction);
-
-    if (target_zoom < extent[0] || target_zoom > extent[1]) { return false; }
 
     translate0 = [(center[0] - view.x) / view.k, (center[1] - view.y) / view.k];
     view.k = target_zoom;
