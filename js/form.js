@@ -83,6 +83,7 @@
     PetitionMap.map_mode = map_mode;
 
     $('input[name=area][value=' + area + ']').prop('checked',true);
+    $('input[name=map_mode][value=' + map_mode + ']').prop('checked',true);
     $('#petition_dropdown option[value=' + petition_id + ']').prop('selected', true);
     return loadPetition(petition_id, false);
   }
@@ -94,7 +95,8 @@
   }
 
   function possibleMapModes() {
-    var possibleMapModes = ['hex', 'topo'];
+    var possibleMapModes = [];
+    $.each($('input[name=map_mode]'), function(idx, elem) { possibleMapModes[idx] = $(elem).attr('value'); });
     return possibleMapModes;
   }
 
@@ -303,6 +305,16 @@
     });
   }
 
+  // Reset zoom and reload map with new mode
+  function changeMapMode() {
+    spinner.spin(target);
+    PetitionMap.map_mode = $("input[name='map_mode']:checked").val();
+    PetitionMap.resetMapState();
+    $.when(reloadMap()).then(function() {
+      pushstateHandler();
+    });
+  }
+
   function changeColouring() {
     var colouring = $("input[name='weighted']:checked").val();
     if (colouring === "percentage") {
@@ -443,6 +455,9 @@
 
   // Area selection
   $("input[name='area']").on('change', changeArea);
+
+  // Map mode selection
+  $("input[name='map_mode']").on('change', changeMapMode);
 
   // Weighted selection
   $("input[name='weighted']").on('change', changeColouring);
