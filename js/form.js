@@ -330,28 +330,25 @@
   };
 
   function highlightConstituencyFromDropdown() {
-    var ons_code = $("#constituency").val(),
-      constituency_data = {
-        "id": ons_code
-      };
+    var ons_code = $("#constituency").val();
 
-    $(window).trigger('petitionmap:constituency-on', constituency_data);
+    $(window).trigger('petitionmap:constituency-on', ons_code);
   };
 
-  function selectConstituencyInDropdown(_event, constituency) {
-    $('#constituency option[value='+constituency.id+']').prop('selected', true);
+  function selectConstituencyInDropdown(_event, constituency_id) {
+    $('#constituency option[value='+constituency_id+']').prop('selected', true);
   }
 
-  function displayConstituencyInfo(_event, constituency) {
-    var mpForConstituency = PetitionMap.mp_data[constituency.id];
-    var population = PetitionMap.population_data[constituency.id].population;
-    var percentage = PetitionMap.weighted_current_petition[constituency.id];
+  function displayConstituencyInfo(_event, constituency_id) {
+    var mpForConstituency = PetitionMap.mp_data[constituency_id];
+    var population = PetitionMap.population_data[constituency_id].population;
+    var percentage = PetitionMap.weighted_current_petition[constituency_id];
 
     if (percentage !== undefined) {
       if (PetitionMap.is_weighted) {
-        percentage = PetitionMap.weighted_current_petition[constituency.id] / 100;
+        percentage = PetitionMap.weighted_current_petition[constituency_id] / 100;
       } else {
-        percentage = (PetitionMap.weighted_current_petition[constituency.id] / population) * 100;
+        percentage = (PetitionMap.weighted_current_petition[constituency_id] / population) * 100;
       }
       percentage = Math.round(percentage * 100) / 100;
     } else {
@@ -365,7 +362,7 @@
         data_found = false;
 
     $.each(PetitionMap.current_petition.data.attributes.signatures_by_constituency, function(i, v) {
-      if (v.ons_code === constituency.id) {
+      if (v.ons_code === constituency_id) {
         count = v.signature_count;
         return;
       }
@@ -381,7 +378,7 @@
     }
   }
 
-  function hideConstituencyInfo(_event, _constituency) {
+  function hideConstituencyInfo(_event, _constituency_id) {
     //$('#constituency_info').show();
   }
 

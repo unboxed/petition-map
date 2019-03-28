@@ -110,8 +110,8 @@
       .attr("id", function(d) {return d.id})
       .attr("d", path)
       .attr('vector-effect', 'non-scaling-stroke')
-      .on("mouseenter", function(constituency){ $(window).trigger('petitionmap:constituency-on', constituency); })
-      .on("mouseleave", function(constituency){ $(window).trigger('petitionmap:constituency-off', constituency); });
+      .on("mouseenter", function(constituency_boundary){ $(window).trigger('petitionmap:constituency-on', constituency_boundary.id); })
+      .on("mouseleave", function(constituency_boundary){ $(window).trigger('petitionmap:constituency-off', constituency_boundary.id); });
 
     // Add a boundary between areas
     g.append("path")
@@ -175,19 +175,19 @@
 
   // Show constituency info and party colours on select
   // (hover on desktop or click on mobile)
-  function highlightConstituencyOnMap(_event, constituency) {
-    var mpForConstituency = PetitionMap.mp_data[constituency.id],
+  function highlightConstituencyOnMap(_event, constituency_id) {
+    var mpForConstituency = PetitionMap.mp_data[constituency_id],
       party_class = stripWhitespace(mpForConstituency.party);
     deselectPartyColours();
-    d3.select("#" + constituency.id).classed(party_class, true);
-    d3.select("#" + constituency.id).classed("selected_boundary", true);
+    d3.select("#" + constituency_id).classed(party_class, true);
+    d3.select("#" + constituency_id).classed("selected_boundary", true);
   }
 
   // Remove classes from other constituencies on deselect
-  function dehighlightConstituencyOnMap(_event, constituency) {
-    // var party_class = stripWhitespace(PetitionMap.mp_data[constituency.id].party);
-    // d3.select("#" + constituency.id).classed(party_class, false);
-    // d3.select("#" + constituency.id).classed("selected_boundary", false);
+  function dehighlightConstituencyOnMap(_event, constituency_id) {
+    // var party_class = stripWhitespace(PetitionMap.mp_data[constituency_id].party);
+    // d3.select("#" + constituency_id).classed(party_class, false);
+    // d3.select("#" + constituency_id).classed("selected_boundary", false);
   }
 
   // Removes all other party colour classes from constituencies
