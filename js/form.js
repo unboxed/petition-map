@@ -3,6 +3,7 @@
   PetitionMap.mp_data = PetitionMap.mp_data || undefined;
   PetitionMap.population_data = PetitionMap.population_data || undefined;
   PetitionMap.current_area = PetitionMap.current_area || undefined;
+  PetitionMap.map_mode = PetitionMap.map_mode || undefined;
   PetitionMap.signature_buckets = PetitionMap.signature_buckets || undefined;
   PetitionMap.weighted_current_petition = PetitionMap.weighted_current_petition || undefined;
   PetitionMap.is_weighted = PetitionMap.is_weighted || true;
@@ -71,17 +72,30 @@
         area = variables.area;
       }
     }
-
     PetitionMap.current_area = area;
+
+    map_mode = 'topo';
+    if (variables.map_mode !== undefined) {
+      if (possibleMapModes().indexOf(variables.map_mode) !== -1) {
+        map_mode = variables.map_mode;
+      }
+    }
+    PetitionMap.map_mode = map_mode;
+
     $('input[name=area][value=' + area + ']').prop('checked',true);
     $('#petition_dropdown option[value=' + petition_id + ']').prop('selected', true);
     return loadPetition(petition_id, false);
   }
 
   function possibleAreas() {
-    var possibleAreas = []
+    var possibleAreas = [];
     $.each($('input[name=area]'), function(idx, elem) { possibleAreas[idx] = $(elem).attr('value'); });
     return possibleAreas;
+  }
+
+  function possibleMapModes() {
+    var possibleMapModes = ['hex', 'topo'];
+    return possibleMapModes;
   }
 
   // Extracts variables from url
@@ -302,7 +316,7 @@
 
   // Reload map
   function reloadMap() {
-    var dataFile = 'json/uk/' + PetitionMap.current_area + '/topo_wpc.json';
+    var dataFile = 'json/uk/' + PetitionMap.current_area + '/' + PetitionMap.map_mode + '_wpc.json';
     return $.when(PetitionMap.loadMapData(dataFile, 'wpc')).then(function() {
       displayPetitionInfo();
       $('#key').fadeIn();
@@ -463,6 +477,9 @@
     }
     if (PetitionMap.current_area !== undefined) {
       state.area = PetitionMap.current_area;
+    }
+    if (PetitionMap.map_mode !== undefined) {
+      state.map_mode = PetitionMap.map_mode;
     }
     return state;
   }
