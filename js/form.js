@@ -136,7 +136,7 @@
         var converted;
         if (PetitionMap.is_weighted) {
           var constituency_pop = PetitionMap.population_data[ons_code].population;
-          converted = (signatures[i].signature_count / constituency_pop) * 10000;
+          converted = (signatures[i].signature_count / constituency_pop) * 1000000;
         } else {
           converted = signatures[i].signature_count;
         }
@@ -196,11 +196,11 @@
 
   function updateKey(fromBuckets) {
     if (PetitionMap.is_weighted) {
-      $('#t1').html("0% - " +  (fromBuckets[1] / 100) + "%");
+      $('#t1').html("0% - " +  (fromBuckets[1] / 10000) + "%");
       for (i = 1; i <= 6; i++) {
-        $('#t' + (i + 1)).html((fromBuckets[i] / 100) + "% - " + (fromBuckets[i + 1] / 100) + "%");
+        $('#t' + (i + 1)).html((fromBuckets[i] / 10000) + "% - " + (fromBuckets[i + 1] / 10000) + "%");
       }
-      $('#t8').html((fromBuckets[7] / 100) + "% +");
+      $('#t8').html((fromBuckets[7] / 10000) + "% +");
     } else {
       $('#t1').html("1 - " +  fromBuckets[1]);
       for (i = 1; i <= 6; i++) {
