@@ -349,11 +349,11 @@
 
     if (percentage !== undefined) {
       if (PetitionMap.is_weighted) {
-        percentage = PetitionMap.weighted_current_petition[constituency.id] / 100;
+        percentage = PetitionMap.weighted_current_petition[constituency.id] / 10000;
       } else {
         percentage = (PetitionMap.weighted_current_petition[constituency.id] / population) * 100;
       }
-      percentage = Math.round(percentage * 100) / 100;
+      percentage = Math.round(percentage * 1000) / 1000;
     } else {
       percentage = 0;
     }
