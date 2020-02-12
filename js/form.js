@@ -35,6 +35,15 @@
 
   function populatePetitionDropdown() {
     return $.getJSON("https://petition.parliament.uk/petitions.json?state=open")
+      .then(function (data) {
+        if (data.data.length == 0) {
+          // No open petitions means parliament is dissolved or the committee is waiting
+          // to be reconstituted after a general election so load the closed petitions
+          return $.getJSON("https://petition.parliament.uk/petitions.json?state=closed");
+        } else {
+          return data;
+        }
+      })
       .done(function (data) {
         var petitions = data.data;
         $.each(petitions, function (index, item) {
