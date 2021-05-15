@@ -317,6 +317,9 @@
   // when the window is resized, redraw the map
   $(window).on('resize', redraw);
 
+  // Zoom the map using the scroll wheel
+  $(window).on('wheel', function() { return false; });
+
   // Button to reset zoom
   $("#reset").on('click', resetMapState);
 
