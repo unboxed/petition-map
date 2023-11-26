@@ -351,6 +351,10 @@
     $('#constituency option[value='+constituency.id+']').prop('selected', true);
   }
 
+  function pluralize(count, singular, plural) {
+    return count === 1 ? singular : plural;
+  }
+
   function displayConstituencyInfo(_event, constituency) {
     var mpForConstituency = PetitionMap.mp_data[constituency.id];
     var population = PetitionMap.population_data[constituency.id].population;
@@ -383,7 +387,7 @@
     $('#constituency_info').append('<h2>' + mpForConstituency.constituency + "</h2>");
     $('#constituency_info').append('<p class="mp">' + (mpForConstituency.mp || "") + '</p>');
     $('#constituency_info').append('<p class="party">' + (mpForConstituency.party || "") + '</p>');
-    $('#constituency_info').append('<p class="signatures_count"><span class="data">' + numberWithCommas(count) + '</span> signatures</p>');
+    $('#constituency_info').append('<p class="signatures_count"><span class="data">' + numberWithCommas(count) + '</span> ' + pluralize(count, 'signature', 'signatures') + '</p>');
     $('#constituency_info').append('<p class="percentage">' + percentage + "% of " + numberWithCommas(population) + " constituents" + '</p>');
     if (!ui_hidden) {
       $('#constituency_info').show();
